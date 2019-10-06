@@ -6,76 +6,58 @@
 #include <libft.h>
 #include <ft_select.h>
 
-//static void winsz_handler(int sig)
-//{
-//	(void)sig;
-//	const char *s = "winsize changed!\n";
-//	write(STDOUT_FILENO, s, strlen(s));
-//}
-
-//static int check_and_init()
-//{
-//	char *name;
-//	char *type;
-//
-//	printf("%d \n", isatty(STDIN_FILENO));
-//	if (1 == isatty(STDIN_FILENO)
-//		&& NULL != (name = ttyname(STDIN_FILENO))
-//		&& NULL != (type = getenv("TERM"))
-//		)
-//	{
-//		printf("%s  %s\n,", name, type);
-//		return (OK);
-//	}
-//	return (-1);
-//}
-
-void get_z(int a);
-void get_z(int a)
+// catch with the read all the signal that I send
+static int check(int ac)
 {
-	(void)a;
-	ft_printf("Please do to kill the app in this way,"
-			  "I need to clean up some stuff");
-	//	signal(SIGTSTP, SIG_DFL);
+	if (ac == 1)
+		;
+//		return (1);
+	if (1 != isatty(STDIN_FILENO))
+	{
+		ft_printf("That's not a term !");
+		return (-1);
+	}
+	return (OK);
 }
 
-// catch with the read all the signal that I send
-int main(void)
+static int ms__get_line(
+	//	t_s *const line,
+	//	char **output
+)
 {
-	struct termios new_termios;
+	static char buffer[5] = { 0 };
 
-	signal(SIGKILL, get_z);
-	char buffer[10];
-	int i;
-
-	set_canonical_mode(&new_termios);
-	while (1)
+	//	fts__clear(line);
+	ft_bzero(&buffer, 5);
+	while (OK != ft_strcmp(buffer, "\n"))
 	{
-		// je start ici, et je peux catch les sinaux la ?
-		ft_bzero(&buffer, 10);
-		read(0, buffer, 10);
-		i = 0;
-		while (i < 10)
-		{
-			printf("%d.", buffer[i]);
-			if ('\x1a' == buffer[i])
-				printf("-true -");
-			i++;
-		}
-		if (32 == buffer[0])
-			break;
-		printf("\n");
-		//		check_and_init();
-		//		printf("slot %d \n", ttyslot());
-		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
+		ft_bzero(&buffer, 5);
+		if (read(0, buffer, 4) < 0)
+			return (-1);
+		ft_printf("%s", buffer);
+		//		if (OK != ft_strcmp(buffer, "\n"))
+		//			handle_input(env, buffer, line);
 	}
-	unset_canonical_mode(&new_termios);
-	while (1);
+	ft_printf("\n");
+	//	*output = line->data;
+	return (OK);
+}
 
-	//	signal(SIGWINCH, winsz_handler);
-	//
-	//	struct winsize w;
-	//
+int main(int ac, char **av)
+{
+	g_test = 0;
+	if (OK != check(ac)
+		|| OK != load_term_caps()
+		|| OK != init_ftselect(ac, av, &g_select)
+		|| OK != set_canonical_mode(&g_select.termios))
+		return (-1);
+	catch_all_signal();
+	ms__get_line();
+	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
+
+
+
+
 	//	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	//	printf("lines %d\n", w.ws_row);
 	//	printf("columns %d\n", w.ws_col);
@@ -91,9 +73,5 @@ int main(void)
 	//	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	//	printf("lines %d\n", w.ws_row);
 	//	printf("columns %d\n", w.ws_col);
-	//	sleep(1);
-	//	while (1)
-	//	    ;
-
 	return 0;
 }

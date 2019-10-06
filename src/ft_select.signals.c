@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 # include <ft_select.h>
+#include <sys/ioctl.h>
 
 static void quit(int nb)
 {
@@ -28,7 +29,9 @@ static void wake_up(int nb)
 static void background(int nb)
 {
 	(void)nb;
-	catch_all_signal();
+	unset_canonical_mode(&g_select.termios);
+	signal(SIGTSTP, SIG_DFL);
+	ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
 }
 
 

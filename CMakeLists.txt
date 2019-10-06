@@ -20,6 +20,9 @@ add_library(${PROJECT_NAME}_lib ${sources_files})
 target_include_directories(${PROJECT_NAME}_lib PUBLIC includes)
 target_link_libraries(${PROJECT_NAME}_lib libft)
 
+find_package(Curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME}_lib ${CURSES_LIBRARIES})
 # ------------------------------------------------------------------------------
 #    Project Binary
 # ------------------------------------------------------------------------------

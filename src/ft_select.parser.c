@@ -20,16 +20,6 @@ static int init_structure(int ac, t_sct *select)
 	return (OK);
 }
 
-// check the term and if it have argument
-static int check(int ac)
-{
-	if (ac == 1)
-		return (1);
-	if (OK != isatty(STDIN_FILENO))
-		return (-1);
-	return (OK);
-}
-
 static void copy_argv_in_elements(int ac, char **av, t_sct *select)
 {
 	t_el el;
@@ -47,8 +37,7 @@ static void copy_argv_in_elements(int ac, char **av, t_sct *select)
 
 int init_ftselect(int ac, char **av, t_sct *select)
 {
-	if (OK != check(ac)
-		|| OK != init_structure(ac, select))
+	if (OK != init_structure(ac, select))
 		return (-1);
 	copy_argv_in_elements(ac, av, select);
 	select->min_size = get_min_size(select->elememens);
