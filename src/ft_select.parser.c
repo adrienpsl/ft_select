@@ -12,12 +12,20 @@
 
 #include <ft_select.h>
 
-static int check_and_init(int ac, t_sct *select)
+static int init_structure(int ac, t_sct *select)
 {
 	ft_bzero(select, sizeof(t_sct));
+	if (NULL == (select->elememens = ftarray__init(ac, sizeof(t_sct))))
+		return (-1);
+	return (OK);
+}
+
+// check the term and if it have argument
+static int check(int ac)
+{
 	if (ac == 1)
 		return (1);
-	if (NULL == (select->elememens = ftarray__init(ac, sizeof(t_sct))))
+	if (OK != isatty(STDIN_FILENO))
 		return (-1);
 	return (OK);
 }
@@ -39,7 +47,8 @@ static void copy_argv_in_elements(int ac, char **av, t_sct *select)
 
 int init_ftselect(int ac, char **av, t_sct *select)
 {
-	if (OK != check_and_init(ac, select))
+	if (OK != check(ac)
+		|| OK != init_structure(ac, select))
 		return (-1);
 	copy_argv_in_elements(ac, av, select);
 	select->min_size = get_min_size(select->elememens);

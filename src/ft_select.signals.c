@@ -19,18 +19,18 @@ static void quit(int nb)
 			  "clean the terminal after it");
 }
 
-static void background(int nb)
-{
-	(void)nb;
-	// reset the mode ctrlz + send it
-	
-}
-
 static void wake_up(int nb)
 {
 	(void)nb;
 	catch_all_signal();
 }
+
+static void background(int nb)
+{
+	(void)nb;
+	catch_all_signal();
+}
+
 
 static void changing_window(int nb)
 {

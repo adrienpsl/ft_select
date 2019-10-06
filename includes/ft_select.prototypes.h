@@ -30,4 +30,9 @@ int unset_canonical_mode(struct termios *backup_termios);
 */
 void catch_all_signal(void);
 
+/*
+**	Termcaps
+*/
+int load_term_caps(void);
+
 #endif

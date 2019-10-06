@@ -67,7 +67,7 @@ int main(void)
 		printf("\n");
 		//		check_and_init();
 		//		printf("slot %d \n", ttyslot());
-		//		ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
+		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 	}
 	unset_canonical_mode(&new_termios);
 	while (1);
