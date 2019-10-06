@@ -16,6 +16,6 @@ void test_init_ftselect(void);
 
 int main()
 {
-	test_init_ftselect();
+	//	test_init_ftselect();
 	return (EXIT_SUCCESS);
 }

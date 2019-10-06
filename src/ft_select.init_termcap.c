@@ -12,43 +12,14 @@
 
 # include <ft_select.h>
 
-static void quit(int nb)
-{
-	(void)nb;
-	ft_printf(FT_SELECT_NAME"please quit correctly that program to allow it"
-			  "clean the terminal after it");
-}
-
-static void background(int nb)
-{
-	(void)nb;
-	// reset the mode ctrlz + send it
-	
-}
-
-static void wake_up(int nb)
-{
-	(void)nb;
-	catch_all_signal();
-}
-
-static void changing_window(int nb)
-{
-	(void)nb;
-}
-
-void catch_all_signal(void)
-{
-	signal(SIGINT, quit);
-	signal(SIGHUP, quit);
-	signal(SIGQUIT, quit);
-	// kill
-	signal(SIGABRT, quit);
-	signal(SIGBUS, quit);
-	signal(SIGSEGV, quit);
-
-	signal(SIGWINCH, changing_window);
-
-	signal(SIGTSTP, background);
-	signal(SIGHUP, wake_up);
-}
+//static int check_and_init()
+//{
+//	char *name;
+//
+//	if (OK == isatty(STDIN_FILENO)
+//		&& NULL != (name = ttyname(STDIN_FILENO))
+//		)
+//		return (OK);
+//	return (-1);
+//}
+//

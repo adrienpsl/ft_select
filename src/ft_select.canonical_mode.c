@@ -12,7 +12,7 @@
 
 #include <ft_select.h>
 
-int activate_canonical_mode(struct termios *backup_termios)
+int set_canonical_mode(struct termios *backup_termios)
 {
 	struct termios new_termios;
 
@@ -30,11 +30,11 @@ int activate_canonical_mode(struct termios *backup_termios)
 	return (OK);
 }
 
-int desactivate_canonical_mode(struct termios *backup_termios)
+int unset_canonical_mode(struct termios *backup_termios)
 {
 	if (-1 == tcsetattr(STDIN_FILENO, TCSANOW, backup_termios))
 	{
-		ft_printf(FT_SELECT_NAME"can't reset the original terminal mode !");
+		ft_printf(FT_SELECT_NAME"can't set the original terminal mode !");
 		return (-1);
 	}
 	return (OK);
