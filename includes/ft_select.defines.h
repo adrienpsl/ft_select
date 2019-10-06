@@ -13,6 +13,8 @@
 #ifndef FT_SELECT_DEFINES_H
 #define FT_SELECT_DEFINES_H
 
-# define FT_SELECT_NAME "ft_select: " 
+# define FT_SELECT_NAME "ft_select: "
+
+t_signal g_signal;
 
 #endif

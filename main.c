@@ -4,7 +4,6 @@
 #include <signal.h>
 #include <termios.h>
 #include <string.h>
-#include <ft_select.structures.h>
 
 static void winsz_handler(int sig)
 {

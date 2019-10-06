@@ -25,4 +25,9 @@ int init_ftselect(int ac, char **av, t_sct *select);
 int activate_canonical_mode(struct termios *backup_termios);
 int desactivate_canonical_mode(struct termios *backup_termios);
 
+/*
+**	Signal
+*/
+void catch_all_signal(void);
+
 #endif

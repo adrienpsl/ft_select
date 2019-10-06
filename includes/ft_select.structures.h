@@ -28,14 +28,14 @@ typedef struct	s_signal
 	char ctrl_c:1;
 	char ctrl_z:1;
 	char change_window:1;
-}t_signal;
+}		t_signal;
 
 typedef struct	s_sct
 {
 	t_array			*elememens;
 	int				min_size;
 	struct termios	termios;
-	t_signal		signal;
+	t_signal		*signal;
 }					t_sct;
 
 
