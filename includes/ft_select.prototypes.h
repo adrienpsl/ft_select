@@ -19,5 +19,10 @@
 int get_min_size(t_array *array);
 int init_ftselect(int ac, char **av, t_sct *select);
 
+/*
+**	Handling the canonical mode
+*/
+int activate_canonical_mode(struct termios *backup_termios);
+int desactivate_canonical_mode(struct termios *backup_termios);
 
 #endif

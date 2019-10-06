@@ -10,34 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_STRUCTURES_H
-#define FT_SELECT_STRUCTURES_H
-
-# include <ft_array.structure.h>
-# include <termios.h>
-
-typedef struct	s_el
-{
-	char		*data;
-	int			is_selected;
-	int			is_current;
-}				t_el;
-
-typedef struct	s_signal
-{
-	char ctrl_c:1;
-	char ctrl_z:1;
-	char change_window:1;
-}t_signal;
-
-typedef struct	s_sct
-{
-	t_array			*elememens;
-	int				min_size;
-	struct termios	termios;
-	t_signal		signal;
-}					t_sct;
+#include <ft_select.h>
 
 
-
-#endif

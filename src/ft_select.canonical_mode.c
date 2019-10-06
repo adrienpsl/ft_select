@@ -10,34 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_STRUCTURES_H
-#define FT_SELECT_STRUCTURES_H
+#include <ft_select.h>
 
-# include <ft_array.structure.h>
-# include <termios.h>
-
-typedef struct	s_el
+int activate_canonical_mode(struct termios *backup_termios)
 {
-	char		*data;
-	int			is_selected;
-	int			is_current;
-}				t_el;
+	struct termios new_termios;
 
-typedef struct	s_signal
+	if (-1 == tcgetattr(STDIN_FILENO, &new_termios)
+		|| -1 == tcgetattr(STDIN_FILENO, backup_termios))
+	{
+		ft_printf(FT_SELECT_NAME"can't set the canonical terminal mode !");
+		return (-1);
+	}
+	new_termios.c_lflag &= ~(ICANON | ECHO);
+	new_termios.c_cc[VMIN] = 1;
+	new_termios.c_cc[VTIME] = 0;
+	if (-1 == tcsetattr(STDIN_FILENO, TCSANOW, &new_termios))
+		return (-1);
+	return (OK);
+}
+
+int desactivate_canonical_mode(struct termios *backup_termios)
 {
-	char ctrl_c:1;
-	char ctrl_z:1;
-	char change_window:1;
-}t_signal;
-
-typedef struct	s_sct
-{
-	t_array			*elememens;
-	int				min_size;
-	struct termios	termios;
-	t_signal		signal;
-}					t_sct;
-
-
-
-#endif
+	if (-1 == tcsetattr(STDIN_FILENO, TCSANOW, backup_termios))
+	{
+		ft_printf(FT_SELECT_NAME"can't reset the original terminal mode !");
+		return (-1);
+	}
+	return (OK);
+}
