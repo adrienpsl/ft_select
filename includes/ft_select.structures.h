@@ -35,7 +35,7 @@ typedef struct	s_sct
 	t_array			*elememens;
 	int				min_size;
 	struct termios	termios;
-	t_signal		*signal;
+	t_signal		signal;
 }					t_sct;
 
 

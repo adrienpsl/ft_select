@@ -15,6 +15,6 @@
 
 # define FT_SELECT_NAME "ft_select: "
 
-t_signal g_signal;
+t_sct g_select;
 
 #endif

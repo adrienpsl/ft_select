@@ -19,8 +19,6 @@ static int check_and_init(int ac, t_sct *select)
 		return (1);
 	if (NULL == (select->elememens = ftarray__init(ac, sizeof(t_sct))))
 		return (-1);
-	ft_bzero(&g_signal, sizeof(g_signal));
-	select->signal = &g_signal;
 	return (OK);
 }
 
