@@ -9,14 +9,13 @@
 /*   Updated: 2017/11/16 12:45:50 by adpusel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+# include "libft.h"
 
-#ifndef FT_SELECT_H
-#define FT_SELECT_H
+void test_init_ftselect(void);
 
-# include "ft_select.structures.h"
-# include "ft_select.prototypes.h"
-# include "ft_select.defines.h"
 
-#include <libft.h>
-
-#endif
+int main()
+{
+	test_init_ftselect();
+	return (EXIT_SUCCESS);
+}

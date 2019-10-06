@@ -13,4 +13,11 @@
 #ifndef FT_SELECT_PROTOTYPES_H
 #define FT_SELECT_PROTOTYPES_H
 
+/*
+**	handling the list element
+*/
+int get_min_size(t_array *array);
+int init_ftselect(int ac, char **av, t_sct *select);
+
+
 #endif

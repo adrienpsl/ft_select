@@ -42,15 +42,13 @@ retun the value in env of the name, null if no found,
 termcap a besoin d'etre initialiser, et pour ce faire, 
 il a besoin d'utiliser la fonction suivante pour initialiser la lib,
 
-## getenv
+## tgetent
 int tgetent(char *bp, const char *name);
 le premier est un buffer ou stocker les data,
 le deuxieme est le nom de mon terminal, que je vais
 surement get avec les options precedentes ! 
 je dois donner a termcaps le nom de mon terminal
 pour qu'il s'aligne avec lui.
-
-
 
 
 

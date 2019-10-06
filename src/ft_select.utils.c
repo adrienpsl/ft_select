@@ -10,13 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_H
-#define FT_SELECT_H
+#include <ft_select.h>
 
-# include "ft_select.structures.h"
-# include "ft_select.prototypes.h"
-# include "ft_select.defines.h"
+int get_min_size(t_array *array)
+{
+	int size;
+	int length;
+	t_el *el;
 
-#include <libft.h>
+	size = 0;
+	ftarray__set_start(array);
+	while (NULL != (el = ftarray__next(array)))
+	{
+		length = ft_strlen(el->data);
+		if (size < length)
+			size = length;
+	}
+	return (size);
+}
 
-#endif

@@ -13,4 +13,21 @@
 #ifndef FT_SELECT_STRUCTURES_H
 #define FT_SELECT_STRUCTURES_H
 
+#include <ft_array.structure.h>
+
+typedef struct	s_el
+{
+	char		*data;
+	int			is_selected;
+	int			is_current;
+}				t_el;
+
+typedef struct	s_sct
+{
+	t_array		*elememens;
+	int			min_size;
+}				t_sct;
+
+
+
 #endif

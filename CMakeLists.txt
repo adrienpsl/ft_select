@@ -15,9 +15,9 @@ add_subdirectory(libft)
 # ------------------------------------------------------------------------------
 #    Libary Init
 # ------------------------------------------------------------------------------
-add_library(${PROJECT_NAME}_lib "")
+file(GLOB_RECURSE sources_files src/*.c)
+add_library(${PROJECT_NAME}_lib ${sources_files})
 target_include_directories(${PROJECT_NAME}_lib PUBLIC includes)
-add_subdirectory(src)
 target_link_libraries(${PROJECT_NAME}_lib libft)
 
 # ------------------------------------------------------------------------------
@@ -29,9 +29,9 @@ target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
 ## ------------------------------------------------------------------------------
 ##    Unit test Binary
 ## ------------------------------------------------------------------------------
-#add_executable(${PROJECT_NAME}_unit_test unit.test/main.test.c)
-#add_subdirectory(unit.test)
-#target_link_libraries(${PROJECT_NAME}_unit_test ${PROJECT_NAME}_lib)
+file(GLOB_RECURSE unit_files unit.test/*.c)
+add_executable(${PROJECT_NAME}_unit_test ${unit_files})
+target_link_libraries(${PROJECT_NAME}_unit_test ${PROJECT_NAME}_lib)
 #
 #
 ## ------------------------------------------------------------------------------
