@@ -24,7 +24,7 @@ static int check(int ac)
 static int ms__get_line(
 	//	t_s *const line,
 	//	char **output
-)
+					   )
 {
 	static char buffer[5] = { 0 };
 
@@ -44,12 +44,28 @@ static int ms__get_line(
 	return (OK);
 }
 
-void write_underline(char *text)
+static void write_underline(char *text)
 {
-	char *underline_cmd = tgetstr("us", NULL);
-	tputs(underline_cmd, 1, ft_putchar);
-
+	tputs(tgetstr("us", NULL), 1, ft_putchar);
+	ft_printf(text);
+	tputs(tgetstr("me", NULL), 1, ft_putchar);
 }
+
+static void write_reverse(char *text)
+{
+	tputs(tgetstr("mr", NULL), 1, ft_putchar);
+	ft_printf(text);
+	tputs(tgetstr("me", NULL), 1, ft_putchar);
+}
+
+static void write_reverse_underline(char *text)
+{
+	tputs(tgetstr("mr", NULL), 1, ft_putchar);
+	tputs(tgetstr("us", NULL), 1, ft_putchar);
+	ft_printf(text);
+	tputs(tgetstr("me", NULL), 1, ft_putchar);
+}
+
 
 int main(int ac, char **av)
 {
@@ -59,15 +75,16 @@ int main(int ac, char **av)
 		|| OK != init_ftselect(ac, av, &g_select)
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
+	// test reverse
+	write_reverse("test in reverse    \n");
+	ft_printf("toto\n");
+	write_underline("test in reverse    \n");
+	ft_printf("toto\n");
+	write_reverse_underline("test in reverse    \n");
+	ft_printf("toto\n");
 
 
-	char *inverse_cmd = tgetstr("mr", NULL);
-//	char* color_cap = tgetstr("AF", NULL);
 
-	tputs(inverse_cmd, 1, putchar);
-
-	printf("Cool ! Maintenant j'ecris en vert !\n");
-//	catch_all_signal();
 	ms__get_line();
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 
