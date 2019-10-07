@@ -10,8 +10,7 @@
 static int check(int ac)
 {
 	if (ac == 1)
-		;
-//		return (1);
+		return (1);
 	if (1 != isatty(STDIN_FILENO))
 	{
 		ft_printf("That's not a term !");
@@ -50,7 +49,7 @@ int main(int ac, char **av)
 		|| OK != load_term_caps()
 		|| OK != init_ftselect(ac, av, &g_select)
 		|| OK != set_canonical_mode(&g_select.termios))
-		return (-1);
+		return (EXIT_FAILURE);
 	catch_all_signal();
 	ms__get_line();
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
