@@ -10,37 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_PROTOTYPES_H
-#define FT_SELECT_PROTOTYPES_H
+#include "ft_select.h"
 
-/*
-**	handling the list element
-*/
-int get_min_size(t_array *array);
-int init_ftselect(int ac, char **av, t_sct *select);
+void print_in_underline(char *text)
+{
+	tputs(tgetstr("us", NULL), 1, ft_putchar);
+	ft_printf(text);
+	tputs(tgetstr("me", NULL), 1, ft_putchar);
+}
 
-/*
-**	Handling the canonical mode
-*/
-int set_canonical_mode(struct termios *backup_termios);
-int unset_canonical_mode(struct termios *backup_termios);
+void print_in_reverse(char *text)
+{
+	tputs(tgetstr("mr", NULL), 1, ft_putchar);
+	ft_printf(text);
+	tputs(tgetstr("me", NULL), 1, ft_putchar);
+}
 
-/*
-**	Signal
-*/
-void catch_all_signal(void);
-
-/*
-**	Termcaps
-*/
-int load_term_caps(void);
-
-/*
-**	CSS
-*/
-void print_in_underline_reverse(char *text);
-void print_in_reverse(char *text);
-void print_in_underline(char *text);
-
-
-#endif
+void print_in_underline_reverse(char *text)
+{
+	tputs(tgetstr("mr", NULL), 1, ft_putchar);
+	tputs(tgetstr("us", NULL), 1, ft_putchar);
+	ft_printf(text);
+	tputs(tgetstr("me", NULL), 1, ft_putchar);
+}

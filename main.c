@@ -44,27 +44,6 @@ static int ms__get_line(
 	return (OK);
 }
 
-static void write_underline(char *text)
-{
-	tputs(tgetstr("us", NULL), 1, ft_putchar);
-	ft_printf(text);
-	tputs(tgetstr("me", NULL), 1, ft_putchar);
-}
-
-static void write_reverse(char *text)
-{
-	tputs(tgetstr("mr", NULL), 1, ft_putchar);
-	ft_printf(text);
-	tputs(tgetstr("me", NULL), 1, ft_putchar);
-}
-
-static void write_reverse_underline(char *text)
-{
-	tputs(tgetstr("mr", NULL), 1, ft_putchar);
-	tputs(tgetstr("us", NULL), 1, ft_putchar);
-	ft_printf(text);
-	tputs(tgetstr("me", NULL), 1, ft_putchar);
-}
 
 
 int main(int ac, char **av)
@@ -76,11 +55,11 @@ int main(int ac, char **av)
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
 	// test reverse
-	write_reverse("test in reverse    \n");
+	print_in_reverse("test in reverse    \n");
 	ft_printf("toto\n");
-	write_underline("test in reverse    \n");
+	print_in_underline("test in reverse    \n");
 	ft_printf("toto\n");
-	write_reverse_underline("test in reverse    \n");
+	print_in_underline_reverse("test in reverse    \n");
 	ft_printf("toto\n");
 
 
