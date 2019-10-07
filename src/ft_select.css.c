@@ -33,3 +33,11 @@ void print_in_underline_reverse(char *text)
 	ft_printf(text);
 	tputs(tgetstr("me", NULL), 1, ft_putchar);
 }
+
+void print_in_underline_reverse(char *text)
+{
+	tputs(tgetstr("mr", NULL), 1, ft_putchar);
+	tputs(tgetstr("us", NULL), 1, ft_putchar);
+	ft_printf(text);
+	tputs(tgetstr("me", NULL), 1, ft_putchar);
+}

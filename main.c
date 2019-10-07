@@ -44,26 +44,24 @@ static int ms__get_line(
 	return (OK);
 }
 
-
-
 int main(int ac, char **av)
 {
 	g_test = 0;
+	int a;
 	if (OK != check(ac)
 		|| OK != load_term_caps()
 		|| OK != init_ftselect(ac, av, &g_select)
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
 	// test reverse
+	tputs(tgetstr("cl", NULL), 1, ft_putchar);
 	print_in_reverse("test in reverse    \n");
 	ft_printf("toto\n");
 	print_in_underline("test in reverse    \n");
 	ft_printf("toto\n");
 	print_in_underline_reverse("test in reverse    \n");
-	ft_printf("toto\n");
-
-
-
+	read(0, &a, 1);
+	tputs(tgetstr("cl", NULL), 1, ft_putchar);
 	ms__get_line();
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 
