@@ -5,6 +5,8 @@
 #include <termios.h>
 #include <libft.h>
 #include <ft_select.h>
+#include <curses.h>
+#include <termcap.h>
 
 // catch with the read all the signal that I send
 static int check(int ac)
@@ -42,6 +44,13 @@ static int ms__get_line(
 	return (OK);
 }
 
+void write_underline(char *text)
+{
+	char *underline_cmd = tgetstr("us", NULL);
+	tputs(underline_cmd, 1, ft_putchar);
+
+}
+
 int main(int ac, char **av)
 {
 	g_test = 0;
@@ -50,7 +59,15 @@ int main(int ac, char **av)
 		|| OK != init_ftselect(ac, av, &g_select)
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
-	catch_all_signal();
+
+
+	char *inverse_cmd = tgetstr("mr", NULL);
+//	char* color_cap = tgetstr("AF", NULL);
+
+	tputs(inverse_cmd, 1, putchar);
+
+	printf("Cool ! Maintenant j'ecris en vert !\n");
+//	catch_all_signal();
 	ms__get_line();
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 

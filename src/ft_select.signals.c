@@ -17,7 +17,7 @@ static void quit(int nb)
 {
 	(void)nb;
 	ft_printf(FT_SELECT_NAME"please quit correctly that program to allow it"
-			  "clean the terminal after it");
+			  "clean the terminal after it\n");
 }
 
 static void wake_up(int nb)
