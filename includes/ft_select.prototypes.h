@@ -16,7 +16,7 @@
 #include <stdbool.h>
 
 // tmp
-bool is_screen_wide_enouth(int size_max, int nb_element);
+bool is_screen_wide_enough(int size_max, int nb_elements);
 
 
 /*

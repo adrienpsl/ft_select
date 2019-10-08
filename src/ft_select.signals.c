@@ -39,7 +39,7 @@ static void background(int nb)
 static void changing_window(int nb)
 {
 	(void)nb;
-	is_screen_wide_enouth(27, 33);
+	is_screen_wide_enough(30, 33);
 
 }
 

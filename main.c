@@ -1,13 +1,6 @@
-#include <sys/ioctl.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
-#include <termios.h>
-#include <libft.h>
 #include <ft_select.h>
-#include <curses.h>
-#include <termcap.h>
-#include <stdbool.h>
+
+
 
 // catch with the read all the signal that I send
 static int check(int ac)
@@ -45,21 +38,6 @@ static int ms__get_line(
 	return (OK);
 }
 
-// regarder si j'ai assez de place :
-// I need to handle the .5, but I will see that tomorow ? no now !!
-bool is_screen_wide_enouth(int size_max, int nb_element)
-{
-	float nb_by_col;
-	(void)nb_element;
-	
-	size_max += 1;
-	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &g_select.size))
-		return (false);
-	nb_by_col = ((float)g_select.size.ws_col / (float)size_max);
-	printf("%.1f \n", nb_by_col);
-	printf("%d \n", (int)(nb_by_col));
-	return (size_max < g_select.size.ws_col);
-}
 
 int main(int ac, char **av)
 {

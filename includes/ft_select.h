@@ -20,4 +20,9 @@
 #include <libft.h>
 
 #include <termcap.h>
+#include <sys/ioctl.h>
+#include <stdbool.h>
+#include <unistd.h>
+#include <curses.h>
+
 #endif
