@@ -26,29 +26,32 @@ static void wake_up(int nb)
 	catch_all_signal();
 }
 
+// TODO : handle error
 static void background(int nb)
 {
 	(void)nb;
 	unset_canonical_mode(&g_select.termios);
 	signal(SIGTSTP, SIG_DFL);
-	ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
+	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
 }
 
 
 static void changing_window(int nb)
 {
 	(void)nb;
+	is_screen_wide_enouth(27, 33);
+
 }
 
 void catch_all_signal(void)
 {
-	signal(SIGINT, quit);
-	signal(SIGHUP, quit);
-	signal(SIGQUIT, quit);
+//	signal(SIGINT, quit);
+//	signal(SIGHUP, quit);
+//	signal(SIGQUIT, quit);
 	// kill
-	signal(SIGABRT, quit);
+//	signal(SIGABRT, quit);
 	signal(SIGBUS, quit);
-	signal(SIGSEGV, quit);
+//	signal(SIGSEGV, quit);
 
 	signal(SIGWINCH, changing_window);
 

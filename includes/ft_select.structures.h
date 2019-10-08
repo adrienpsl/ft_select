@@ -30,6 +30,7 @@ typedef struct	s_sct
 	struct termios	termios;
 	char ctrl_c:1;
 	char ctrl_z:1;
+	struct winsize size;
 }					t_sct;
 
 

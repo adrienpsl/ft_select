@@ -7,6 +7,7 @@
 #include <ft_select.h>
 #include <curses.h>
 #include <termcap.h>
+#include <stdbool.h>
 
 // catch with the read all the signal that I send
 static int check(int ac)
@@ -24,7 +25,7 @@ static int check(int ac)
 static int ms__get_line(
 	//	t_s *const line,
 	//	char **output
-					   )
+)
 {
 	static char buffer[5] = { 0 };
 
@@ -44,24 +45,42 @@ static int ms__get_line(
 	return (OK);
 }
 
+// regarder si j'ai assez de place :
+// I need to handle the .5, but I will see that tomorow ? no now !!
+bool is_screen_wide_enouth(int size_max, int nb_element)
+{
+	float nb_by_col;
+	(void)nb_element;
+	
+	size_max += 1;
+	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &g_select.size))
+		return (false);
+	nb_by_col = ((float)g_select.size.ws_col / (float)size_max);
+	printf("%.1f \n", nb_by_col);
+	printf("%d \n", (int)(nb_by_col));
+	return (size_max < g_select.size.ws_col);
+}
+
 int main(int ac, char **av)
 {
 	g_test = 0;
-	int a;
+//	int a;
 	if (OK != check(ac)
 		|| OK != load_term_caps()
 		|| OK != init_ftselect(ac, av, &g_select)
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
 	// test reverse
-	tputs(tgetstr("cl", NULL), 1, ft_putchar);
-	print_in_reverse("test in reverse    \n");
-	ft_printf("toto\n");
-	print_in_underline("test in reverse    \n");
-	ft_printf("toto\n");
-	print_in_underline_reverse("test in reverse    \n");
-	read(0, &a, 1);
-	tputs(tgetstr("cl", NULL), 1, ft_putchar);
+//	tputs(tgetstr("cl", NULL), 1, ft_putchar);
+//	print_in_reverse("test in reverse    \n");
+//	ft_printf("toto\n");
+//	print_in_underline("test in reverse    \n");
+//	ft_printf("toto\n");
+//	print_in_underline_reverse("test in reverse    \n");
+//	read(0, &a, 1);
+
+	catch_all_signal();
+
 	ms__get_line();
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 

@@ -13,6 +13,12 @@
 #ifndef FT_SELECT_PROTOTYPES_H
 #define FT_SELECT_PROTOTYPES_H
 
+#include <stdbool.h>
+
+// tmp
+bool is_screen_wide_enouth(int size_max, int nb_element);
+
+
 /*
 **	handling the list element
 */
@@ -41,6 +47,7 @@ int load_term_caps(void);
 void print_in_underline_reverse(char *text);
 void print_in_reverse(char *text);
 void print_in_underline(char *text);
+void clear_screen(void);
 
 
 #endif
