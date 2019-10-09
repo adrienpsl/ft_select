@@ -16,7 +16,7 @@ static int check(int ac)
 static int ms__get_line(
 	//	t_s *const line,
 	//	char **output
-					   )
+)
 {
 	static char buffer[5] = { 0 };
 
@@ -51,15 +51,15 @@ int main(int ac, char **av)
 		|| OK != init_ftselect(ac, av, &g_select)
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
-
+	
+	
+	get_window_size();
 	clear_screen();
-	t_array *array = testing_array();
-	loop_and_print(array);
+	g_select.elememens = testing_array();
+	g_select.min_size = get_min_size(g_select.elememens);
+	loop_and_print(g_select.elememens);
 
-
-
-
-	//	catch_all_signal();
+	catch_all_signal();
 	ms__get_line();
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 	//	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);

@@ -35,26 +35,30 @@ static void background(int nb)
 	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
 }
 
-
 static void changing_window(int nb)
 {
 	(void)nb;
-	is_screen_wide_enough(30, 33);
-
+	//	is_screen_wide_enough(30, 33);
+	get_window_size();
+	clear_screen();
+	loop_and_print(g_select.elememens);
 }
 
 void catch_all_signal(void)
 {
-//	signal(SIGINT, quit);
-//	signal(SIGHUP, quit);
-//	signal(SIGQUIT, quit);
+	(void)quit;
+	(void)wake_up;
+	(void)background;
+	//	signal(SIGINT, quit);
+	//	signal(SIGHUP, quit);
+	//	signal(SIGQUIT, quit);
 	// kill
-//	signal(SIGABRT, quit);
-	signal(SIGBUS, quit);
-//	signal(SIGSEGV, quit);
+	//	signal(SIGABRT, quit);
+//	signal(SIGBUS, quit);
+	//	signal(SIGSEGV, quit);
 
 	signal(SIGWINCH, changing_window);
 
-	signal(SIGTSTP, background);
-	signal(SIGHUP, wake_up);
+//	signal(SIGTSTP, background);
+//	signal(SIGHUP, wake_up);
 }

@@ -30,6 +30,7 @@ bool get_termcaps(char *name)
 
 void print_in_underline(char *text)
 {
+	ft_putchar(' ');
 	get_termcaps("us");
 	ft_printf("%s", text);
 	get_termcaps("me");
@@ -38,6 +39,7 @@ void print_in_underline(char *text)
 
 void print_in_reverse(char *text)
 {
+	ft_putchar(' ');
 	get_termcaps("mr");
 	ft_printf("%s", text);
 	get_termcaps("me");
@@ -46,6 +48,7 @@ void print_in_reverse(char *text)
 
 void print_in_underline_reverse(char *text)
 {
+	ft_putchar(' ');
 	get_termcaps("mr");
 	get_termcaps("us");
 	ft_printf("%s", text);

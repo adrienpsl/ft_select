@@ -14,31 +14,32 @@
 
 // je set a 0 mon cursor,
 // je print a chaque fois plus un
-int put_cursor_next(void);
-int put_cursor_next(void)
+int put_cursor_next(int *col, int *line);
+int put_cursor_next(int *col, int *line)
 {
-	static int col = 0;
-	static int line = 0;
 
 	char *caps = tgetstr("cm", NULL);
-	tputs(tgoto(caps, line, col), 1, ft_putchar);
-	line += 8;
-	if (line >= g_select.size.ws_col)
+	tputs(tgoto(caps, *line, *col), 1, ft_putchar);
+	*line += g_select.min_size;
+	if (*line + g_select.min_size >= g_select.size.ws_col)
 	{
-		line = 0;
-		col++;
+		*line = 0;
+		*col += 1;
 	}
 	return (1);
 }
 
+// if left > less space ?
 void loop_and_print(t_array *array)
 {
 	t_el *el;
+	int col = 0;
+	int line = 0;
 
 	array->i = 0;
 	while (NULL != (el = ftarray__next(array)))
 	{
-		put_cursor_next();
+		put_cursor_next(&col, &line);
 		if (el->is_current && el->is_selected)
 			print_in_underline_reverse(el->text);
 		else if (el->is_current)
@@ -46,6 +47,6 @@ void loop_and_print(t_array *array)
 		else if (el->is_selected)
 			print_in_reverse(el->text);
 		else
-			ft_printf("%s ", el->text);
+			ft_printf(" %s ", el->text);
 	}
 }

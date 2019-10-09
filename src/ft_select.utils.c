@@ -26,9 +26,16 @@ int get_min_size(t_array *array)
 		if (size < length)
 			size = length;
 	}
-	return (size);
+	return (size + 2);
 }
 
+bool get_window_size(void)
+{
+	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &g_select.size))
+		return (false);
+	else
+		return (true);
+}
 
 bool is_screen_wide_enough(int size_max, int nb_elements)
 {
@@ -36,9 +43,9 @@ bool is_screen_wide_enough(int size_max, int nb_elements)
 	int nb_total;
 
 	size_max += 1;
-	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &g_select.size))
+	if (false == get_window_size())
 		return (false);
 	nb_by_line = (g_select.size.ws_col / size_max);
-	nb_total  = nb_by_line * g_select.size.ws_row;
+	nb_total = nb_by_line * g_select.size.ws_row;
 	return (nb_total <= nb_elements);
 }

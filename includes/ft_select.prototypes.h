@@ -54,6 +54,11 @@ void print_in_underline(char *text);
 void clear_screen(void);
 
 /*
+**	utils
+*/
+bool get_window_size(void);
+
+/*
 **	Print
 */
 void loop_and_print(t_array *array);
