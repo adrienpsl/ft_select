@@ -45,7 +45,7 @@ void set_el(t_el *el, char *data, int selected, int current, t_array *array)
 	ft_bzero(el, sizeof(t_el));
 	char *t = ft_strdup(data);
 	el->d = t;
-	el->data = &t;
+	el->data = &el->d;
 	//	printf("%p \n", *el->data);
 	//	printf("%p \n", t);
 	el->is_selected = selected;
