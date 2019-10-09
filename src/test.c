@@ -16,22 +16,23 @@
 void set_el(t_el *el, char *data, int selected, int current, t_array *array)
 {
 	ft_bzero(el, sizeof(t_el));
-	el->text = data;
+	el->text = ft_strdup(data);
 	el->is_selected = selected;
 	el->is_current = current;
 	ftarray__push(array, el);
 }
-
 t_array *testing_array(void)
 {
 	t_el el;
 	t_array *array = ftarray__init(10, sizeof(t_el));
+	char buff[30];
 
-	set_el(&el, "el_1", 1, 0, array);
-	set_el(&el, "el_20", 0, 0, array);
-	set_el(&el, "el_3", 1, 0, array);
-	set_el(&el, "el_4", 1, 1, array);
-
+	for (int i = 0; i < 100; ++i)
+	{
+		ft_bzero(buff, 30);
+		sprintf(buff, "el_%d", i);
+		set_el(&el, buff, 1, 0, array);
+	}
 	return (array);
 }
 

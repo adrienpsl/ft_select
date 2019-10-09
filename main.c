@@ -52,11 +52,15 @@ int main(int ac, char **av)
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
 
+	clear_screen();
 	t_array *array = testing_array();
 	loop_and_print(array);
 
+
+
+
 	//	catch_all_signal();
-	(void)ms__get_line;
+	ms__get_line();
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 	//	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	//	printf("lines %d\n", w.ws_row);
