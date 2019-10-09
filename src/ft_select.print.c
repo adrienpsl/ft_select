@@ -21,8 +21,13 @@ int put_cursor_next(void)
 	static int line = 0;
 
 	char *caps = tgetstr("cm", NULL);
-	tputs(tgoto(caps,  line, col), 1, ft_putchar);
+	tputs(tgoto(caps, line, col), 1, ft_putchar);
 	line += 8;
+	if (line >= g_select.size.ws_col)
+	{
+		line = 0;
+		col++;
+	}
 	return (1);
 }
 

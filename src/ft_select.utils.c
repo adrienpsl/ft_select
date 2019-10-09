@@ -29,6 +29,7 @@ int get_min_size(t_array *array)
 	return (size);
 }
 
+
 bool is_screen_wide_enough(int size_max, int nb_elements)
 {
 	int nb_by_line;
