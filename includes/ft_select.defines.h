@@ -12,8 +12,13 @@
 
 #ifndef FT_SELECT_DEFINES_H
 #define FT_SELECT_DEFINES_H
-
+// [
 # define FT_SELECT_NAME "ft_select: "
+
+# define FT_UP 		"\x1b" "\x5b" "\x41"
+# define FT_DOWN 	"\x1b" "\x5b" "\x42"
+# define FT_RIGHT	"\x1b" "\x5b" "\x43"
+# define FT_LEFT	"\x1b" "\x5b" "\x44"
 
 t_sct g_select;
 

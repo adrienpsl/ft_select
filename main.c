@@ -17,24 +17,24 @@ static int check(int ac)
 // handle if I have nothing to down, and the limit ? go to start line ?
 
 // first I need to catch the user input
-// 
-static int ms__get_line(
-	//	t_s *const line,
-	//	char **output
-)
+static int ms__get_line()
 {
 	static char buffer[5] = { 0 };
 
-	//	fts__clear(line);
 	ft_bzero(&buffer, 5);
 	while (OK != ft_strcmp(buffer, "\n"))
 	{
 		ft_bzero(&buffer, 5);
 		if (read(0, buffer, 4) < 0)
 			return (-1);
-		ft_printf("%s", buffer);
-		//		if (OK != ft_strcmp(buffer, "\n"))
-		//			handle_input(env, buffer, line);
+		if (OK == ft_strcmp(FT_UP, buffer))
+		    ft_printf("up\n");
+		if (OK == ft_strcmp(FT_DOWN, buffer))
+			ft_printf("down\n");
+		if (OK == ft_strcmp(FT_LEFT, buffer))
+			ft_printf("left\n");
+		if (OK == ft_strcmp(FT_RIGHT, buffer))
+			ft_printf("right\n");
 	}
 	ft_printf("\n");
 	//	*output = line->data;
@@ -62,8 +62,7 @@ int main(int ac, char **av)
 		|| OK != init_ftselect(ac, av, &g_select)
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
-	
-	
+
 	get_window_size();
 	clear_screen();
 	g_select.elememens = testing_array();
