@@ -13,6 +13,11 @@ static int check(int ac)
 	return (OK);
 }
 
+// catch the upper, left, up and down key, and deal with it,
+// handle if I have nothing to down, and the limit ? go to start line ?
+
+// first I need to catch the user input
+// 
 static int ms__get_line(
 	//	t_s *const line,
 	//	char **output
@@ -41,6 +46,12 @@ static int ms__get_line(
 
 // I need to calculate all the good point to each line
 // and move the curssor accordli to the rigth point
+
+
+// move the carret, 
+// will be in the right button, and : 
+
+
 
 
 int main(int ac, char **av)
