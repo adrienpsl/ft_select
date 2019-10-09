@@ -49,5 +49,10 @@ void print_in_reverse(char *text);
 void print_in_underline(char *text);
 void clear_screen(void);
 
+/*
+**	Print
+*/
+void loop_and_print(t_array *array);
+
 
 #endif

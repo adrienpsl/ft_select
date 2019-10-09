@@ -22,7 +22,7 @@ int get_min_size(t_array *array)
 	ftarray__set_start(array);
 	while (NULL != (el = ftarray__next(array)))
 	{
-		length = ft_strlen(el->data);
+		length = ft_strlen(*el->data);
 		if (size < length)
 			size = length;
 	}

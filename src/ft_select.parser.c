@@ -29,7 +29,7 @@ static void copy_argv_in_elements(int ac, char **av, t_sct *select)
 	while (i < ac)
 	{
 		ft_bzero(&el, sizeof(t_el));
-		el.data = av[i];
+		el.data = av + i;
 		ftarray__push(select->elememens, &el);
 		i += 1;
 	}

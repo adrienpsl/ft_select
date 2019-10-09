@@ -10,31 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_select.h"
+#include <ft_select.h>
 
-void print_in_underline(char *text)
+void loop_and_print(t_array *array)
 {
-	tputs(tgetstr("us", NULL), 1, ft_putchar);
-	ft_printf("%s", text);
-	tputs(tgetstr("me", NULL), 1, ft_putchar);
+	t_el *el;
+
+	array->i = 0;
+	printf(" \n");
+	
+	el = ftarray__at(array, 0);
+//	ft_printf("%s \n", *el->data);
+//	ft_printf("%d \n", el->is_selected);
+//	el = ftarray__at(array, 1);
+//	ft_printf("%s \n", *el->data);
+	while (NULL != (el = ftarray__next(array)))
+	{
+//		printf("%p\n", *el->data);
+//		printf("%s\n", *el->data);
+//		printf("%p\n", el->data);
+//		printf("%s\n", *((char**)el->data));
+//		printf("%d\n", el->is_selected);
+//		printf("%s\n", *(el->data));
+		//		if (el->is_current && el->is_selected)
+//			print_in_underline_reverse(el->data);
+//		else if (el->is_current)
+//			print_in_underline(el->data);
+//		if (el->is_selected)
+//			print_in_reverse(el->data);
+//		else
+//			ft_printf(el->data);
+	}
 }
 
-void print_in_reverse(char *text)
-{
-	tputs(tgetstr("mr", NULL), 1, ft_putchar);
-	ft_printf("%s", text);
-	tputs(tgetstr("me", NULL), 1, ft_putchar);
-}
-
-void print_in_underline_reverse(char *text)
-{
-	tputs(tgetstr("mr", NULL), 1, ft_putchar);
-	tputs(tgetstr("us", NULL), 1, ft_putchar);
-	ft_printf("%s", text);
-	tputs(tgetstr("me", NULL), 1, ft_putchar);
-}
-
-void clear_screen(void)
-{
-	tputs(tgetstr("cl", NULL), 1, ft_putchar);
-}
