@@ -18,8 +18,7 @@
 
 typedef struct	s_el
 {
-	char		**data;
-	char		*d;
+	char		*text;
 	int			is_selected;
 	int			is_current;
 }				t_el;

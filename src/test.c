@@ -10,36 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include "ft_select.h"
 
-static int init_structure(int ac, t_sct *select)
+
+void set_el(t_el *el, char *data, int selected, int current, t_array *array)
 {
-	ft_bzero(select, sizeof(t_sct));
-	if (NULL == (select->elememens = ftarray__init(ac, sizeof(t_sct))))
-		return (-1);
-	return (OK);
+	ft_bzero(el, sizeof(t_el));
+	el->text = data;
+	el->is_selected = selected;
+	el->is_current = current;
+	ftarray__push(array, el);
 }
 
-static void copy_argv_in_elements(int ac, char **av, t_sct *select)
+t_array *testing_array(void)
 {
 	t_el el;
-	int i;
+	t_array *array = ftarray__init(10, sizeof(t_el));
 
-	i = 1;
-	while (i < ac)
-	{
-		ft_bzero(&el, sizeof(t_el));
-		el.text = av[i];
-		ftarray__push(select->elememens, &el);
-		i += 1;
-	}
+	set_el(&el, "el_1", 1, 0, array);
+	set_el(&el, "el_20", 0, 0, array);
+	set_el(&el, "el_3", 1, 0, array);
+	set_el(&el, "el_4", 1, 1, array);
+
+	return (array);
 }
 
-int init_ftselect(int ac, char **av, t_sct *select)
-{
-	if (OK != init_structure(ac, select))
-		return (-1);
-	copy_argv_in_elements(ac, av, select);
-	select->min_size = get_min_size(select->elememens);
-	return (OK);
-}

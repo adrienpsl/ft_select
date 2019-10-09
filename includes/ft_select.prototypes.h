@@ -17,6 +17,9 @@
 
 // tmp
 bool is_screen_wide_enough(int size_max, int nb_elements);
+void set_el(t_el *el, char *data, int selected, int current, t_array *array);
+t_array *testing_array(void);
+
 
 
 /*
@@ -40,6 +43,7 @@ void catch_all_signal(void);
 **	Termcaps
 */
 int load_term_caps(void);
+bool get_termcaps(char *name);
 
 /*
 **	CSS

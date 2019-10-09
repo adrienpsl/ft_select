@@ -12,26 +12,45 @@
 
 #include "ft_select.h"
 
+bool get_termcaps(char *name)
+{
+	char *term;
+
+	if ((term = tgetstr(name, NULL)))
+	{
+		tputs(term, 1, ft_putchar);
+		return (true);
+	}
+	else
+	{
+		ft_printf(FT_SELECT_NAME"can't get the right termcap");
+		return (false);
+	}
+}
+
 void print_in_underline(char *text)
 {
-	tputs(tgetstr("us", NULL), 1, ft_putchar);
+	get_termcaps("us");
 	ft_printf("%s", text);
-	tputs(tgetstr("me", NULL), 1, ft_putchar);
+	get_termcaps("me");
+	ft_putchar(' ');
 }
 
 void print_in_reverse(char *text)
 {
-	tputs(tgetstr("mr", NULL), 1, ft_putchar);
+	get_termcaps("mr");
 	ft_printf("%s", text);
-	tputs(tgetstr("me", NULL), 1, ft_putchar);
+	get_termcaps("me");
+	ft_putchar(' ');
 }
 
 void print_in_underline_reverse(char *text)
 {
-	tputs(tgetstr("mr", NULL), 1, ft_putchar);
-	tputs(tgetstr("us", NULL), 1, ft_putchar);
+	get_termcaps("mr");
+	get_termcaps("us");
 	ft_printf("%s", text);
 	tputs(tgetstr("me", NULL), 1, ft_putchar);
+	ft_putchar(' ');
 }
 
 void clear_screen(void)
