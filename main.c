@@ -13,7 +13,7 @@ static int check(int ac)
 	return (OK);
 }
 
-static void t(int u)
+static void move_and_print(int u)
 {
 	t_el *el;
 
@@ -36,7 +36,7 @@ void space(void)
 
 	el = ftarray__at(g_select.elements, g_select.current);
 	el->is_selected = !el->is_selected;
-	t(+1);
+	move_and_print(+1);
 }
 
 void del(void);
@@ -44,8 +44,7 @@ void del(void)
 {
 	get_window_size(&g_select.window, g_select.elements->length);
 	ftarray__remove(g_select.elements, g_select.current);
-	g_select.current--;
-	t(0);
+	move_and_print(-1);
 }
 
 // move with the arrow,
@@ -65,16 +64,17 @@ static int ms__get_line()
 		if (read(0, buffer, 4) < 0)
 			return (-1);
 		if (OK == ft_strcmp(FT_UP, buffer))
-			t(-g_select.window.elem_by_line);
+			move_and_print(-g_select.window.elem_by_line);
 		if (OK == ft_strcmp(FT_DOWN, buffer))
-			t(g_select.window.elem_by_line);
+			move_and_print(g_select.window.elem_by_line);
 		if (OK == ft_strcmp(FT_LEFT, buffer))
-			t(-1);
+			move_and_print(-1);
 		if (OK == ft_strcmp(FT_RIGHT, buffer))
-			t(+1);
+			move_and_print(+1);
 		if (OK == ft_strcmp(" ", buffer))
 			space();
-		if (OK == ft_strcmp("z", buffer))
+		if (OK == ft_strcmp(FT_DEL, buffer)
+		|| OK == ft_strcmp(FT_BACKSPACE, buffer))
 			del();
 	}
 	ft_printf("\n");
