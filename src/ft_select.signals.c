@@ -39,9 +39,9 @@ static void changing_window(int nb)
 {
 	(void)nb;
 	//	is_screen_wide_enough(30, 33);
-	get_window_size();
+	get_window_size(&g_select.window, g_select.elements->length);
 	clear_screen();
-	loop_and_print(g_select.elememens);
+	loop_and_print(g_select.elements);
 }
 
 void catch_all_signal(void)
@@ -54,11 +54,11 @@ void catch_all_signal(void)
 	//	signal(SIGQUIT, quit);
 	// kill
 	//	signal(SIGABRT, quit);
-//	signal(SIGBUS, quit);
+	//	signal(SIGBUS, quit);
 	//	signal(SIGSEGV, quit);
 
 	signal(SIGWINCH, changing_window);
 
-//	signal(SIGTSTP, background);
-//	signal(SIGHUP, wake_up);
+	//	signal(SIGTSTP, background);
+	//	signal(SIGHUP, wake_up);
 }

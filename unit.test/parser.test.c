@@ -37,16 +37,16 @@ static void f_init_ftselect(struct t t)
 
 	int ret = init_ftselect(t.ac, argv, &select);
 	if (ret == OK)
-		print_array(select.elememens);
+		print_array(select.elements);
 	if (test_cmp_int(t.expected_int, ret)
 		|| test_cmp_buff(t.expected_print)
-		|| test_cmp_int(t.expected_min_size, select.min_size))
+		|| test_cmp_int(t.expected_min_size, select.size_el))
 		log_test_line(1, t.line_nb);
 
 	if (argv)
 		ft_strsplit_free(&argv);
-	if (select.elememens)
-		ftarray__free(&select.elememens);
+	if (select.elements)
+		ftarray__free(&select.elements);
 	g_test = 0;
 }
 

@@ -32,14 +32,20 @@ typedef struct	s_term
 	char		*clear_screen;
 }				t_term;
 
+typedef struct s_window{
+	int				elem_by_line;
+	int				line_nb;
+	int is_enough;
+} t_window;
+
 typedef struct	s_sct
 {
-	t_array			*elememens;
-	int				min_size;
+	t_array			*elements;
+	int				size_el;
 	t_term			term;
+	t_window		window;
 	int				current;
 	struct termios	termios;
-	struct winsize size;
 }					t_sct;
 
 

@@ -14,15 +14,15 @@
 
 // je set a 0 mon cursor,
 // je print a chaque fois plus un
-int put_cursor_next(int *col, int *line);
-int put_cursor_next(int *col, int *line)
+int put_cursor_next(int *col_index, int *line_index);
+int put_cursor_next(int *col_index, int *line_index)
 {
-	tputs(tgoto(g_select.term.move, *line, *col), 1, ft_putchar);
-	*line += g_select.min_size;
-	if (*line + g_select.min_size >= g_select.size.ws_col)
+	tputs(tgoto(g_select.term.move, *col_index * g_select.size_el, *line_index), 1, ft_putchar);
+	*col_index += 1;
+	if (*col_index += 1 >= g_select.window.elem_by_line)
 	{
-		*line = 0;
-		*col += 1;
+		*col_index = 0;
+		*line_index += 1;
 	}
 	return (1);
 }
@@ -31,13 +31,13 @@ int put_cursor_next(int *col, int *line)
 void loop_and_print(t_array *array)
 {
 	t_el *el;
-	int col = 0;
-	int line = 0;
+	int col_index = 0;
+	int line_index = 0;
 
 	array->i = 0;
 	while (NULL != (el = ftarray__next(array)))
 	{
-		put_cursor_next(&col, &line);
+		put_cursor_next(&col_index, &line_index);
 		if (el->is_current && el->is_selected)
 			print_in_underline_reverse(el->text);
 		else if (el->is_current)

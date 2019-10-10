@@ -29,12 +29,12 @@ int get_min_size(t_array *array)
 	return (size + 2);
 }
 
-int get_size_line()
-{
-
-}
-
-t_el *get_elemet_at(int index)
-{
-	return ();
-}
+//int get_size_line()
+//{
+//
+//}
+//
+//t_el *get_elemet_at(int index)
+//{
+//	return ();
+//}

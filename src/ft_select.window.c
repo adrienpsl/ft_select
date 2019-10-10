@@ -12,32 +12,18 @@
 
 #include "ft_select.h"
 
-bool get_window_size(void)
+bool get_window_size(t_window *w, int nb_elements)
 {
-	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &g_select.size))
+	struct winsize size;
+
+	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &size))
 		return (false);
 	else
+	{
+		printf("%d %d \n", size.ws_col, size.ws_row);
+		w->elem_by_line = size.ws_col / g_select.size_el;
+		w->line_nb = (g_select.elements->length / w->elem_by_line);
+		w->is_enough = (w->line_nb * w->elem_by_line) / nb_elements;
 		return (true);
+	}
 }
-
-bool is_screen_wide_enough(int size_max, int nb_elements)
-{
-	int nb_by_line;
-	int nb_total;
-
-	size_max += 1;
-	if (false == get_window_size())
-		return (false);
-	nb_by_line = (g_select.size.ws_col / size_max);
-	nb_total = nb_by_line * g_select.size.ws_row;
-	return (nb_total <= nb_elements);
-}
-// j'ai la taille de ma window, comment je regarde si je peux bouger?
-// a droite : mon index de line + 1 * la size min <, taille window ?
-// a gauche : inferieur. comment je get mon index ?
-// je vais le mettre dans mon tableau !
-// dailleur si mon tableau pouvais juste etre un array de ptr ce serai plus opti
-//
-
-// look if I can move at left rigth botton of up.
-// if I can, I had to

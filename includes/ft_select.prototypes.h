@@ -56,7 +56,7 @@ void clear_screen(void);
 /*
 **	utils
 */
-bool get_window_size(void);
+bool get_window_size(t_window *w, int nb_elements);
 
 /*
 **	Print

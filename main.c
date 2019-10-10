@@ -60,13 +60,14 @@ int main(int ac, char **av)
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
 
-	get_window_size();
 	clear_screen();
-	g_select.elememens = testing_array();
-	g_select.min_size = get_min_size(g_select.elememens);
-	loop_and_print(g_select.elememens);
-
-	catch_all_signal();
+	g_select.elements = testing_array();
+	g_select.size_el = get_min_size(g_select.elements);
+	get_window_size(&g_select.window, g_select.elements->length);
+	printf("-- %d %d\n", g_select.window.elem_by_line, g_select.window.line_nb);
+	loop_and_print(g_select.elements);
+//
+//	catch_all_signal();
 	ms__get_line();
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 	//	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
