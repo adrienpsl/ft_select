@@ -25,11 +25,11 @@ typedef struct	s_el
 
 typedef struct	s_term
 {
-	char *move;
-	char *underline;
-	char *reverse;
-	char *clean;
-	char *clear_screen;
+	char		*move;
+	char		*underline;
+	char		*reverse;
+	char		*clean;
+	char		*clear_screen;
 }				t_term;
 
 typedef struct	s_sct
@@ -37,6 +37,7 @@ typedef struct	s_sct
 	t_array			*elememens;
 	int				min_size;
 	t_term			term;
+	int				current;
 	struct termios	termios;
 	struct winsize size;
 }					t_sct;
