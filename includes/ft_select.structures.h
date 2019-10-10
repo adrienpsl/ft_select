@@ -32,10 +32,17 @@ typedef struct	s_term
 	char		*clear_screen;
 }				t_term;
 
+typedef struct s_pos
+{
+	int x;
+	int y;
+} t_pos;
+
 typedef struct s_window{
 	int				elem_by_line;
-	int				line_nb;
-	int is_enough;
+	int				nb_lines;
+	int				x_last_el;
+	int				is_enough;
 } t_window;
 
 typedef struct	s_sct

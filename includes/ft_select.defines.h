@@ -19,6 +19,11 @@
 # define FT_DOWN 	"\x1b" "\x5b" "\x42"
 # define FT_RIGHT	"\x1b" "\x5b" "\x43"
 # define FT_LEFT	"\x1b" "\x5b" "\x44"
+# define FT_ECHAP	"\x1b"
+# define FT_DEL 	"\x1b" "\x5b" "\x33" "\x7e"
+# define FT_BACKSPACE 	"\x7f"
+# define FT_SPACE 	" "
+
 
 t_sct g_select;
 

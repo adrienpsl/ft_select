@@ -26,7 +26,6 @@ int put_cursor_next(int *col_index, int *line_index)
 	return (1);
 }
 
-// if left > less space ?
 void loop_and_print(t_array *array)
 {
 	t_el *el;

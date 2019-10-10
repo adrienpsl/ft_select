@@ -13,6 +13,46 @@ static int check(int ac)
 	return (OK);
 }
 
+static void t(int u)
+{
+	t_el *el;
+
+	if (is_good_index(&g_select.window, g_select.current + u))
+	{
+		clear_screen();
+		el = ftarray__at(g_select.elements, g_select.current + u);
+		el->is_current = 1;
+		el = ftarray__at(g_select.elements, g_select.current);
+		el->is_current = 0;
+		loop_and_print(g_select.elements);
+		g_select.current += u;
+	}
+}
+
+void space(void);
+void space(void)
+{
+	t_el *el;
+
+	el = ftarray__at(g_select.elements, g_select.current);
+	el->is_selected = !el->is_selected;
+	t(+1);
+}
+
+void del(void);
+void del(void)
+{
+	get_window_size(&g_select.window, g_select.elements->length);
+	ftarray__remove(g_select.elements, g_select.current);
+	g_select.current--;
+	t(0);
+}
+
+// move with the arrow,
+// echap : quit : 1b
+// del / backspace 7f > delete // no element > echap
+//
+
 
 static int ms__get_line()
 {
@@ -25,13 +65,17 @@ static int ms__get_line()
 		if (read(0, buffer, 4) < 0)
 			return (-1);
 		if (OK == ft_strcmp(FT_UP, buffer))
-			ft_printf("up\n");
+			t(-g_select.window.elem_by_line);
 		if (OK == ft_strcmp(FT_DOWN, buffer))
-			ft_printf("down\n");
+			t(g_select.window.elem_by_line);
 		if (OK == ft_strcmp(FT_LEFT, buffer))
-			ft_printf("left\n");
+			t(-1);
 		if (OK == ft_strcmp(FT_RIGHT, buffer))
-			ft_printf("right\n");
+			t(+1);
+		if (OK == ft_strcmp(" ", buffer))
+			space();
+		if (OK == ft_strcmp("z", buffer))
+			del();
 	}
 	ft_printf("\n");
 	//	*output = line->data;
@@ -42,14 +86,7 @@ static int ms__get_line()
 // set the array to the right current element
 
 // I need to calculate all the good point to each line
-// and move the curssor accordli to the rigth point
-
-
-// move the carret, 
-// will be in the right button, and : 
-
-
-
+// and move the curssor accordli to the rigth poin
 
 int main(int ac, char **av)
 {
@@ -64,9 +101,10 @@ int main(int ac, char **av)
 	g_select.elements = testing_array();
 	g_select.size_el = get_min_size(g_select.elements);
 	get_window_size(&g_select.window, g_select.elements->length);
-	printf("-- %d %d\n", g_select.window.elem_by_line, g_select.window.line_nb);
-//	loop_and_print(g_select.elements);
-//
+	printf("-- %d %d\n", g_select.window.elem_by_line,
+		g_select.window.nb_lines);
+	//	loop_and_print(g_select.elements);
+	//
 	catch_all_signal();
 	ms__get_line();
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);

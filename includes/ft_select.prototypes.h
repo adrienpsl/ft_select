@@ -57,6 +57,9 @@ void clear_screen(void);
 **	utils
 */
 bool get_window_size(t_window *w, int nb_elements);
+bool is_good_index(t_window *w, int index);
+void get_position(t_pos *pos, int index, t_window *w);
+bool is_good_index(t_window *w, int index);
 
 /*
 **	Print

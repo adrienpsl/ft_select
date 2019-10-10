@@ -29,12 +29,24 @@ int get_min_size(t_array *array)
 	return (size + 2);
 }
 
-//int get_size_line()
-//{
-//
-//}
-//
-//t_el *get_elemet_at(int index)
-//{
-//	return ();
-//}
+void get_position(t_pos *pos, int index, t_window *w)
+{
+	pos->x = index % w->elem_by_line;
+	pos->y = (index / w->elem_by_line);
+}
+
+bool is_good_index(t_window *w, int index)
+{
+	t_pos pos;
+
+	get_position(&pos, index, w);
+	//	printf("%d %d %d %d", pos.x, pos.y, w->nb_lines, w->x_last_el);
+	if (pos.y < 0 || pos.x < 0)
+	    return (false);
+	if (pos.y < w->nb_lines)
+		return (true);
+	if (pos.y == w->nb_lines
+		&& pos.x < w->x_last_el)
+		return (true);
+	return (false);
+}

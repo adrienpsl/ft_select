@@ -31,7 +31,7 @@ t_array *testing_array(void)
 	{
 		ft_bzero(buff, 30);
 		sprintf(buff, "el_%d", rand());
-		set_el(&el, buff, i % 3, i % 2, array);
+		set_el(&el, buff, 0, 0, array);
 	}
 	return (array);
 }
