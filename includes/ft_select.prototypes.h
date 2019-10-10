@@ -43,7 +43,7 @@ void catch_all_signal(void);
 **	Termcaps
 */
 int load_term_caps(void);
-bool get_termcaps(char *name);
+bool put_termcaps(char *name);
 
 /*
 **	CSS

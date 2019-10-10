@@ -12,6 +12,10 @@
 
 #include <ft_select.h>
 
+/*
+**	Set terminal in canonical mode, and save the origin config in backup
+*/
+
 int set_canonical_mode(struct termios *backup_termios)
 {
 	struct termios new_termios;
@@ -29,6 +33,10 @@ int set_canonical_mode(struct termios *backup_termios)
 		return (-1);
 	return (OK);
 }
+
+/*
+**	Reset the backup terminal config
+*/
 
 int unset_canonical_mode(struct termios *backup_termios)
 {

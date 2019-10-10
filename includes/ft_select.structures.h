@@ -23,13 +23,21 @@ typedef struct	s_el
 	int			is_current;
 }				t_el;
 
+typedef struct	s_term
+{
+	char *move;
+	char *underline;
+	char *reverse;
+	char *clean;
+	char *clear_screen;
+}				t_term;
+
 typedef struct	s_sct
 {
 	t_array			*elememens;
 	int				min_size;
+	t_term			term;
 	struct termios	termios;
-	char ctrl_c:1;
-	char ctrl_z:1;
 	struct winsize size;
 }					t_sct;
 

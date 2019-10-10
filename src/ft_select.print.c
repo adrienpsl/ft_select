@@ -17,9 +17,7 @@
 int put_cursor_next(int *col, int *line);
 int put_cursor_next(int *col, int *line)
 {
-
-	char *caps = tgetstr("cm", NULL);
-	tputs(tgoto(caps, *line, *col), 1, ft_putchar);
+	tputs(tgoto(g_select.term.move, *line, *col), 1, ft_putchar);
 	*line += g_select.min_size;
 	if (*line + g_select.min_size >= g_select.size.ws_col)
 	{

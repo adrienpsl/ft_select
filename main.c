@@ -13,10 +13,7 @@ static int check(int ac)
 	return (OK);
 }
 
-// catch the upper, left, up and down key, and deal with it,
-// handle if I have nothing to down, and the limit ? go to start line ?
 
-// first I need to catch the user input
 static int ms__get_line()
 {
 	static char buffer[5] = { 0 };
@@ -28,7 +25,7 @@ static int ms__get_line()
 		if (read(0, buffer, 4) < 0)
 			return (-1);
 		if (OK == ft_strcmp(FT_UP, buffer))
-		    ft_printf("up\n");
+			ft_printf("up\n");
 		if (OK == ft_strcmp(FT_DOWN, buffer))
 			ft_printf("down\n");
 		if (OK == ft_strcmp(FT_LEFT, buffer))
@@ -58,8 +55,8 @@ int main(int ac, char **av)
 {
 	g_test = 0;
 	if (OK != check(ac)
-		|| OK != load_term_caps()
 		|| OK != init_ftselect(ac, av, &g_select)
+		|| OK != load_term_caps()
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
 
