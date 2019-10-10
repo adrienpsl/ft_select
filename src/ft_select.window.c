@@ -14,7 +14,7 @@
 
 bool get_window_size(t_window *w, int nb_elements)
 {
-	struct winsize size;
+	static struct winsize size;
 
 	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &size))
 		return (false);
@@ -24,6 +24,7 @@ bool get_window_size(t_window *w, int nb_elements)
 		w->elem_by_line = size.ws_col / g_select.size_el;
 		w->line_nb = (g_select.elements->length / w->elem_by_line);
 		w->is_enough = (w->line_nb * w->elem_by_line) / nb_elements;
+		printf("wid : %d %d \n",w->elem_by_line,  w->line_nb);
 		return (true);
 	}
 }

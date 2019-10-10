@@ -12,14 +12,13 @@
 
 #include <ft_select.h>
 
-// je set a 0 mon cursor,
-// je print a chaque fois plus un
 int put_cursor_next(int *col_index, int *line_index);
 int put_cursor_next(int *col_index, int *line_index)
 {
-	tputs(tgoto(g_select.term.move, *col_index * g_select.size_el, *line_index), 1, ft_putchar);
+	tputs(tgoto(g_select.term.move, *col_index * g_select.size_el, *line_index),
+		1, ft_putchar);
 	*col_index += 1;
-	if (*col_index += 1 >= g_select.window.elem_by_line)
+	if (*col_index >= g_select.window.elem_by_line)
 	{
 		*col_index = 0;
 		*line_index += 1;
