@@ -21,9 +21,14 @@ bool get_window_size(t_window *w, int nb_elements)
 	else
 	{
 		w->elem_by_line = size.ws_col / g_select.size_el;
+		if (w->elem_by_line == 0)
+		    w->elem_by_line = g_select.elements->length;
 		w->nb_lines = (nb_elements / w->elem_by_line);
+		if (w->nb_lines == 0)
+		    w->nb_lines = 1;
 		w->is_enough = (w->nb_lines * w->elem_by_line) / nb_elements;
 		w->x_last_el = nb_elements % w->nb_lines;
+		putchar('b');
 		return (true);
 	}
 }

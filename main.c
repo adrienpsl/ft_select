@@ -51,7 +51,7 @@ void del(void)
 // echap : quit : 1b
 // del / backspace 7f > delete // no element > echap
 //
-
+// je pense qu'il me faut mes logs dans un autre endroit, mais ou?
 
 static int ms__get_line()
 {
@@ -96,7 +96,7 @@ int main(int ac, char **av)
 		|| OK != load_term_caps()
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
-
+	
 	clear_screen();
 	g_select.elements = testing_array();
 	g_select.size_el = get_min_size(g_select.elements);

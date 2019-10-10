@@ -34,6 +34,7 @@ void get_position(t_pos *pos, int index, t_window *w)
 	pos->x = index % w->elem_by_line;
 	pos->y = (index / w->elem_by_line);
 }
+// 
 
 bool is_good_index(t_window *w, int index)
 {
@@ -42,9 +43,12 @@ bool is_good_index(t_window *w, int index)
 	get_position(&pos, index, w);
 	//	printf("%d %d %d %d", pos.x, pos.y, w->nb_lines, w->x_last_el);
 	if (pos.y < 0 || pos.x < 0)
-	    return (false);
-	if (pos.y < w->nb_lines)
+		return (false);
+	if (index == g_select.elements->length)
+		return (false);
+	if (pos.y < w->nb_lines) // here the pb. 
 		return (true);
+	// if index == size element : 
 	if (pos.y == w->nb_lines
 		&& pos.x < w->x_last_el)
 		return (true);

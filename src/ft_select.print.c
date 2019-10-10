@@ -45,4 +45,5 @@ void loop_and_print(t_array *array)
 		else
 			ft_printf(" %s ", el->text);
 	}
+	ft_printf("%d--", array->length);
 }
