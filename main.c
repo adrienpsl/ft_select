@@ -66,7 +66,7 @@ int main(int ac, char **av)
 	start_display(&s);
 	if (1 == catch_and_treat_user_input(&s))
 	{
-		clear_screen(&s.term);
+		clear_screen();
 		ftarray__func(s.elements, print_value, NULL);
 	}
 	quit_binary(s.elements, &s.termios, s.termios_set);

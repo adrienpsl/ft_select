@@ -44,10 +44,10 @@ bool put_termcaps(char *name);
 /*
 **	CSS
 */
-void print_in_underline_reverse(char *text, t_term *t);
-void print_in_reverse(char *text, t_term *t);
-void print_in_underline(char *text, t_term *t);
-void clear_screen(t_term *t);
+void print_in_underline_reverse(char *text);
+void print_in_reverse(char *text);
+void print_in_underline(char *text);
+void clear_screen(void);
 
 /*
 **	utils
@@ -55,8 +55,13 @@ void clear_screen(t_term *t);
 bool get_window_size(t_window *w, int nb_elements, int size_el);
 bool is_good_index(int index, int nb_elements);
 void start_display(t_sct *s);
-t_sct *get_sct(t_sct *s);
 int putchar_on_fd_0(int a);
+
+/*
+**	getter
+*/
+t_sct *get_sct(t_sct *s);
+t_term *get_term(void);
 
 /*
 **	Print

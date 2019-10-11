@@ -43,7 +43,7 @@ static int get_all_termcaps(t_term *t)
 	if (NULL == (t->move = tgetstr("cm", NULL))
 		|| NULL == (t->underline = tgetstr("us", NULL))
 		|| NULL == (t->reverse = tgetstr("mr", NULL))
-		|| NULL == (t->clean = tgetstr("me", NULL))
+		|| NULL == (t->reset = tgetstr("me", NULL))
 		|| NULL == (t->clear_screen = tgetstr("cl", NULL)))
 		return (-1);
 	return (OK);

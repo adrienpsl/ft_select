@@ -65,22 +65,9 @@ void quit_binary(t_array *elements, struct termios *backup, int termios_set)
 
 void start_display(t_sct *s)
 {
-	clear_screen(&s->term);
+	clear_screen();
 	get_window_size(&s->window, s->elements->length, s->size_el);
 	print_data(s->elements, &s->term, &s->window, s->size_el);
-}
-
-t_sct *get_sct(t_sct *s)
-{
-	static t_sct *ptr;
-
-	if (s == NULL)
-		return (ptr);
-	else
-	{
-		ptr = s;
-		return (NULL);
-	}
 }
 
 int putchar_on_fd_0(int a)

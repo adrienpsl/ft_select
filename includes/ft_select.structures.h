@@ -28,7 +28,7 @@ typedef struct	s_term
 	char		*move;
 	char		*underline;
 	char		*reverse;
-	char		*clean;
+	char		*reset;
 	char		*clear_screen;
 }				t_term;
 

@@ -36,17 +36,17 @@ void print_data(t_array *els, t_term *t, t_window *w, int size_el)
 
 	pos.x = 0;
 	pos.y = 0;
-	clear_screen(t);
+	clear_screen();
 	els->i = 0;
 	while (NULL != (el = ftarray__next(els)))
 	{
 		put_cursor_next(&pos, t, w, size_el);
 		if (el->is_current && el->is_selected)
-			print_in_underline_reverse(el->text, t);
+			print_in_underline_reverse(el->text);
 		else if (el->is_current)
-			print_in_underline(el->text, t);
+			print_in_underline(el->text);
 		else if (el->is_selected)
-			print_in_reverse(el->text, t);
+			print_in_reverse(el->text);
 		else
 			ft_dprintf(0, " %s ", el->text);
 	}

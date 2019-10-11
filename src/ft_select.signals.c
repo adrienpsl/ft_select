@@ -57,7 +57,7 @@ static void changing_window(int nb)
 	s = get_sct(NULL);
 	get_window_size(&s->window, s->elements->length,
 		s->size_el);
-	clear_screen(&s->term);
+	clear_screen();
 	if (s->window.is_enough == false)
 		ft_dprintf(0, "The window is too little dude ! line lack : %d",
 			s->window.is_enough);
