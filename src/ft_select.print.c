@@ -29,7 +29,7 @@ static int put_cursor_next(t_pos *pos, t_term *t, t_window *w, int size_el)
 	return (1);
 }
 
-void loop_and_print(t_array *els, t_term *t, t_window *w, int size_el)
+void print_data(t_array *els, t_term *t, t_window *w, int size_el)
 {
 	t_el *el;
 	t_pos pos;
@@ -50,5 +50,4 @@ void loop_and_print(t_array *els, t_term *t, t_window *w, int size_el)
 		else
 			ft_printf(" %s ", el->text);
 	}
-	//	ft_printf("%d-- current :%d %d", array->length, g_select.current, is_good_index(g_select.current));
 }

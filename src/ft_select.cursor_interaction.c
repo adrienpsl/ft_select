@@ -25,7 +25,7 @@ void move_if_valid_new_index(int step_size, t_sct *s)
 		el = ftarray__at(s->elements, s->current + step_size);
 		el->is_current = 1;
 		s->current += step_size;
-		loop_and_print(s->elements, &s->term, &s->window, s->size_el);
+		print_data(s->elements, &s->term, &s->window, s->size_el);
 	}
 }
 
@@ -35,13 +35,13 @@ void space(t_sct *s)
 
 	el = ftarray__at(s->elements, s->current);
 	el->is_selected = !el->is_selected;
-	loop_and_print(s->elements, &s->term, &s->window, s->size_el);
+	print_data(s->elements, &s->term, &s->window, s->size_el);
 	move_if_valid_new_index(+1, s);
 }
 
 void del(t_sct *s)
 {
 	ftarray__remove(s->elements, s->current);
-	loop_and_print(s->elements, &s->term, &s->window, s->size_el);
+	print_data(s->elements, &s->term, &s->window, s->size_el);
 	move_if_valid_new_index(-1, s);
 }

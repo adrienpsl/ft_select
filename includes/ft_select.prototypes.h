@@ -16,7 +16,6 @@
 #include <stdbool.h>
 
 // tmp
-bool is_screen_wide_enough(int size_max, int nb_elements);
 void set_el(t_el *el, char *data, int selected, int current, t_array *array);
 t_array *testing_array(void);
 
@@ -26,8 +25,6 @@ t_array *testing_array(void);
 **	handling the list element
 */
 int get_min_size(t_array *array);
-int init_ftselect(int ac, char **av, t_sct *select);
-
 /*
 **	Handling the canonical mode
 */
@@ -63,7 +60,7 @@ bool is_good_index(int index, int nb_elements);
 /*
 **	Print
 */
-void loop_and_print(t_array *els, t_term *t, t_window *w, int size_el);
+void print_data(t_array *els, t_term *t, t_window *w, int size_el);
 
 /*
 **	cursor interaction
