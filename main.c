@@ -19,22 +19,22 @@ int main(int ac, char **av)
 	t_sct s;
 
 	if (OK != check(ac)
-		|| OK != init_ftselect(ac, av, &g_select)
-		|| OK != load_term_caps()
-		|| OK != set_canonical_mode(&g_select.termios))
+		|| OK != init_ftselect(ac, av, &s)
+		|| OK != load_term_caps(&s.term)
+		|| OK != set_canonical_mode(&s.termios))
 		return (EXIT_FAILURE);
-	s = g_select;
-	clear_screen(&g_select.term);
-	g_select.elements = testing_array();
-	g_select.size_el = get_min_size(g_select.elements);
-	get_window_size(&g_select.window, g_select.elements->length);
-	loop_and_print(s.elements, &s.term, &s.window);
+	clear_screen(&s.term);
+	s.elements = testing_array();
+	s.size_el = get_min_size(s.elements);
+	g_select = &s;
+	get_window_size(&s.window, s.elements->length, s.size_el);1
+	loop_and_print(s.elements, &s.term, &s.window, s.size_el);
 //	printf("-- %d %d\n", g_select.window.elem_by_line,
 //		g_select.window.nb_lines);
 	//	loop_and_print(g_select.elements);
 	//
 	catch_all_signal();
-	ms__get_line(&g_select);
+	ms__get_line(&s);
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 	//	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	//	printf("lines %d\n", w.ws_row);

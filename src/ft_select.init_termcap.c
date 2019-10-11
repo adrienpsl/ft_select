@@ -49,10 +49,10 @@ static int get_all_termcaps(t_term *t)
 	return (OK);
 }
 
-int load_term_caps(void)
+int load_term_caps(t_term *t)
 {
 	if (OK != check_and_init()
-		|| OK != get_all_termcaps(&g_select.term))
+		|| OK != get_all_termcaps(t))
 		return (-1);
 	return (OK);
 }

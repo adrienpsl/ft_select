@@ -29,17 +29,31 @@ int get_min_size(t_array *array)
 	return (size + 2);
 }
 
-//void get_position(t_pos *pos, int index, t_window *w)
-//{
-//	pos->x = index % w->elem_by_line;
-//	pos->y = (index / w->elem_by_line);
-//}
-
-bool is_good_index(int index)
+bool is_good_index(int index, int nb_elements)
 {
 	if (index < 0)
 		return (false);
-	if (index < g_select.elements->length)
+	if (index < nb_elements)
 		return (true);
 	return (false);
+}
+
+bool get_window_size(t_window *w, int nb_elements, int size_el)
+{
+	static struct winsize size;
+
+	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &size))
+		return (false);
+	else
+	{
+		w->elem_by_line = size.ws_col / size_el;
+		if (w->elem_by_line == 0)
+			w->elem_by_line = nb_elements;
+		w->nb_lines = (nb_elements / w->elem_by_line);
+		if (w->nb_lines == 0)
+			w->nb_lines = 1;
+		w->is_enough = (w->nb_lines * w->elem_by_line) / nb_elements;
+		putchar('b');
+		return (true);
+	}
 }

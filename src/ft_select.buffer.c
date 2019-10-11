@@ -12,23 +12,30 @@
 
 #include "ft_select.h"
 
+/*
+**	dispatch at the good function according to the user input
+*/
 
 static void dispatch_between_order(char *buffer, t_sct *s)
 {
 	if (OK == ft_strcmp(FT_UP, buffer))
 		move_if_valid_new_index(-s->window.elem_by_line, s);
-	if (OK == ft_strcmp(FT_DOWN, buffer))
+	else if (OK == ft_strcmp(FT_DOWN, buffer))
 		move_if_valid_new_index(s->window.elem_by_line, s);
-	if (OK == ft_strcmp(FT_LEFT, buffer))
+	else if (OK == ft_strcmp(FT_LEFT, buffer))
 		move_if_valid_new_index(-1, s);
-	if (OK == ft_strcmp(FT_RIGHT, buffer))
+	else if (OK == ft_strcmp(FT_RIGHT, buffer))
 		move_if_valid_new_index(+1, s);
-	if (OK == ft_strcmp(" ", buffer))
+	else if (OK == ft_strcmp(" ", buffer))
 		space(s);
-	if (OK == ft_strcmp(FT_DEL, buffer)
+	else if (OK == ft_strcmp(FT_DEL, buffer)
 		|| OK == ft_strcmp(FT_BACKSPACE, buffer))
 		del(s);
 }
+
+/*
+**	as we are in raw mode, I have to handle the line buffer by myself
+*/
 
 int ms__get_line(t_sct *s)
 {

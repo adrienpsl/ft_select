@@ -30,7 +30,7 @@ static void wake_up(int nb)
 static void background(int nb)
 {
 	(void)nb;
-	unset_canonical_mode(&g_select.termios);
+	unset_canonical_mode(&g_select->termios);
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
 }
@@ -38,9 +38,9 @@ static void background(int nb)
 static void changing_window(int nb)
 {
 	(void)nb;
-	get_window_size(&g_select.window, g_select.elements->length);
-	clear_screen(&g_select.term);
-	loop_and_print(g_select.elements, &g_select.term, &g_select.window);
+	get_window_size(&g_select->window, g_select->elements->length, g_select->size_el);
+	clear_screen(&g_select->term);
+	loop_and_print(g_select->elements, &g_select->term, &g_select->window, g_select->size_el);
 }
 
 void catch_all_signal(void)

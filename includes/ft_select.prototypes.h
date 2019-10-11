@@ -42,7 +42,7 @@ void catch_all_signal(void);
 /*
 **	Termcaps
 */
-int load_term_caps(void);
+int load_term_caps(t_term *t);
 bool put_termcaps(char *name);
 
 /*
@@ -56,14 +56,14 @@ void clear_screen(t_term *t);
 /*
 **	utils
 */
-bool get_window_size(t_window *w, int nb_elements);
-bool is_good_index(int index);
+bool get_window_size(t_window *w, int nb_elements, int size_el);
+bool is_good_index(int index, int nb_elements);
 
 
 /*
 **	Print
 */
-void loop_and_print(t_array *els, t_term *t, t_window *w);
+void loop_and_print(t_array *els, t_term *t, t_window *w, int size_el);
 
 /*
 **	cursor interaction

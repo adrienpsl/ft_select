@@ -41,7 +41,6 @@ typedef struct s_pos
 typedef struct s_window{
 	int				elem_by_line;
 	int				nb_lines;
-	int				x_last_el;
 	int				is_enough;
 } t_window;
 

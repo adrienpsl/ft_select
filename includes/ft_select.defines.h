@@ -25,6 +25,6 @@
 # define FT_SPACE 	" "
 
 
-t_sct g_select;
+t_sct *g_select;
 
 #endif

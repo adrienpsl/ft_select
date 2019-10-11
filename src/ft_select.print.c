@@ -12,12 +12,16 @@
 
 #include <ft_select.h>
 
-static int put_cursor_next(t_pos *pos)
+static int put_cursor_next(t_pos *pos, t_term *t, t_window *w, int size_el)
 {
-	tputs(tgoto(g_select.term.move, pos->x * g_select.size_el, pos->y),
-		1, ft_putchar);
+	char *goto_term;
+
+	goto_term = tgoto(t->move, pos->x * size_el, pos->y);
+	if (goto_term == NULL)
+		return (-1);
+	tputs(goto_term, 1, ft_putchar);
 	pos->x += 1;
-	if (pos->x >= g_select.window.elem_by_line)
+	if (pos->x >= w->elem_by_line)
 	{
 		pos->x = 0;
 		pos->y += 1;
@@ -25,19 +29,18 @@ static int put_cursor_next(t_pos *pos)
 	return (1);
 }
 
-void loop_and_print(t_array *els, t_term *t, t_window *w)
+void loop_and_print(t_array *els, t_term *t, t_window *w, int size_el)
 {
 	t_el *el;
 	t_pos pos;
 
 	pos.x = 0;
 	pos.y = 0;
-	(void)w;
 	clear_screen(t);
 	els->i = 0;
 	while (NULL != (el = ftarray__next(els)))
 	{
-		put_cursor_next(&pos);
+		put_cursor_next(&pos, t, w, size_el);
 		if (el->is_current && el->is_selected)
 			print_in_underline_reverse(el->text, t);
 		else if (el->is_current)
@@ -48,5 +51,4 @@ void loop_and_print(t_array *els, t_term *t, t_window *w)
 			ft_printf(" %s ", el->text);
 	}
 	//	ft_printf("%d-- current :%d %d", array->length, g_select.current, is_good_index(g_select.current));
-	ft_printf("-- %d", g_select.current);
 }
