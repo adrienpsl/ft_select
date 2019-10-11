@@ -26,7 +26,7 @@ t_array *testing_array(void)
 	t_array *array = ftarray__init(10, sizeof(t_el));
 	char buff[30];
 
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 10; ++i)
 	{
 		ft_bzero(buff, 30);
 		sprintf(buff, "el_%d", rand());

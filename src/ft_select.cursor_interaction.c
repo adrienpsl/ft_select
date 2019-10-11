@@ -12,21 +12,50 @@
 
 #include "ft_select.h"
 
-void move_if_valid_new_index(int step_size, t_sct *s)
+static void move_cursor(int step_size, t_sct *s)
 {
 	t_el *el;
 
-	if (s->current + step_size < 0)
+	el = ftarray__at(s->elements, s->current);
+	el->is_current = 0;
+	el = ftarray__at(s->elements, s->current + step_size);
+	el->is_current = 1;
+	s->current += step_size;
+}
+
+static void start_cursor(t_sct *s)
+{
+	t_el *el;
+
+	el = ftarray__at(s->elements, s->elements->length - 1);
+	el->is_current = 0;
+	el = ftarray__at(s->elements, 0);
+	el->is_current = 1;
+	s->current = 0;
+}
+
+static void end_cursor(t_sct *s)
+{
+	t_el *el;
+
+	el = ftarray__at(s->elements, s->elements->length - 1);
+	el->is_current = 1;
+	el = ftarray__at(s->elements, 0);
+	el->is_current = 0;
+	s->current = s->elements->length;
+}
+
+void move_if_valid_new_index(int step_size, t_sct *s)
+{
+	if (step_size == -1 && s->current == 0)
+		end_cursor(s);
+	else if (s->current + step_size < 0)
 		step_size = 0;
-	if (true == is_good_index(s->current + step_size, s->elements->length))
-	{
-		el = ftarray__at(s->elements, s->current);
-		el->is_current = 0;
-		el = ftarray__at(s->elements, s->current + step_size);
-		el->is_current = 1;
-		s->current += step_size;
-		print_data(s->elements, &s->term, &s->window, s->size_el);
-	}
+	if (step_size == 1 && s->current + step_size == s->elements->length)
+		start_cursor(s);
+	else if (true == is_good_index(s->current + step_size, s->elements->length))
+		move_cursor(step_size, s);
+	print_data(s->elements, &s->term, &s->window, s->size_el);
 }
 
 void space(t_sct *s)
