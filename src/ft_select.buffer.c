@@ -13,24 +13,24 @@
 #include "ft_select.h"
 
 
-static void dispatch_between_order(char *buffer)
+static void dispatch_between_order(char *buffer, t_sct *s)
 {
 	if (OK == ft_strcmp(FT_UP, buffer))
-		move_if_valid_new_index(-g_select.window.elem_by_line);
+		move_if_valid_new_index(-s->window.elem_by_line, s);
 	if (OK == ft_strcmp(FT_DOWN, buffer))
-		move_if_valid_new_index(g_select.window.elem_by_line);
+		move_if_valid_new_index(s->window.elem_by_line, s);
 	if (OK == ft_strcmp(FT_LEFT, buffer))
-		move_if_valid_new_index(-1);
+		move_if_valid_new_index(-1, s);
 	if (OK == ft_strcmp(FT_RIGHT, buffer))
-		move_if_valid_new_index(+1);
+		move_if_valid_new_index(+1, s);
 	if (OK == ft_strcmp(" ", buffer))
-		space();
+		space(s);
 	if (OK == ft_strcmp(FT_DEL, buffer)
 		|| OK == ft_strcmp(FT_BACKSPACE, buffer))
-		del();
+		del(s);
 }
 
-int ms__get_line(void)
+int ms__get_line(t_sct *s)
 {
 	static char buffer[5] = { 0 };
 
@@ -40,9 +40,7 @@ int ms__get_line(void)
 		ft_bzero(&buffer, 5);
 		if (read(0, buffer, 4) < 0)
 			return (-1);
-		dispatch_between_order(buffer);
+		dispatch_between_order(buffer, s);
 	}
-	ft_printf("\n");
-	//	*output = line->data;
 	return (OK);
 }

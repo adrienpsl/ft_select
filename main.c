@@ -31,7 +31,7 @@ int main(int ac, char **av)
 	//	loop_and_print(g_select.elements);
 	//
 	catch_all_signal();
-	ms__get_line();
+	ms__get_line(&g_select);
 	//		ioctl(STDIN_FILENO, TIOCSIG, SIGTSTP);
 	//	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	//	printf("lines %d\n", w.ws_row);

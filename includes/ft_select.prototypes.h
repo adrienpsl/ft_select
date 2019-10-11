@@ -58,7 +58,6 @@ void clear_screen(void);
 */
 bool get_window_size(t_window *w, int nb_elements);
 bool is_good_index(int index);
-void get_position(t_pos *pos, int index, t_window *w);
 
 
 /*
@@ -69,14 +68,14 @@ void loop_and_print(t_array *array);
 /*
 **	cursor interaction
 */
-void move_if_valid_new_index(int step_size);
-void space(void);
-void del(void);
+void move_if_valid_new_index(int step_size, t_sct *s);
+void space(t_sct *s);
+void del(t_sct *s);
 
 /*
 **	Buffer
 */
-int ms__get_line(void);
+int ms__get_line(t_sct *s);
 
 
 
