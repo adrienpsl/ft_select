@@ -50,20 +50,17 @@ static int print_value(void *p_el, void *null)
 
 int main(int ac, char **av)
 {
-	g_test = 0;
 	t_sct s;
 
 	if (OK == check(ac, &s)
 		&& OK == init_ftselect(ac, av, &s)
 		&& OK == load_term_caps(&s.term)
-		&& OK == set_canonical_mode(&s.termios))
+		&& OK == set_canonical_mode(&s.termios, &s.termios_set))
 	{
-		clear_screen(&s.term);
+
 		s.elements = testing_array();
 		s.size_el = get_min_size(s.elements);
 		g_select = &s;
-		get_window_size(&s.window, s.elements->length, s.size_el);
-		print_data(s.elements, &s.term, &s.window, s.size_el);
 		catch_all_signal();
 		if (1 == catch_and_treat_user_input(&s))
 		{
@@ -71,6 +68,6 @@ int main(int ac, char **av)
 			ftarray__func(s.elements, print_value, NULL);
 		}
 	}
-	ftarray__free(&s.elements);
-	return 0;
+	quit_binary(s.elements, &s.termios, s.termios_set);
+	return (EXIT_SUCCESS);
 }

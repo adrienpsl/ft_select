@@ -25,10 +25,11 @@ t_array *testing_array(void);
 **	handling the list element
 */
 int get_min_size(t_array *array);
+
 /*
 **	Handling the canonical mode
 */
-int set_canonical_mode(struct termios *backup_termios);
+int set_canonical_mode(struct termios *backup_termios, int *set_termios);
 int unset_canonical_mode(struct termios *backup_termios);
 
 /*
@@ -55,6 +56,7 @@ void clear_screen(t_term *t);
 */
 bool get_window_size(t_window *w, int nb_elements, int size_el);
 bool is_good_index(int index, int nb_elements);
+void start_display(t_sct *s);
 
 
 /*
@@ -73,7 +75,7 @@ void del(t_sct *s);
 **	Buffer
 */
 int catch_and_treat_user_input(t_sct *s);
-
+void quit_binary(t_array *elements, struct termios *backup, int termios_set);
 
 
 #endif

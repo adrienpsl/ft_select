@@ -24,9 +24,9 @@ static void wake_up(int nb)
 {
 	(void)nb;
 	catch_all_signal();
+	start_display(g_select);
 }
 
-// TODO : handle error
 static void background(int nb)
 {
 	(void)nb;
@@ -42,7 +42,8 @@ static void changing_window(int nb)
 		g_select->size_el);
 	clear_screen(&g_select->term);
 	if (g_select->window.is_enough == false)
-		ft_printf("The window is too little dude ! %d", g_select->window.is_enough);
+		ft_printf("The window is too little dude ! line lack : %d",
+			g_select->window.is_enough);
 	else
 		print_data(g_select->elements, &g_select->term, &g_select->window,
 			g_select->size_el);
@@ -50,18 +51,13 @@ static void changing_window(int nb)
 
 void catch_all_signal(void)
 {
-	(void)quit;
-	(void)wake_up;
-	(void)background;
-	//	signal(SIGINT, quit);
-	//	signal(SIGHUP, quit);
-	//	signal(SIGQUIT, quit);
-	// kill
-	//	signal(SIGABRT, quit);
-	//	signal(SIGBUS, quit);
-	//	signal(SIGSEGV, quit);
-
+	signal(SIGINT, quit);
+	signal(SIGHUP, quit);
+	signal(SIGQUIT, quit);
+	signal(SIGABRT, quit);
+	signal(SIGBUS, quit);
+	signal(SIGSEGV, quit);
 	signal(SIGWINCH, changing_window);
-	//	signal(SIGTSTP, background);
-	//	signal(SIGHUP, wake_up);
+	signal(SIGTSTP, background);
+	signal(SIGHUP, wake_up);
 }

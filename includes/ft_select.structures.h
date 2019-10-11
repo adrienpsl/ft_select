@@ -51,6 +51,7 @@ typedef struct	s_sct
 	t_term			term;
 	t_window		window;
 	int				current;
+	int				termios_set;
 	struct termios	termios;
 }					t_sct;
 

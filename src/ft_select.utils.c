@@ -53,7 +53,21 @@ bool get_window_size(t_window *w, int nb_elements, int size_el)
 		if (w->nb_lines == 0)
 			w->nb_lines = 1;
 		w->is_enough = size.ws_row - w->nb_lines > 0 ? true: false;
-		putchar('b');
 		return (true);
 	}
+}
+
+void quit_binary(t_array *elements, struct termios *backup, int termios_set)
+{
+	ftarray__free(&elements);
+	if (termios_set)
+		unset_canonical_mode(backup);
+	exit(EXIT_SUCCESS);
+}
+
+void start_display(t_sct *s)
+{
+	clear_screen(&s->term);
+	get_window_size(&s->window, s->elements->length, s->size_el);
+	print_data(s->elements, &s->term, &s->window, s->size_el);
 }

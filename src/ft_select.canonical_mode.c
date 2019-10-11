@@ -16,7 +16,7 @@
 **	Set terminal in canonical mode, and save the origin config in backup
 */
 
-int set_canonical_mode(struct termios *backup_termios)
+int set_canonical_mode(struct termios *backup_termios, int *set_termios)
 {
 	struct termios new_termios;
 
@@ -31,6 +31,7 @@ int set_canonical_mode(struct termios *backup_termios)
 	new_termios.c_cc[VTIME] = 0;
 	if (-1 == tcsetattr(STDIN_FILENO, TCSANOW, &new_termios))
 		return (-1);
+	*set_termios = 1;
 	return (OK);
 }
 
