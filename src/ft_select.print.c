@@ -29,9 +29,27 @@ static int placing_cursor(t_pos *pos)
 	return (1);
 }
 
-void print_list(t_array *els)
+static void loop_on_elements(t_array *els, t_pos *pos)
 {
 	static t_el *el;
+
+	els->i = 0;
+	while (NULL != (el = ftarray__next(els)))
+	{
+		placing_cursor(pos);
+		if ((el->is_current && el->is_selected)
+			&& print_in_underline_reverse(el->text));
+		else if (el->is_current
+				 && print_in_underline(el->text));
+		else if (el->is_selected
+				 && print_in_reverse(el->text));
+		else
+			ft_dprintf(0, " %s ", el->text);
+	}
+}
+
+void print_list(t_array *els)
+{
 	static t_pos pos;
 
 	pos.x = 0;
@@ -42,17 +60,5 @@ void print_list(t_array *els)
 		ft_dprintf(0, "The window is too little dude !");
 		return ;
 	}
-	els->i = 0;
-	while (NULL != (el = ftarray__next(els)))
-	{
-		placing_cursor(&pos);
-		if ((el->is_current && el->is_selected)
-			&& print_in_underline_reverse(el->text));
-		else if (el->is_current
-				 && print_in_underline(el->text));
-		else if (el->is_selected
-				 && print_in_reverse(el->text));
-		else
-			ft_dprintf(0, " %s ", el->text);
-	}
+	loop_on_elements(els, &pos);
 }
