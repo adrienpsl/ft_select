@@ -29,7 +29,7 @@ static void put_in_foreground(int nb)
 	(void)nb;
 	s = get_sct(NULL);
 	catch_all_signal();
-	if (OK != set_canonical(&s->termios, &s->termios_set))
+	if (OK != set_canonical(&s->termios))
 	{
 		quit_binary(s->elements, &s->termios,
 			s->termios_set);

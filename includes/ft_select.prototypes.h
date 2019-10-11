@@ -27,7 +27,7 @@ int get_min_size(t_array *array);
 /*
 **	Handling the canonical mode
 */
-int set_canonical(struct termios *backup_termios, int *set_termios);
+int set_canonical(struct termios *termios_backup);
 int unset_canonical_mode(struct termios *backup_termios);
 
 /*
