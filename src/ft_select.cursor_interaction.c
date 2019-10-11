@@ -39,7 +39,7 @@ int move_selector(int step_size, t_sct *s)
 	else if (true ==
 			 is_good_index(s->current + step_size, s->elements->length))
 		move_next(step_size);
-	print_data(s->elements, &s->term, &s->window, s->size_el);
+	print_list(s->elements);
 	return (1);
 }
 
@@ -49,7 +49,7 @@ int space(t_sct *s)
 
 	el = ftarray__at(s->elements, s->current);
 	el->is_selected = !el->is_selected;
-	print_data(s->elements, &s->term, &s->window, s->size_el);
+	print_list(s->elements);
 	move_selector(+1, s);
 	return (1);
 }
@@ -57,7 +57,7 @@ int space(t_sct *s)
 int del(t_sct *s)
 {
 	ftarray__remove(s->elements, s->current);
-	print_data(s->elements, &s->term, &s->window, s->size_el);
+	print_list(s->elements);
 	move_selector(-1, s);
 	return (1);
 }

@@ -12,46 +12,35 @@
 
 #include "ft_select.h"
 
-/*
-**	 put the asked termcap
-*/
-
-bool put_termcaps(char *termcaps)
-{
-	ft_dprintf(0, termcaps);
-	//	if (ERR == tputs(termcaps, 1, putchar_on_fd_0))
-	//	{
-	//		ft_dprintf(2, FT_SELECT_NAME"can't print the termcaps");
-	//		return (false);
-	//	}
-	return (true);
-}
-
-void print_in_underline(char *text)
+int print_in_underline(char *text)
 {
 	ft_dprintf(FT_FD_OUT, " %s" "%s" "%s ",
 		get_term()->underline,
 		text,
 		get_term()->reset);
+	return (1);
 }
 
-void print_in_reverse(char *text)
+int print_in_reverse(char *text)
 {
 	ft_dprintf(FT_FD_OUT, " %s" "%s" "%s ",
 		get_term()->reverse,
 		text,
 		get_term()->reset);
+	return (1);
 }
 
-void print_in_underline_reverse(char *text)
+int print_in_underline_reverse(char *text)
 {
 	ft_dprintf(FT_FD_OUT, " %s%s" "%s" "%s ",
 		get_term()->reverse, get_term()->underline,
 		text,
 		get_term()->reset);
+	return (1);
 }
 
-void clear_screen(void)
+int clear_screen(void)
 {
 	ft_dprintf(FT_FD_OUT, get_term()->clear_screen);
+	return (1);
 }

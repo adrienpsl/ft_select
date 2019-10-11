@@ -65,7 +65,7 @@ void start_display(t_sct *s)
 {
 	clear_screen();
 	get_window_size(&s->window, s->elements->length, s->size_el);
-	print_data(s->elements, &s->term, &s->window, s->size_el);
+	print_list(s->elements);
 }
 
 int putchar_on_fd_0(int a)

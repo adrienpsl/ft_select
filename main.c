@@ -71,9 +71,9 @@ int main(int ac, char **av)
 	static t_sct s = { 0 };
 
 	if (OK != check(ac)
-		|| OK != set_canonical(&s.termios)
 		|| OK != fill_elements(ac, av, &s)
-		|| OK != load_termcaps(&s.term))
+		|| OK != load_termcaps(&s.term)
+		|| OK != set_canonical(&s.termios))
 	{
 		quit_binary(s.elements, &s.termios);
 	}

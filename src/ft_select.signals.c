@@ -17,16 +17,15 @@ static void quit(int nb)
 {
 	t_sct *s;
 
-	(void)nb;
 	s = get_sct(NULL);
 	quit_binary(s->elements, &s->termios);
+	(void)nb;
 }
 
 static void put_in_foreground(int nb)
 {
 	t_sct *s;
 
-	(void)nb;
 	s = get_sct(NULL);
 	catch_all_signal();
 	if (OK != set_canonical(&s->termios))
@@ -35,17 +34,18 @@ static void put_in_foreground(int nb)
 	}
 	ft_printf("toto \n");
 	start_display(s);
+	(void)nb;
 }
 
 static void put_in_background(int nb)
 {
 	t_sct *s;
 
-	(void)nb;
 	s = get_sct(NULL);
 	unset_canonical_mode(&s->termios);
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
+	(void)nb;
 }
 
 static void changing_window(int nb)
@@ -54,17 +54,11 @@ static void changing_window(int nb)
 
 	(void)nb;
 	s = get_sct(NULL);
-	get_window_size(&s->window, s->elements->length,
+	get_window_size(&s->window,
+		s->elements->length,
 		s->size_el);
-	clear_screen();
-	if (s->window.is_enough == false)
-		ft_dprintf(0, "The window is too little dude ! line lack : %d",
-			s->window.is_enough);
-//	else
-//		print_data(s->elements, &s->term, &s->window,
-//			s->size_el);
+	print_list(s->elements);
 }
-
 
 void catch_all_signal(void)
 {

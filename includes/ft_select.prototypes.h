@@ -44,10 +44,10 @@ bool put_termcaps(char *name);
 /*
 **	CSS
 */
-void print_in_underline_reverse(char *text);
-void print_in_reverse(char *text);
-void print_in_underline(char *text);
-void clear_screen(void);
+int print_in_underline_reverse(char *text);
+int print_in_reverse(char *text);
+int print_in_underline(char *text);
+int clear_screen(void);
 
 /*
 **	utils
@@ -66,7 +66,7 @@ t_term *get_term(void);
 /*
 **	Print
 */
-void print_data(t_array *els, t_term *t, t_window *w, int size_el);
+void print_list(t_array *els);
 
 /*
 **	cursor interaction
