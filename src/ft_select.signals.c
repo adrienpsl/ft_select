@@ -16,14 +16,19 @@
 static void quit(int nb)
 {
 	(void)nb;
-	ft_printf(FT_SELECT_NAME"please quit correctly that program to allow it"
-			  "clean the terminal after it\n");
+	quit_binary(g_select->elements, &g_select->termios, g_select->termios_set);
 }
 
 static void wake_up(int nb)
 {
 	(void)nb;
 	catch_all_signal();
+	if (OK != set_canonical_mode(&g_select->termios, &g_select->termios_set))
+	{
+		quit_binary(g_select->elements, &g_select->termios,
+			g_select->termios_set);
+	}
+	ft_printf("toto \n");
 	start_display(g_select);
 }
 
@@ -59,5 +64,5 @@ void catch_all_signal(void)
 	signal(SIGSEGV, quit);
 	signal(SIGWINCH, changing_window);
 	signal(SIGTSTP, background);
-	signal(SIGHUP, wake_up);
+	signal(SIGCONT, wake_up);
 }

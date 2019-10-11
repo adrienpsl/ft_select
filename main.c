@@ -57,11 +57,11 @@ int main(int ac, char **av)
 		&& OK == load_term_caps(&s.term)
 		&& OK == set_canonical_mode(&s.termios, &s.termios_set))
 	{
-
 		s.elements = testing_array();
 		s.size_el = get_min_size(s.elements);
 		g_select = &s;
 		catch_all_signal();
+		start_display(&s);
 		if (1 == catch_and_treat_user_input(&s))
 		{
 			clear_screen(&s.term);
