@@ -74,6 +74,7 @@ void print_data(t_array *els, t_term *t, t_window *w, int size_el);
 int move_selector(int step_size, t_sct *s);
 int space(t_sct *s);
 int del(t_sct *s);
+int dispatch_user_key(char *buffer, t_sct *s);
 
 /*
 **	Buffer

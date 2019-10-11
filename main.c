@@ -49,6 +49,23 @@ static int fill_elements(int ac, char **av, t_sct *select)
 	return (OK);
 }
 
+int catch_and_treat_user_input(t_sct *s)
+{
+	static char buffer[5] = { 0 };
+	int ret;
+
+	ft_bzero(&buffer, 5);
+	while (OK != ft_strcmp(buffer, "\n"))
+	{
+		ft_bzero(&buffer, 5);
+		if (read(0, buffer, 4) < 0)
+			return (-1);
+		if (OK != (ret = dispatch_user_key(buffer, s)))
+			return (ret);
+	}
+	return (OK);
+}
+
 int main(int ac, char **av)
 {
 	static t_sct s = { 0 };

@@ -12,49 +12,33 @@
 
 #include "ft_select.h"
 
-static void move_cursor(int step_size, t_sct *s)
+static void move_next(int step)
 {
-	t_el *el;
+	t_el *current;
+	t_el *new;
+	t_sct *s;
 
-	el = ftarray__at(s->elements, s->current);
-	el->is_current = 0;
-	el = ftarray__at(s->elements, s->current + step_size);
-	el->is_current = 1;
-	s->current += step_size;
-}
-
-static void start_cursor(t_sct *s)
-{
-	t_el *el;
-
-	el = ftarray__at(s->elements, s->elements->length - 1);
-	el->is_current = 0;
-	el = ftarray__at(s->elements, 0);
-	el->is_current = 1;
-	s->current = 0;
-}
-
-static void end_cursor(t_sct *s)
-{
-	t_el *el;
-
-	el = ftarray__at(s->elements, s->elements->length - 1);
-	el->is_current = 1;
-	el = ftarray__at(s->elements, 0);
-	el->is_current = 0;
-	s->current = s->elements->length;
+	s = get_sct(NULL);
+	current = ftarray__at(s->elements, s->current);
+	current->is_current = 0;
+	new = ftarray__at(s->elements, s->current + step);
+	new->is_current = 1;
+	s->current += step;
 }
 
 int move_selector(int step_size, t_sct *s)
 {
-	if (step_size == -1 && s->current == 0)
-		end_cursor(s);
+	if (step_size == -1
+		&& s->current == 0)
+		move_next(s->elements->length - 1);
 	else if (s->current + step_size < 0)
-		step_size = 0;
-	if (step_size == 1 && s->current + step_size == s->elements->length)
-		start_cursor(s);
-	else if (true == is_good_index(s->current + step_size, s->elements->length))
-		move_cursor(step_size, s);
+		return (1);
+	else if (step_size == 1
+			 && s->current + step_size == s->elements->length)
+		move_next(-(s->elements->length - 1));
+	else if (true ==
+			 is_good_index(s->current + step_size, s->elements->length))
+		move_next(step_size);
 	print_data(s->elements, &s->term, &s->window, s->size_el);
 	return (1);
 }
@@ -76,4 +60,26 @@ int del(t_sct *s)
 	print_data(s->elements, &s->term, &s->window, s->size_el);
 	move_selector(-1, s);
 	return (1);
+}
+
+/*
+**	dispatch at the good function according to the user input
+*/
+
+int dispatch_user_key(char *buffer, t_sct *s)
+{
+	ft_streq(FT_UP, buffer) && move_selector(-s->window.line_wide, s);
+	ft_streq(FT_DOWN, buffer) && move_selector(s->window.line_wide, s);
+	ft_streq(FT_LEFT, buffer) && move_selector(-1, s);
+	ft_streq(FT_RIGHT, buffer) && move_selector(+1, s);
+	ft_streq(FT_SPACE, buffer) && space(s);
+	((ft_streq(FT_DEL, buffer) || ft_streq(FT_BACKSPACE, buffer)) && del(s));
+	if (ft_streq(FT_ENTER, buffer))
+		return (1);
+	else if (ft_streq(FT_ECHAP, buffer))
+		return (-1);
+	else if (s->elements->length == 0)
+		return (-1);
+	else
+		return (OK);
 }
