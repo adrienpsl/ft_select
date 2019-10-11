@@ -12,7 +12,6 @@
 
 #include "ft_select.h"
 
-
 void set_el(t_el *el, char *data, int selected, int current, t_array *array)
 {
 	ft_bzero(el, sizeof(t_el));
@@ -27,13 +26,14 @@ t_array *testing_array(void)
 	t_array *array = ftarray__init(10, sizeof(t_el));
 	char buff[30];
 
-	for (int i = 0; i < 13; ++i)
+	for (int i = 0; i < 100; ++i)
 	{
 		ft_bzero(buff, 30);
 		sprintf(buff, "el_%d", rand());
 		set_el(&el, buff, 0, 0, array);
 	}
-	((t_el*)ftarray__at(array, 0))->is_current = 1;
+	if (array->length)
+		((t_el *)ftarray__at(array, 0))->is_current = 1;
 	return (array);
 }
 

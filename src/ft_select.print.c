@@ -12,8 +12,7 @@
 
 #include <ft_select.h>
 
-int put_cursor_next(int *col_index, int *line_index);
-int put_cursor_next(int *col_index, int *line_index)
+static int put_cursor_next(int *col_index, int *line_index)
 {
 	tputs(tgoto(g_select.term.move, *col_index * g_select.size_el, *line_index),
 		1, ft_putchar);
@@ -32,6 +31,7 @@ void loop_and_print(t_array *array)
 	int col_index = 0;
 	int line_index = 0;
 
+	clear_screen();
 	array->i = 0;
 	while (NULL != (el = ftarray__next(array)))
 	{
@@ -45,5 +45,6 @@ void loop_and_print(t_array *array)
 		else
 			ft_printf(" %s ", el->text);
 	}
-	ft_printf("%d--", array->length);
+//	ft_printf("%d-- current :%d %d", array->length, g_select.current, is_good_index(g_select.current));
+	ft_printf("-- %d",g_select.current);
 }

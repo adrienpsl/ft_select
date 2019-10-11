@@ -12,21 +12,22 @@
 
 #include "ft_select.h"
 
+// ici j'ai un pb avec mon current si je delete un seul element
+
 void move_if_valid_new_index(int step_size)
 {
 	t_el *el;
 
-	if (g_select.current + step_size == -1)
-	    step_size = 0;
-	if (is_good_index( g_select.current + step_size))
+	if (g_select.current + step_size < 0)
+		step_size = 0;
+	if (true == is_good_index(g_select.current + step_size))
 	{
-		clear_screen();
 		el = ftarray__at(g_select.elements, g_select.current);
 		el->is_current = 0;
 		el = ftarray__at(g_select.elements, g_select.current + step_size);
 		el->is_current = 1;
-		loop_and_print(g_select.elements);
 		g_select.current += step_size;
+		loop_and_print(g_select.elements);
 	}
 }
 
@@ -36,12 +37,13 @@ void space(void)
 
 	el = ftarray__at(g_select.elements, g_select.current);
 	el->is_selected = !el->is_selected;
+	loop_and_print(g_select.elements);
 	move_if_valid_new_index(+1);
 }
 
 void del(void)
 {
-//	get_window_size(&g_select.window, g_select.elements->length);
 	ftarray__remove(g_select.elements, g_select.current);
+	loop_and_print(g_select.elements);
 	move_if_valid_new_index(-1);
 }
