@@ -21,13 +21,13 @@ int main(int ac, char **av)
 		|| OK != load_term_caps()
 		|| OK != set_canonical_mode(&g_select.termios))
 		return (EXIT_FAILURE);
-	
 	clear_screen();
 	g_select.elements = testing_array();
 	g_select.size_el = get_min_size(g_select.elements);
 	get_window_size(&g_select.window, g_select.elements->length);
-	printf("-- %d %d\n", g_select.window.elem_by_line,
-		g_select.window.nb_lines);
+	loop_and_print(g_select.elements);
+//	printf("-- %d %d\n", g_select.window.elem_by_line,
+//		g_select.window.nb_lines);
 	//	loop_and_print(g_select.elements);
 	//
 	catch_all_signal();

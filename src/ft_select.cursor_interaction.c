@@ -16,7 +16,7 @@ void move_if_valid_new_index(int step_size)
 {
 	t_el *el;
 
-	if (is_good_index(&g_select.window, g_select.current + step_size))
+	if (is_good_index( g_select.current + step_size))
 	{
 		clear_screen();
 		el = ftarray__at(g_select.elements, g_select.current + step_size);
