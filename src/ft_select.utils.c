@@ -61,15 +61,8 @@ void quit_binary(t_array *elements, struct termios *backup)
 	exit(EXIT_SUCCESS);
 }
 
-void start_display(t_sct *s)
+void get_window_and_print(t_sct *s)
 {
-	clear_screen();
 	get_window_size(&s->window, s->elements->length, s->size_el);
 	print_list(s->elements);
-}
-
-int putchar_on_fd_0(int a)
-{
-	write(0, &a, 1);
-	return (0);
 }

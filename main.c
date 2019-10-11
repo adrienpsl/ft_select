@@ -80,7 +80,7 @@ int main(int ac, char **av)
 	test(&s);
 	get_sct(&s);
 	catch_all_signal();
-	start_display(&s);
+	get_window_and_print(&s);
 	if (1 == loop_user_input(&s))
 	{
 		clear_screen();

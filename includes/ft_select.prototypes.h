@@ -54,8 +54,7 @@ int clear_screen(void);
 */
 bool get_window_size(t_window *w, int nb_elements, int size_el);
 bool is_good_index(int index, int nb_elements);
-void start_display(t_sct *s);
-int putchar_on_fd_0(int a);
+void get_window_and_print(t_sct *s);
 
 /*
 **	getter

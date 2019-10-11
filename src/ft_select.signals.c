@@ -33,7 +33,7 @@ static void put_in_foreground(int nb)
 		quit_binary(s->elements, &s->termios);
 	}
 	ft_printf("toto \n");
-	start_display(s);
+	get_window_and_print(s);
 	(void)nb;
 }
 
