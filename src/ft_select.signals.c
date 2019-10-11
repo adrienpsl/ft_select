@@ -41,11 +41,11 @@ static void changing_window(int nb)
 	get_window_size(&g_select->window, g_select->elements->length,
 		g_select->size_el);
 	clear_screen(&g_select->term);
-//	if (g_select->window.is_enough == 0)
+	if (g_select->window.is_enough == false)
 		ft_printf("The window is too little dude ! %d", g_select->window.is_enough);
-//	else
-//		print_data(g_select->elements, &g_select->term, &g_select->window,
-//			g_select->size_el);
+	else
+		print_data(g_select->elements, &g_select->term, &g_select->window,
+			g_select->size_el);
 }
 
 void catch_all_signal(void)
