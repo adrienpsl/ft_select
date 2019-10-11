@@ -30,7 +30,7 @@ void print_in_underline(char *text, t_term *t)
 {
 	ft_putchar(' ');
 	put_termcaps(t->underline);
-	ft_printf("%s", text);
+	ft_putstr_fd( text, 0);
 	put_termcaps(t->clean);
 	ft_putchar(' ');
 }
@@ -39,7 +39,7 @@ void print_in_reverse(char *text, t_term *t)
 {
 	ft_putchar(' ');
 	put_termcaps(t->reverse);
-	ft_printf("%s", text);
+	ft_putstr_fd( text, 0);
 	put_termcaps(t->clean);
 	ft_putchar(' ');
 }
@@ -49,7 +49,7 @@ void print_in_underline_reverse(char *text, t_term *t)
 	ft_putchar(' ');
 	put_termcaps(t->reverse);
 	put_termcaps(t->underline);
-	ft_printf("%s", text);
+	ft_putstr_fd( text, 0);
 	put_termcaps(t->clean);
 	ft_putchar(' ');
 }

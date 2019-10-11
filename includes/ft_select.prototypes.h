@@ -67,7 +67,7 @@ void print_data(t_array *els, t_term *t, t_window *w, int size_el);
 /*
 **	cursor interaction
 */
-void move_if_valid_new_index(int step_size, t_sct *s);
+int move_if_valid_new_index(int step_size, t_sct *s);
 void space(t_sct *s);
 void del(t_sct *s);
 

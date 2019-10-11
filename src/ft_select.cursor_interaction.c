@@ -45,7 +45,7 @@ static void end_cursor(t_sct *s)
 	s->current = s->elements->length;
 }
 
-void move_if_valid_new_index(int step_size, t_sct *s)
+int move_if_valid_new_index(int step_size, t_sct *s)
 {
 	if (step_size == -1 && s->current == 0)
 		end_cursor(s);
@@ -56,6 +56,7 @@ void move_if_valid_new_index(int step_size, t_sct *s)
 	else if (true == is_good_index(s->current + step_size, s->elements->length))
 		move_cursor(step_size, s);
 	print_data(s->elements, &s->term, &s->window, s->size_el);
+	return (1);
 }
 
 void space(t_sct *s)
