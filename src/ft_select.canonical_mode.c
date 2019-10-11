@@ -20,6 +20,7 @@ int set_canonical(struct termios *termios_backup)
 {
 	struct termios new_termios;
 
+	ft_bzero(termios_backup, sizeof(struct termios));
 	if (-1 == tcgetattr(STDIN_FILENO, &new_termios)
 		|| -1 == tcgetattr(STDIN_FILENO, termios_backup))
 	{

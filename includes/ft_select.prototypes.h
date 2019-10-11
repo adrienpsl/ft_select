@@ -79,7 +79,7 @@ int dispatch_user_key(char *buffer, t_sct *s);
 /*
 **	Buffer
 */
-int catch_and_treat_user_input(t_sct *s);
-void quit_binary(t_array *elements, struct termios *backup, int termios_set);
+int loop_user_input(t_sct *s);
+void quit_binary(t_array *elements, struct termios *backup);
 
 #endif

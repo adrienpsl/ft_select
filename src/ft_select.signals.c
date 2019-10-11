@@ -19,7 +19,7 @@ static void quit(int nb)
 
 	(void)nb;
 	s = get_sct(NULL);
-	quit_binary(s->elements, &s->termios, s->termios_set);
+	quit_binary(s->elements, &s->termios);
 }
 
 static void put_in_foreground(int nb)
@@ -31,8 +31,7 @@ static void put_in_foreground(int nb)
 	catch_all_signal();
 	if (OK != set_canonical(&s->termios))
 	{
-		quit_binary(s->elements, &s->termios,
-			s->termios_set);
+		quit_binary(s->elements, &s->termios);
 	}
 	ft_printf("toto \n");
 	start_display(s);

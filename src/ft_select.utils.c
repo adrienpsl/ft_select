@@ -43,7 +43,6 @@ bool get_window_size(t_window *w, int nb_elements, int size_el)
 
 	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &size))
 		return (false);
-	ft_dprintf(0, "--%d %d\n", size.ws_row, size.ws_col);
 	w->line_wide = size.ws_col / size_el;
 	if (w->line_wide == 0)
 		w->line_wide = nb_elements;
@@ -51,14 +50,13 @@ bool get_window_size(t_window *w, int nb_elements, int size_el)
 	if (w->nb_line == 0)
 		w->nb_line = 1;
 	w->is_enough = size.ws_row - w->nb_line > 0 ? true : false;
-	ft_dprintf(0, "%d %d\n", w->nb_line, w->line_wide);
 	return (true);
 }
 
-void quit_binary(t_array *elements, struct termios *backup, int termios_set)
+void quit_binary(t_array *elements, struct termios *backup)
 {
 	ftarray__free(&elements);
-	if (termios_set)
+	if (backup->c_cc[VMIN])
 		unset_canonical_mode(backup);
 	exit(EXIT_SUCCESS);
 }

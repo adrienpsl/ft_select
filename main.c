@@ -49,7 +49,7 @@ static int fill_elements(int ac, char **av, t_sct *select)
 	return (OK);
 }
 
-int catch_and_treat_user_input(t_sct *s)
+int loop_user_input(t_sct *s)
 {
 	static char buffer[5] = { 0 };
 	int ret;
@@ -71,21 +71,21 @@ int main(int ac, char **av)
 	static t_sct s = { 0 };
 
 	if (OK != check(ac)
+		|| OK != set_canonical(&s.termios)
 		|| OK != fill_elements(ac, av, &s)
-		|| OK != load_termcaps(&s.term)
-		|| OK != set_canonical(&s.termios))
+		|| OK != load_termcaps(&s.term))
 	{
-		quit_binary(s.elements, &s.termios, s.termios_set);
+		quit_binary(s.elements, &s.termios);
 	}
 	test(&s);
 	get_sct(&s);
 	catch_all_signal();
 	start_display(&s);
-	if (1 == catch_and_treat_user_input(&s))
+	if (1 == loop_user_input(&s))
 	{
 		clear_screen();
 		ftarray__func(s.elements, print_value, NULL);
 	}
-	quit_binary(s.elements, &s.termios, s.termios_set);
+	quit_binary(s.elements, &s.termios);
 	return (EXIT_SUCCESS);
 }
