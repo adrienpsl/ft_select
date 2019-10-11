@@ -16,11 +16,17 @@
 **	 put the asked termcap
 */
 
+static int put_0(int a)
+{
+	write(0, &a, 1);
+	return (0);
+}
+
 bool put_termcaps(char *termcaps)
 {
-	if (ERR == tputs(termcaps, 1, ft_putchar))
+	if (ERR == tputs(termcaps, 1, put_0))
 	{
-		ft_printf(FT_SELECT_NAME"can't print the termcaps");
+		ft_dprintf(2, FT_SELECT_NAME"can't print the termcaps");
 		return (false);
 	}
 	return (true);
@@ -28,30 +34,30 @@ bool put_termcaps(char *termcaps)
 
 void print_in_underline(char *text, t_term *t)
 {
-	ft_putchar(' ');
+	ft_putchar_fd(' ', 0);
 	put_termcaps(t->underline);
-	ft_putstr_fd( text, 0);
+	ft_dprintf(0, "%s", text);
 	put_termcaps(t->clean);
-	ft_putchar(' ');
+	ft_putchar_fd(' ', 0);
 }
 
 void print_in_reverse(char *text, t_term *t)
 {
-	ft_putchar(' ');
+	ft_putchar_fd(' ', 0);
 	put_termcaps(t->reverse);
-	ft_putstr_fd( text, 0);
+	ft_dprintf(0, "%s", text);
 	put_termcaps(t->clean);
-	ft_putchar(' ');
+	ft_putchar_fd(' ', 0);
 }
 
 void print_in_underline_reverse(char *text, t_term *t)
 {
-	ft_putchar(' ');
+	ft_putchar_fd(' ', 0);
 	put_termcaps(t->reverse);
 	put_termcaps(t->underline);
-	ft_putstr_fd( text, 0);
+	ft_dprintf(0, "%s", text);
 	put_termcaps(t->clean);
-	ft_putchar(' ');
+	ft_putchar_fd(' ', 0);;
 }
 
 void clear_screen(t_term *t)

@@ -23,8 +23,7 @@ int set_canonical_mode(struct termios *backup_termios, int *set_termios)
 	if (-1 == tcgetattr(STDIN_FILENO, &new_termios)
 		|| -1 == tcgetattr(STDIN_FILENO, backup_termios))
 	{
-		ft_putstr_fd_nl(FT_SELECT_NAME"can't set the canonical terminal mode !",
-			STDERR_FILENO);
+		ft_dprintf(2, FT_SELECT_NAME"can't set the canonical terminal mode !");
 		return (-1);
 	}
 	new_termios.c_lflag &= ~(ICANON | ECHO);
@@ -44,8 +43,7 @@ int unset_canonical_mode(struct termios *backup_termios)
 {
 	if (-1 == tcsetattr(STDIN_FILENO, TCSANOW, backup_termios))
 	{
-		ft_putstr_fd_nl(FT_SELECT_NAME"can't set the original terminal mode !",
-			STDERR_FILENO);
+		ft_dprintf(2, FT_SELECT_NAME"can't set the original terminal mode !");
 		return (-1);
 	}
 	return (OK);

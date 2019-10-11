@@ -20,21 +20,19 @@ static int check_and_init()
 
 	if (NULL == (term_name = getenv("TERM")))
 	{
-		ft_putstr_fd_nl("Specify a terminal type with 'TERM=<type>'.\n",
-			STDERR_FILENO);
+		ft_printf("Specify a terminal type with 'TERM=<type>'.\n");
 		return -1;
 	}
 	ret = tgetent(NULL, term_name);
 	if (ret == -1)
 	{
-		ft_putstr_fd_nl("Could not access the termcap data base.\n",
-			STDERR_FILENO);
+		ft_printf("Could not access the termcap data base.\n");
 		return (-1);
 	}
 	if (ret == 0)
 	{
-		ft_putstr_fd_nl("Terminal is not defined in termcap database "
-						"(or too little information).\n", STDERR_FILENO);
+		ft_printf("Terminal type '%s' is not defined in termcap database "
+				  "(or too little information).\n", term_name);
 		return (-1);
 	}
 	return (OK);

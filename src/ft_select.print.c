@@ -48,6 +48,6 @@ void print_data(t_array *els, t_term *t, t_window *w, int size_el)
 		else if (el->is_selected)
 			print_in_reverse(el->text, t);
 		else
-			ft_printf(" %s ", el->text);
+			ft_dprintf(0, " %s ", el->text);
 	}
 }
