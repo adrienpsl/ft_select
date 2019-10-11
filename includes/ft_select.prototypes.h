@@ -66,5 +66,18 @@ bool is_good_index(t_window *w, int index);
 */
 void loop_and_print(t_array *array);
 
+/*
+**	cursor interaction
+*/
+void move_if_valid_new_index(int step_size);
+void space(void);
+void del(void);
+
+/*
+**	Buffer
+*/
+int ms__get_line(void);
+
+
 
 #endif
