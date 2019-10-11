@@ -62,7 +62,6 @@ void catch_all_signal(void)
 	//	signal(SIGSEGV, quit);
 
 	signal(SIGWINCH, changing_window);
-
 	//	signal(SIGTSTP, background);
 	//	signal(SIGHUP, wake_up);
 }

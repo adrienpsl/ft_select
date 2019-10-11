@@ -72,7 +72,7 @@ void del(t_sct *s);
 /*
 **	Buffer
 */
-int ms__get_line(t_sct *s);
+int catch_and_treat_user_input(t_sct *s);
 
 
 

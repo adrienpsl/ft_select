@@ -37,6 +37,17 @@ static int init_ftselect(int ac, char **av, t_sct *select)
 	return (OK);
 }
 
+static int print_value(void *p_el, void *null)
+{
+	t_el *el;
+
+	(void)null;
+	el = p_el;
+	if (el->is_selected)
+		ft_printf("%s ", el->text);
+	return (0);
+}
+
 int main(int ac, char **av)
 {
 	g_test = 0;
@@ -54,7 +65,11 @@ int main(int ac, char **av)
 		get_window_size(&s.window, s.elements->length, s.size_el);
 		print_data(s.elements, &s.term, &s.window, s.size_el);
 		catch_all_signal();
-		ms__get_line(&s);
+		if (1 == catch_and_treat_user_input(&s))
+		{
+			clear_screen(&s.term);
+			ftarray__func(s.elements, print_value, NULL);
+		}
 	}
 	ftarray__free(&s.elements);
 	return 0;
