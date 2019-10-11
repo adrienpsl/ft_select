@@ -25,7 +25,4 @@
 # define FT_SPACE 	" "
 # define FT_ENTER 	"\xa"
 
-
-t_sct *g_select;
-
 #endif

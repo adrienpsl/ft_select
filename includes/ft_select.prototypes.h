@@ -19,8 +19,6 @@
 void set_el(t_el *el, char *data, int selected, int current, t_array *array);
 t_array *testing_array(void);
 
-
-
 /*
 **	handling the list element
 */
@@ -29,7 +27,7 @@ int get_min_size(t_array *array);
 /*
 **	Handling the canonical mode
 */
-int set_canonical_mode(struct termios *backup_termios, int *set_termios);
+int set_canonical(struct termios *backup_termios, int *set_termios);
 int unset_canonical_mode(struct termios *backup_termios);
 
 /*
@@ -40,7 +38,7 @@ void catch_all_signal(void);
 /*
 **	Termcaps
 */
-int load_term_caps(t_term *t);
+int load_termcaps(t_term *t);
 bool put_termcaps(char *name);
 
 /*
@@ -57,7 +55,8 @@ void clear_screen(t_term *t);
 bool get_window_size(t_window *w, int nb_elements, int size_el);
 bool is_good_index(int index, int nb_elements);
 void start_display(t_sct *s);
-
+t_sct *get_sct(t_sct *s);
+int putchar_on_fd_0(int a);
 
 /*
 **	Print
@@ -67,15 +66,14 @@ void print_data(t_array *els, t_term *t, t_window *w, int size_el);
 /*
 **	cursor interaction
 */
-int move_if_valid_new_index(int step_size, t_sct *s);
-void space(t_sct *s);
-void del(t_sct *s);
+int move_selector(int step_size, t_sct *s);
+int space(t_sct *s);
+int del(t_sct *s);
 
 /*
 **	Buffer
 */
 int catch_and_treat_user_input(t_sct *s);
 void quit_binary(t_array *elements, struct termios *backup, int termios_set);
-
 
 #endif

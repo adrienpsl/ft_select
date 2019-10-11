@@ -16,15 +16,9 @@
 **	 put the asked termcap
 */
 
-static int put_0(int a)
-{
-	write(0, &a, 1);
-	return (0);
-}
-
 bool put_termcaps(char *termcaps)
 {
-	if (ERR == tputs(termcaps, 1, put_0))
+	if (ERR == tputs(termcaps, 1, putchar_on_fd_0))
 	{
 		ft_dprintf(2, FT_SELECT_NAME"can't print the termcaps");
 		return (false);

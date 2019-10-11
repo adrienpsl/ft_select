@@ -31,30 +31,28 @@ int get_min_size(t_array *array)
 
 bool is_good_index(int index, int nb_elements)
 {
-	if (index < 0)
-		return (false);
-	if (index < nb_elements)
+	if (index >= 0 && index < nb_elements)
 		return (true);
 	return (false);
 }
 
+// I have to stock the data, to keep element in place
 bool get_window_size(t_window *w, int nb_elements, int size_el)
 {
 	static struct winsize size;
 
 	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &size))
 		return (false);
-	else
-	{
-		w->elem_by_line = size.ws_col / size_el;
-		if (w->elem_by_line == 0)
-			w->elem_by_line = nb_elements;
-		w->nb_lines = (nb_elements / w->elem_by_line);
-		if (w->nb_lines == 0)
-			w->nb_lines = 1;
-		w->is_enough = size.ws_row - w->nb_lines > 0 ? true: false;
-		return (true);
-	}
+	ft_dprintf(0, "--%d %d\n", size.ws_row, size.ws_col);
+	w->line_wide = size.ws_col / size_el;
+	if (w->line_wide == 0)
+		w->line_wide = nb_elements;
+	w->nb_line = (nb_elements / w->line_wide);
+	if (w->nb_line == 0)
+		w->nb_line = 1;
+	w->is_enough = size.ws_row - w->nb_line > 0 ? true : false;
+	ft_dprintf(0, "%d %d\n", w->nb_line, w->line_wide);
+	return (true);
 }
 
 void quit_binary(t_array *elements, struct termios *backup, int termios_set)
@@ -70,4 +68,23 @@ void start_display(t_sct *s)
 	clear_screen(&s->term);
 	get_window_size(&s->window, s->elements->length, s->size_el);
 	print_data(s->elements, &s->term, &s->window, s->size_el);
+}
+
+t_sct *get_sct(t_sct *s)
+{
+	static t_sct *ptr;
+
+	if (s == NULL)
+		return (ptr);
+	else
+	{
+		ptr = s;
+		return (NULL);
+	}
+}
+
+int putchar_on_fd_0(int a)
+{
+	write(0, &a, 1);
+	return (0);
 }

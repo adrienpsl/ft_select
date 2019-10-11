@@ -19,9 +19,9 @@ static int put_cursor_next(t_pos *pos, t_term *t, t_window *w, int size_el)
 	goto_term = tgoto(t->move, pos->x * size_el, pos->y);
 	if (goto_term == NULL)
 		return (-1);
-	tputs(goto_term, 1, ft_putchar);
+	tputs(goto_term, 1, putchar_on_fd_0);
 	pos->x += 1;
-	if (pos->x >= w->elem_by_line)
+	if (pos->x >= w->line_wide)
 	{
 		pos->x = 0;
 		pos->y += 1;

@@ -15,44 +15,57 @@
 
 static void quit(int nb)
 {
+	t_sct *s;
+
 	(void)nb;
-	quit_binary(g_select->elements, &g_select->termios, g_select->termios_set);
+	s = get_sct(NULL);
+	quit_binary(s->elements, &s->termios, s->termios_set);
 }
 
-static void wake_up(int nb)
+static void put_in_foreground(int nb)
 {
+	t_sct *s;
+
 	(void)nb;
+	s = get_sct(NULL);
 	catch_all_signal();
-	if (OK != set_canonical_mode(&g_select->termios, &g_select->termios_set))
+	if (OK != set_canonical(&s->termios, &s->termios_set))
 	{
-		quit_binary(g_select->elements, &g_select->termios,
-			g_select->termios_set);
+		quit_binary(s->elements, &s->termios,
+			s->termios_set);
 	}
 	ft_printf("toto \n");
-	start_display(g_select);
+	start_display(s);
 }
 
-static void background(int nb)
+static void put_in_background(int nb)
 {
+	t_sct *s;
+
 	(void)nb;
-	unset_canonical_mode(&g_select->termios);
+	s = get_sct(NULL);
+	unset_canonical_mode(&s->termios);
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
 }
 
 static void changing_window(int nb)
 {
+	t_sct *s;
+
 	(void)nb;
-	get_window_size(&g_select->window, g_select->elements->length,
-		g_select->size_el);
-	clear_screen(&g_select->term);
-	if (g_select->window.is_enough == false)
-		ft_printf("The window is too little dude ! line lack : %d",
-			g_select->window.is_enough);
-	else
-		print_data(g_select->elements, &g_select->term, &g_select->window,
-			g_select->size_el);
+	s = get_sct(NULL);
+	get_window_size(&s->window, s->elements->length,
+		s->size_el);
+	clear_screen(&s->term);
+	if (s->window.is_enough == false)
+		ft_dprintf(0, "The window is too little dude ! line lack : %d",
+			s->window.is_enough);
+//	else
+//		print_data(s->elements, &s->term, &s->window,
+//			s->size_el);
 }
+
 
 void catch_all_signal(void)
 {
@@ -63,6 +76,6 @@ void catch_all_signal(void)
 	signal(SIGBUS, quit);
 	signal(SIGSEGV, quit);
 	signal(SIGWINCH, changing_window);
-	signal(SIGTSTP, background);
-	signal(SIGCONT, wake_up);
+	signal(SIGTSTP, put_in_background);
+	signal(SIGCONT, put_in_foreground);
 }

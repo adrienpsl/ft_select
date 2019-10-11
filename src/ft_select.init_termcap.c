@@ -20,19 +20,19 @@ static int check_and_init()
 
 	if (NULL == (term_name = getenv("TERM")))
 	{
-		ft_printf("Specify a terminal type with 'TERM=<type>'.\n");
+		ft_dprintf(0, "Specify a terminal type with 'TERM=<type>'.\n");
 		return -1;
 	}
 	ret = tgetent(NULL, term_name);
 	if (ret == -1)
 	{
-		ft_printf("Could not access the termcap data base.\n");
+		ft_dprintf(0, "Could not access the termcap data base.\n");
 		return (-1);
 	}
 	if (ret == 0)
 	{
-		ft_printf("Terminal type '%s' is not defined in termcap database "
-				  "(or too little information).\n", term_name);
+		ft_dprintf(0, "Terminal type '%s' is not defined in termcap database "
+					  "(or too little information).\n", term_name);
 		return (-1);
 	}
 	return (OK);
@@ -49,7 +49,7 @@ static int get_all_termcaps(t_term *t)
 	return (OK);
 }
 
-int load_term_caps(t_term *t)
+int load_termcaps(t_term *t)
 {
 	if (OK != check_and_init()
 		|| OK != get_all_termcaps(t))

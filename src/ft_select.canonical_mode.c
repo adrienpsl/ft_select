@@ -16,7 +16,7 @@
 **	Set terminal in canonical mode, and save the origin config in backup
 */
 
-int set_canonical_mode(struct termios *backup_termios, int *set_termios)
+int set_canonical(struct termios *backup_termios, int *set_termios)
 {
 	struct termios new_termios;
 
