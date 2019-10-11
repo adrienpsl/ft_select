@@ -41,6 +41,8 @@ int print_in_underline_reverse(char *text)
 
 int clear_screen(void)
 {
-	ft_dprintf(FT_FD_OUT, get_term()->clear_screen);
+//	ft_dprintf(FT_FD_OUT, get_term()->clear_screen);
+//	;
+	fputs(tgetstr("cl", NULL), stdout);
 	return (1);
 }
