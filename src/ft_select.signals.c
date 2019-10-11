@@ -39,8 +39,8 @@ static void changing_window(int nb)
 {
 	(void)nb;
 	get_window_size(&g_select.window, g_select.elements->length);
-	clear_screen();
-	loop_and_print(g_select.elements);
+	clear_screen(&g_select.term);
+	loop_and_print(g_select.elements, &g_select.term, &g_select.window);
 }
 
 void catch_all_signal(void)

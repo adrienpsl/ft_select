@@ -26,35 +26,35 @@ bool put_termcaps(char *termcaps)
 	return (true);
 }
 
-void print_in_underline(char *text)
+void print_in_underline(char *text, t_term *t)
 {
 	ft_putchar(' ');
-	put_termcaps(g_select.term.underline);
+	put_termcaps(t->underline);
 	ft_printf("%s", text);
-	put_termcaps(g_select.term.clean);
+	put_termcaps(t->clean);
 	ft_putchar(' ');
 }
 
-void print_in_reverse(char *text)
+void print_in_reverse(char *text, t_term *t)
 {
 	ft_putchar(' ');
-	put_termcaps(g_select.term.reverse);
+	put_termcaps(t->reverse);
 	ft_printf("%s", text);
-	put_termcaps(g_select.term.clean);
+	put_termcaps(t->clean);
 	ft_putchar(' ');
 }
 
-void print_in_underline_reverse(char *text)
+void print_in_underline_reverse(char *text, t_term *t)
 {
 	ft_putchar(' ');
-	put_termcaps(g_select.term.reverse);
-	put_termcaps(g_select.term.underline);
+	put_termcaps(t->reverse);
+	put_termcaps(t->underline);
 	ft_printf("%s", text);
-	put_termcaps(g_select.term.clean);
+	put_termcaps(t->clean);
 	ft_putchar(' ');
 }
 
-void clear_screen(void)
+void clear_screen(t_term *t)
 {
-	put_termcaps(g_select.term.clear_screen);
+	put_termcaps(t->clear_screen);
 }

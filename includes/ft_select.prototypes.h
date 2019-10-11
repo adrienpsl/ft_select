@@ -48,10 +48,10 @@ bool put_termcaps(char *name);
 /*
 **	CSS
 */
-void print_in_underline_reverse(char *text);
-void print_in_reverse(char *text);
-void print_in_underline(char *text);
-void clear_screen(void);
+void print_in_underline_reverse(char *text, t_term *t);
+void print_in_reverse(char *text, t_term *t);
+void print_in_underline(char *text, t_term *t);
+void clear_screen(t_term *t);
 
 /*
 **	utils
@@ -63,7 +63,7 @@ bool is_good_index(int index);
 /*
 **	Print
 */
-void loop_and_print(t_array *array);
+void loop_and_print(t_array *els, t_term *t, t_window *w);
 
 /*
 **	cursor interaction
