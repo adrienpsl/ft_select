@@ -46,6 +46,7 @@ typedef struct s_window{
 	int				current_step;
 	int				capacity;
 	int				is_enough;
+	int				last_step;
 } t_window;
 
 typedef struct	s_sct

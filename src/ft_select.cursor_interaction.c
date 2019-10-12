@@ -14,6 +14,17 @@
 
 // here I can se helper 
 
+static int go_last()
+{
+	return (get_sct()->elements->length - 1);
+}
+
+static int go_first()
+{
+	return (-go_last());
+}
+
+
 static int need_display_down(int step)
 {
 	return (step > 0 &&
@@ -28,6 +39,17 @@ static int need_display_up(int step)
 			&& step + get_sct()->current > 0);
 }
 
+static int need_display_uppest(int step)
+{
+	return (step == go_first()); 
+}
+
+static int need_display_downest(int step)
+{
+	return (step == go_last());
+}
+
+
 static void move_next(int step)
 {
 	t_el *current;
@@ -36,29 +58,20 @@ static void move_next(int step)
 
 	s = get_sct();
 
-	if (true == need_display_down(step))
+	if (true == need_display_uppest(step))
+		get_win()->current_step = 0;
+	else if (true == need_display_downest(step))
+		get_win()->current_step = get_win()->last_step;
+	else if (true == need_display_down(step))
 		get_win()->current_step += get_win()->capacity;
 	else if (true == need_display_up(step))
 		get_win()->current_step -= get_win()->capacity;
-	//	else if (step)
-	//	    ;
-
 
 	current = ftarray__at(s->elements, s->current);
 	current->is_current = 0;
 	new = ftarray__at(s->elements, s->current + step);
 	new->is_current = 1;
 	s->current += step;
-}
-
-static int go_last()
-{
-	return (get_sct()->elements->length - 1);
-}
-
-static int go_first()
-{
-	return (-go_last());
 }
 
 int move_selector(int step_size, t_sct *s)
@@ -91,9 +104,10 @@ int space(t_sct *s)
 
 int del(t_sct *s)
 {
+	int step = s->current == s->elements->length -1 ? -1 : 0;
 	ftarray__remove(s->elements, s->current);
 	print_list(s->elements);
-	move_selector(-1, s);
+	move_selector(step, s);
 	return (1);
 }
 
