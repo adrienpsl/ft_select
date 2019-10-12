@@ -45,6 +45,16 @@ t_array *get_elements(void)
 	return (get_sct()->elements);
 }
 
+int g_current(void)
+{
+	return (get_sct()->current);
+}
+
+int *set_current(void)
+{
+	return (&get_sct()->current);
+}
+
 int get_elements_length(void)
 {
 	return (get_elements()->length - 1);

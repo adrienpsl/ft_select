@@ -14,7 +14,7 @@
 
 int go_last(void)
 {
-	return (get_sct()->elements->length - 1);
+	return (get_elements_length());
 }
 
 int go_first(void)
@@ -22,18 +22,17 @@ int go_first(void)
 	return (-go_last());
 }
 
-static void move_next(int step)
+static void move_next(int step_size)
 {
 	t_el *current;
 	t_el *new;
-	t_sct *s;
 
-	s = get_sct();
-	current = ftarray__at(s->elements, s->current);
+	move_display(step_size);
+	current = ftarray__at(get_elements(), g_current());
 	current->is_current = 0;
-	new = ftarray__at(s->elements, s->current + step);
+	new = ftarray__at(get_elements(), g_current() + step_size);
 	new->is_current = 1;
-	s->current += step;
+	*set_current() += step_size;
 }
 
 int move_selector(int step_size, t_sct *s)
