@@ -58,7 +58,7 @@ static void changing_window(int nb)
 		get_window_and_print(get_sct());
 }
 
-void catch_all_signal(void)
+int handle_all_signal(void)
 {
 	g_is_foreground = false;
 	signal(SIGINT, quit);
@@ -70,4 +70,5 @@ void catch_all_signal(void)
 	signal(SIGWINCH, changing_window);
 	signal(SIGTSTP, put_in_background);
 	signal(SIGCONT, put_in_foreground);
+	return (OK);
 }

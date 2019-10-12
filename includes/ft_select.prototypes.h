@@ -56,7 +56,7 @@ int unset_canonical_mode(struct termios *backup_termios);
 /*
 **	Signal
 */
-void catch_all_signal(void);
+int handle_all_signal(void);
 
 /*
 **	Termcaps

@@ -46,8 +46,6 @@ bool get_window_size(t_window *w, int nb_elements, int size_el)
 	w->line_wide = size.ws_col / size_el;
 	if (w->line_wide == 0)
 		w->line_wide = nb_elements;
-	// TODO : reset
-	w->line_wide = 2;
 	w->nb_line = (nb_elements / w->line_wide);
 	if (w->nb_line == 0)
 		w->nb_line = 1;
@@ -61,6 +59,8 @@ bool get_window_size(t_window *w, int nb_elements, int size_el)
 void quit_binary(t_array *elements, struct termios *backup)
 {
 	ftarray__free(&elements);
+	clear_screen();
+	tputs(tgoto(get_term()->move, 0, -4), 1, putchar_0);
 	if (backup->c_cc[VMIN])
 		unset_canonical_mode(backup);
 	exit(EXIT_SUCCESS);
@@ -77,10 +77,3 @@ int putchar_0(int c)
 	write(FT_FD_OUT, &c, 1);
 	return (OK);
 }
-
-// clean screen
-//tputs(tgoto(get_term()->move, 0, 0), 1, putchar_0);
-//tputs(tgetstr("dl", NULL), 1, putchar_0);
-//tputs(tgetstr("dl", NULL), 1, putchar_0);
-//tputs(tgetstr("dl", NULL), 1, putchar_0);
-//tputs(tgetstr("dl", NULL), 1, putchar_0);

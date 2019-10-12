@@ -30,7 +30,7 @@ static int check(int ac)
 	return (OK);
 }
 
-static int fill_elements(int ac, char **av, t_sct *select)
+static int get_argv(int ac, char **av, t_sct *select)
 {
 	t_el el;
 	int i;
@@ -70,21 +70,20 @@ int main(int ac, char **av)
 	static t_sct s = { 0 };
 
 	if (OK != check(ac)
-		|| OK != fill_elements(ac, av, &s)
+		|| OK != get_argv(ac, av, &s)
 		|| OK != load_termcaps(&s.term)
-		|| OK != set_canonical(&s.termios))
-	{
+		|| OK != set_canonical(&s.termios)
+		|| OK != handle_all_signal()
+		|| OK != set_sct(&s))
 		quit_binary(s.elements, &s.termios);
-	}
 	test(&s);
-	set_sct(&s);
-	catch_all_signal();
 	get_window_and_print(&s);
 	if (1 == loop_user_input(&s))
 	{
 		clear_screen();
 		ftarray__func(s.elements, print_value, NULL);
 	}
+	clear_screen();
 	quit_binary(s.elements, &s.termios);
 	return (EXIT_SUCCESS);
 }

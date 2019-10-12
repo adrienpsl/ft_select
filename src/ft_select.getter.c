@@ -21,7 +21,7 @@ t_sct *set_sct(t_sct *s)
 	else
 	{
 		ptr = s;
-		return (NULL);
+		return (OK);
 	}
 }
 

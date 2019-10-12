@@ -37,8 +37,7 @@ static void move_next(int step_size)
 
 int move_selector(int step_size, t_sct *s)
 {
-	if (step_size == -1
-		&& s->current == 0)
+	if (step_size == -1 && s->current == 0)
 		move_next(go_last());
 	else if (s->current + step_size < 0)
 		return (1);

@@ -45,6 +45,13 @@ int print_in_underline_reverse(char *text)
 
 int clear_screen(void)
 {
-	tputs(tgetstr("cl", NULL), 1, putchar_0);
+	int i = 0;
+	tputs(tgoto(get_term()->move, 0, 0), 1, putchar_0);
+
+	while (i < get_win()->nb_line)
+	{
+		tputs(tgetstr("dl", NULL), 1, putchar_0);
+		i++;
+	}
 	return (1);
 }
