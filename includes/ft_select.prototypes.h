@@ -20,6 +20,22 @@ void set_el(t_el *el, char *data, int selected, int current, t_array *array);
 t_array *testing_array(void);
 
 /*
+**	Helpers
+*/
+int go_last(void);
+int go_first(void);
+
+/*
+**	getter
+*/
+t_sct *set_sct(t_sct *s);
+t_sct *get_sct(void);
+t_term *get_term(void);
+t_window *get_win(void);
+t_array *get_elements(void);
+int get_elements_length(void);
+
+/*
 **	handling the list element
 */
 int get_min_size(t_array *array);
@@ -57,12 +73,9 @@ bool is_good_index(int index, int nb_elements);
 void get_window_and_print(t_sct *s);
 
 /*
-**	getter
+**	Display
 */
-t_sct *set_sct(t_sct *s);
-t_sct *get_sct(void);
-t_term *get_term(void);
-t_window *get_win(void);
+void move_display(int step);
 
 /*
 **	Print

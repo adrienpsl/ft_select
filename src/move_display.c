@@ -12,40 +12,38 @@
 
 #include <ft_select.h>
 
-t_sct *set_sct(t_sct *s)
+static int need_display_down(int step)
 {
-	static t_sct *ptr;
-
-	if (s == NULL)
-		return (ptr);
-	else
-	{
-		ptr = s;
-		return (NULL);
-	}
+	return (step > 0 &&
+			step + get_sct()->current >=
+			get_win()->current_step + get_win()->capacity);
 }
 
-t_sct *get_sct(void)
+static int need_display_up(int step)
 {
-	return (set_sct(NULL));
+	return (step <= 0 &&
+			step + get_sct()->current <= get_win()->current_step
+			&& step + get_sct()->current > 0);
 }
 
-t_term *get_term(void)
+static int need_display_upper(int step)
 {
-	return (&get_sct()->term);
+	return (step == go_first());
 }
 
-t_window *get_win(void)
+static int need_display_downer(int step)
 {
-	return (&get_sct()->window);
+	return (step == go_last());
 }
 
-t_array *get_elements(void)
+void move_display(int step)
 {
-	return (get_sct()->elements);
-}
-
-int get_elements_length(void)
-{
-	return (get_elements()->length - 1);
+	if (true == need_display_upper(step))
+		get_win()->current_step = 0;
+	else if (true == need_display_downer(step))
+		get_win()->current_step = get_win()->last_step;
+	else if (true == need_display_down(step))
+		get_win()->current_step += get_win()->capacity;
+	else if (true == need_display_up(step))
+		get_win()->current_step -= get_win()->capacity;
 }

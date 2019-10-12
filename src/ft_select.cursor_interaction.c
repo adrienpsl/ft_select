@@ -12,43 +12,15 @@
 
 #include "ft_select.h"
 
-// here I can se helper 
-
-static int go_last()
+int go_last(void)
 {
 	return (get_sct()->elements->length - 1);
 }
 
-static int go_first()
+int go_first(void)
 {
 	return (-go_last());
 }
-
-
-static int need_display_down(int step)
-{
-	return (step > 0 &&
-			step + get_sct()->current >=
-			get_win()->current_step + get_win()->capacity);
-}
-
-static int need_display_up(int step)
-{
-	return (step <= 0 &&
-			step + get_sct()->current <= get_win()->current_step
-			&& step + get_sct()->current > 0);
-}
-
-static int need_display_uppest(int step)
-{
-	return (step == go_first()); 
-}
-
-static int need_display_downest(int step)
-{
-	return (step == go_last());
-}
-
 
 static void move_next(int step)
 {
@@ -57,16 +29,6 @@ static void move_next(int step)
 	t_sct *s;
 
 	s = get_sct();
-
-	if (true == need_display_uppest(step))
-		get_win()->current_step = 0;
-	else if (true == need_display_downest(step))
-		get_win()->current_step = get_win()->last_step;
-	else if (true == need_display_down(step))
-		get_win()->current_step += get_win()->capacity;
-	else if (true == need_display_up(step))
-		get_win()->current_step -= get_win()->capacity;
-
 	current = ftarray__at(s->elements, s->current);
 	current->is_current = 0;
 	new = ftarray__at(s->elements, s->current + step);
@@ -104,7 +66,7 @@ int space(t_sct *s)
 
 int del(t_sct *s)
 {
-	int step = s->current == s->elements->length -1 ? -1 : 0;
+	int step = s->current == s->elements->length - 1 ? -1 : 0;
 	ftarray__remove(s->elements, s->current);
 	print_list(s->elements);
 	move_selector(step, s);
@@ -117,8 +79,8 @@ int del(t_sct *s)
 
 int dispatch_user_key(int *buffer, t_sct *s)
 {
-	K_UP == *buffer && move_selector(-s->window.line_wide, s);
-	K_DOWN == *buffer && move_selector(s->window.line_wide, s);
+	K_UP == *buffer && move_selector(get_win()->line_wide * -1, s);
+	K_DOWN == *buffer && move_selector(get_win()->line_wide, s);
 	K_LEFT == *buffer && move_selector(-1, s);
 	K_RIGHT == *buffer && move_selector(+1, s);
 	K_SPACE == *buffer && space(s);
@@ -127,7 +89,7 @@ int dispatch_user_key(int *buffer, t_sct *s)
 		return (1);
 	else if (K_ESCAPE == *buffer)
 		return (-1);
-	else if (s->elements->length == 0)
+	else if (get_elements_length() == 0)
 		return (-1);
 	else
 		return (OK);
