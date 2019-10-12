@@ -37,3 +37,8 @@ t_array *testing_array(void)
 	return (array);
 }
 
+void test(t_sct *s)
+{
+	s->elements = testing_array();
+	s->size_el = get_min_size(s->elements);
+}

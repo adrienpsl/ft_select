@@ -51,7 +51,9 @@ static void loop_on_elements(t_array *els, t_pos *pos)
 				 && print_in_reverse(el->text));
 		else
 		{
+			tputs(" ", 1, putchar_0);
 			tputs(el->text, 1, putchar_0);
+			tputs(" ", 1, putchar_0);
 		}
 		i++;
 	}

@@ -12,12 +12,6 @@ static int print_value(void *p_el, void *null)
 	return (0);
 }
 
-static void test(t_sct *s)
-{
-	s->elements = testing_array();
-	s->size_el = get_min_size(s->elements);
-}
-
 static int check(int ac)
 {
 	if (ac == 1)

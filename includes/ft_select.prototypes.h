@@ -18,6 +18,7 @@
 // tmp
 void set_el(t_el *el, char *data, int selected, int current, t_array *array);
 t_array *testing_array(void);
+void test(t_sct *s);
 
 /*
 **	Helpers
