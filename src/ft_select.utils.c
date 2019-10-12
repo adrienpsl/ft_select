@@ -66,6 +66,3 @@ void get_window_and_print(t_sct *s)
 	get_window_size(&s->window, s->elements->length, s->size_el);
 	print_list(s->elements);
 }
-
-// I need to reset putchar to use it with the clear and 
-// move element.

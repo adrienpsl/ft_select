@@ -77,12 +77,6 @@ int main(int ac, char **av)
 	{
 		quit_binary(s.elements, &s.termios);
 	}
-	fputs(tgetstr("al", NULL), stdout);
-	fputs(tgetstr("al", NULL), stdout);
-	fputs(tgetstr("al", NULL), stdout);
-	fputs(tgetstr("al", NULL), stdout);
-	fputs(tgetstr("al", NULL), stdout);
-	fputs(tgetstr("al", NULL), stdout);
 	test(&s);
 	get_sct(&s);
 	catch_all_signal();

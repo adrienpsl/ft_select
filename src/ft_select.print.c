@@ -46,10 +46,6 @@ static void loop_on_elements(t_array *els, t_pos *pos)
 		else
 			ft_dprintf(0, " %s ", el->text);
 	}
-//	pos->x = 0;
-//	pos->y = -pos->y;
-//	placing_cursor(pos);
-	
 }
 
 void print_list(t_array *els)
