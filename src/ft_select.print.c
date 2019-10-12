@@ -19,7 +19,7 @@ static int placing_cursor(t_pos *pos)
 	if (NULL == (goto_term = tgoto(
 		get_term()->move, pos->x * get_sct(NULL)->size_el, pos->y)))
 		return (-1);
-	ft_dprintf(0, goto_term);
+	tputs(goto_term, 1, putchar_0);
 	pos->x += 1;
 	if (pos->x >= get_sct(NULL)->window.line_wide)
 	{
@@ -44,7 +44,9 @@ static void loop_on_elements(t_array *els, t_pos *pos)
 		else if (el->is_selected
 				 && print_in_reverse(el->text));
 		else
-			ft_dprintf(0, " %s ", el->text);
+		{
+			tputs(el->text, 1 , putchar_0);
+		}
 	}
 }
 

@@ -14,33 +14,37 @@
 
 int print_in_underline(char *text)
 {
-	ft_dprintf(FT_FD_OUT, " %s" "%s" "%s ",
-		get_term()->underline,
-		text,
-		get_term()->reset);
+	tputs(" ", 1, putchar_0);
+	tputs(get_term()->underline, 1, putchar_0);
+	tputs(text, 1, putchar_0);
+	tputs(get_term()->reset, 1, putchar_0);
+	tputs(" ", 1, putchar_0);
 	return (1);
 }
 
 int print_in_reverse(char *text)
 {
-	ft_dprintf(FT_FD_OUT, " %s" "%s" "%s ",
-		get_term()->reverse,
-		text,
-		get_term()->reset);
+	tputs(" ", 1, putchar_0);
+	tputs(get_term()->reverse, 1, putchar_0);
+	tputs(text, 1, putchar_0);
+	tputs(get_term()->reset, 1, putchar_0);
+	tputs(" ", 1, putchar_0);
 	return (1);
 }
 
 int print_in_underline_reverse(char *text)
 {
-	ft_dprintf(FT_FD_OUT, " %s%s" "%s" "%s ",
-		get_term()->reverse, get_term()->underline,
-		text,
-		get_term()->reset);
+	tputs(" ", 1, putchar_0);
+	tputs(get_term()->reverse, 1, putchar_0);
+	tputs(get_term()->underline, 1, putchar_0);
+	tputs(text, 1, putchar_0);
+	tputs(get_term()->reset, 1, putchar_0);
+	tputs(" ", 1, putchar_0);
 	return (1);
 }
 
 int clear_screen(void)
 {
-	ft_dprintf(FT_FD_OUT, get_term()->clear_screen);
+	tputs(tgetstr("cl", NULL), 1, putchar_0);
 	return (1);
 }

@@ -51,16 +51,15 @@ static int fill_elements(int ac, char **av, t_sct *select)
 
 int loop_user_input(t_sct *s)
 {
-	static char buffer[5] = { 0 };
+	static int buffer = { 0 };
 	int ret;
 
-	ft_bzero(&buffer, 5);
-	while (OK != ft_strcmp(buffer, "\n"))
+	while (buffer != K_ENTER)
 	{
-		ft_bzero(&buffer, 5);
-		if (read(0, buffer, 4) < 0)
+		buffer = 0;
+		if (read(0, &buffer, 4) < 0)
 			return (-1);
-		if (OK != (ret = dispatch_user_key(buffer, s)))
+		if (OK != (ret = dispatch_user_key(&buffer, s)))
 			return (ret);
 	}
 	return (OK);

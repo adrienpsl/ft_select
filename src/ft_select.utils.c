@@ -66,3 +66,16 @@ void get_window_and_print(t_sct *s)
 	get_window_size(&s->window, s->elements->length, s->size_el);
 	print_list(s->elements);
 }
+
+int putchar_0(int c)
+{
+	write(FT_FD_OUT, &c, 1);
+	return (OK);
+}
+
+// clean screen
+//tputs(tgoto(get_term()->move, 0, 0), 1, putchar_0);
+//tputs(tgetstr("dl", NULL), 1, putchar_0);
+//tputs(tgetstr("dl", NULL), 1, putchar_0);
+//tputs(tgetstr("dl", NULL), 1, putchar_0);
+//tputs(tgetstr("dl", NULL), 1, putchar_0);

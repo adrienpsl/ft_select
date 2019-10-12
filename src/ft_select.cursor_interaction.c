@@ -66,17 +66,17 @@ int del(t_sct *s)
 **	dispatch at the good function according to the user input
 */
 
-int dispatch_user_key(char *buffer, t_sct *s)
+int dispatch_user_key(int *buffer, t_sct *s)
 {
-	ft_streq(FT_UP, buffer) && move_selector(-s->window.line_wide, s);
-	ft_streq(FT_DOWN, buffer) && move_selector(s->window.line_wide, s);
-	ft_streq(FT_LEFT, buffer) && move_selector(-1, s);
-	ft_streq(FT_RIGHT, buffer) && move_selector(+1, s);
-	ft_streq(FT_SPACE, buffer) && space(s);
-	((ft_streq(FT_DEL, buffer) || ft_streq(FT_BACKSPACE, buffer)) && del(s));
-	if (ft_streq(FT_ENTER, buffer))
+	K_UP == *buffer && move_selector(-s->window.line_wide, s);
+	K_DOWN == *buffer && move_selector(s->window.line_wide, s);
+	K_LEFT == *buffer && move_selector(-1, s);
+	K_RIGHT == *buffer && move_selector(+1, s);
+	K_SPACE == *buffer && space(s);
+	((K_DEL == *buffer || K_BACKSPACE == *buffer) && del(s));
+	if (K_ENTER == *buffer)
 		return (1);
-	else if (ft_streq(FT_ECHAP, buffer))
+	else if (K_ESCAPE == *buffer)
 		return (-1);
 	else if (s->elements->length == 0)
 		return (-1);

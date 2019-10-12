@@ -24,40 +24,34 @@ static void quit(int nb)
 
 static void put_in_foreground(int nb)
 {
+	// here set a protection to that.
 	t_sct *s;
 
 	s = get_sct(NULL);
 	catch_all_signal();
+	ft_dprintf(0, "fore");
 	if (OK != set_canonical(&s->termios))
 	{
 		quit_binary(s->elements, &s->termios);
 	}
-	ft_printf("toto \n");
-	get_window_and_print(s);
+//	get_window_and_print(s);
 	(void)nb;
 }
 
 static void put_in_background(int nb)
 {
-	t_sct *s;
-
-	s = get_sct(NULL);
-	unset_canonical_mode(&s->termios);
+	ft_dprintf(0, "back");
+	unset_canonical_mode(&get_sct(NULL)->termios);
 	signal(SIGTSTP, SIG_DFL);
-	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
+	ioctl(1, TIOCSTI, "\x1A");
 	(void)nb;
 }
 
 static void changing_window(int nb)
 {
-	t_sct *s;
-
 	(void)nb;
-	s = get_sct(NULL);
-	get_window_size(&s->window,
-		s->elements->length,
-		s->size_el);
-	print_list(s->elements);
+//	get_window_and_print(get_sct(NULL));
+ft_dprintf(0, "change");
 }
 
 void catch_all_signal(void)

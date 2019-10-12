@@ -12,18 +12,17 @@
 
 #ifndef FT_SELECT_DEFINES_H
 #define FT_SELECT_DEFINES_H
-// [
 # define FT_SELECT_NAME "ft_select: "
 
-# define FT_UP 		"\x1b" "\x5b" "\x41"
-# define FT_DOWN 	"\x1b" "\x5b" "\x42"
-# define FT_RIGHT	"\x1b" "\x5b" "\x43"
-# define FT_LEFT	"\x1b" "\x5b" "\x44"
-# define FT_ECHAP	"\x1b"
-# define FT_DEL 	"\x1b" "\x5b" "\x33" "\x7e"
-# define FT_BACKSPACE 	"\x7f"
-# define FT_SPACE 	" "
-# define FT_ENTER 	"\xa"
+# define K_DEL 2117294875
+# define K_RIGHT 4414235
+# define K_LEFT	4479771
+# define K_DOWN 4348699
+# define K_UP 4283163
+# define K_BACKSPACE 127
+# define K_ENTER 10
+# define K_ESCAPE 27
+# define K_SPACE 32
 
 # define FT_FD_OUT 0
 
