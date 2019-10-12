@@ -49,6 +49,7 @@ bool get_window_size(t_window *w, int nb_elements, int size_el)
 	w->nb_line = (nb_elements / w->line_wide);
 	if (w->nb_line == 0)
 		w->nb_line = 1;
+	
 	w->is_enough = size.ws_row - w->nb_line > 0 ? true : false;
 	return (true);
 }

@@ -13,6 +13,7 @@
 # include <ft_select.h>
 #include <sys/ioctl.h>
 
+// to prenvent a bug or feature but a shit stuff.
 static int g_is_foreground;
 
 static void quit(int nb)
@@ -45,7 +46,7 @@ static void put_in_foreground(int nb)
 		{
 			quit_binary(s->elements, &s->termios);
 		}
-		//	get_window_and_print(s);
+			get_window_and_print(s);
 		(void)nb;
 		g_is_foreground = true;
 	}
@@ -54,7 +55,7 @@ static void put_in_foreground(int nb)
 static void changing_window(int nb)
 {
 	(void)nb;
-	//	get_window_and_print(get_sct(NULL));
+		get_window_and_print(get_sct(NULL));
 }
 
 void catch_all_signal(void)

@@ -36,11 +36,14 @@ typedef struct s_pos
 {
 	int x;
 	int y;
+	// also, where I am ?
+	// I mean : 
 } t_pos;
 
 typedef struct s_window{
 	int				line_wide;
 	int				nb_line;
+	int				current_step;
 	int				is_enough;
 } t_window;
 
@@ -53,6 +56,10 @@ typedef struct	s_sct
 	int				current;
 	int				termios_set;
 	struct termios	termios;
+	
+	int	max_y;
+	int	max_x;
+	
 }					t_sct;
 
 
