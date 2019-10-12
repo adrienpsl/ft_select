@@ -43,13 +43,17 @@ bool get_window_size(t_window *w, int nb_elements, int size_el)
 
 	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &size))
 		return (false);
-	w->line_wide = size.ws_col / size_el;
-	if (w->line_wide == 0)
-		w->line_wide = nb_elements;
+	// TODO : reset
+	(void)size_el;
+	//	w->line_wide = size.ws_col / size_el;
+	//	if (w->line_wide == 0)
+	//		w->line_wide = nb_elements;
+	w->line_wide = 2;
 	w->nb_line = (nb_elements / w->line_wide);
 	if (w->nb_line == 0)
 		w->nb_line = 1;
-	
+	w->capacity =  w->line_wide * size.ws_row;
+	w->current_step = 0;
 	w->is_enough = size.ws_row - w->nb_line > 0 ? true : false;
 	return (true);
 }

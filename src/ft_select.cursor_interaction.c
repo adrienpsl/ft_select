@@ -12,13 +12,38 @@
 
 #include "ft_select.h"
 
+// here I can se helper 
+
+static int need_display_down(int step)
+{
+	return (step > 0 &&
+			step + get_sct()->current >=
+			get_win()->current_step + get_win()->capacity);
+}
+
+static int need_display_up(int step)
+{
+	return (step <= 0 &&
+			step + get_sct()->current <= get_win()->current_step
+			&& step + get_sct()->current > 0);
+}
+
 static void move_next(int step)
 {
 	t_el *current;
 	t_el *new;
 	t_sct *s;
 
-	s = get_sct(NULL);
+	s = get_sct();
+
+	if (true == need_display_down(step))
+		get_win()->current_step += get_win()->capacity;
+	else if (true == need_display_up(step))
+		get_win()->current_step -= get_win()->capacity;
+	//	else if (step)
+	//	    ;
+
+
 	current = ftarray__at(s->elements, s->current);
 	current->is_current = 0;
 	new = ftarray__at(s->elements, s->current + step);
@@ -26,16 +51,26 @@ static void move_next(int step)
 	s->current += step;
 }
 
+static int go_last()
+{
+	return (get_sct()->elements->length - 1);
+}
+
+static int go_first()
+{
+	return (-go_last());
+}
+
 int move_selector(int step_size, t_sct *s)
 {
 	if (step_size == -1
 		&& s->current == 0)
-		move_next(s->elements->length - 1);
+		move_next(go_last());
 	else if (s->current + step_size < 0)
 		return (1);
 	else if (step_size == 1
 			 && s->current + step_size == s->elements->length)
-		move_next(-(s->elements->length - 1));
+		move_next(go_first());
 	else if (true ==
 			 is_good_index(s->current + step_size, s->elements->length))
 		move_next(step_size);

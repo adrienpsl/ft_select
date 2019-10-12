@@ -20,14 +20,14 @@ static void quit(int nb)
 {
 	t_sct *s;
 
-	s = get_sct(NULL);
+	s = get_sct();
 	quit_binary(s->elements, &s->termios);
 	(void)nb;
 }
 
 static void put_in_background(int nb)
 {
-	unset_canonical_mode(&get_sct(NULL)->termios);
+	unset_canonical_mode(&get_sct()->termios);
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(1, TIOCSTI, "\x1A");
 	g_is_foreground = true;
@@ -40,7 +40,7 @@ static void put_in_foreground(int nb)
 
 	if (g_is_foreground == true)
 	{
-		s = get_sct(NULL);
+		s = get_sct();
 		signal(SIGTSTP, put_in_background);
 		if (OK != set_canonical(&s->termios))
 		{
@@ -55,7 +55,7 @@ static void put_in_foreground(int nb)
 static void changing_window(int nb)
 {
 	(void)nb;
-		get_window_and_print(get_sct(NULL));
+		get_window_and_print(get_sct());
 }
 
 void catch_all_signal(void)

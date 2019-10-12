@@ -44,6 +44,7 @@ typedef struct s_window{
 	int				line_wide;
 	int				nb_line;
 	int				current_step;
+	int				capacity;
 	int				is_enough;
 } t_window;
 
