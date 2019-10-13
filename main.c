@@ -43,9 +43,16 @@ static int get_argv(int ac, char **av, t_sct *select)
 	return (OK);
 }
 
+// je fais une current line,
+// if user tap /, 
+// I add the char to the current line, 
+// and select all the matched,
+// I need to validate with enter
+
+// add to buffer :
 int loop_user_input(t_sct *s)
 {
-	static int buffer = { 0 };
+	static long buffer = { 0 };
 	int ret;
 
 	while (buffer != K_ENTER)
@@ -53,7 +60,19 @@ int loop_user_input(t_sct *s)
 		buffer = 0;
 		if (read(0, &buffer, 4) < 0)
 			return (-1);
-		if (OK != (ret = dispatch_user_key(&buffer, s)))
+		if (buffer == '$' || NULL != *get_buffer())
+		{
+			if (buffer == '$' && *get_buffer())
+				ft_dprintf(1, *get_buffer());
+			if (*get_buffer() == NULL)
+			{
+				if (NULL == (*get_buffer() = ft_strdup((char *)buffer)))
+					return (0);
+			}
+			else
+				ft_pstrjoin(*get_buffer(), (char*)buffer, 1, get_buffer());
+		}
+		else if (OK != (ret = dispatch_user_key(&buffer, s)))
 			return (ret);
 	}
 	return (OK);

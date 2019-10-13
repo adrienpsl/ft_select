@@ -59,3 +59,10 @@ int get_elements_length(void)
 {
 	return (get_elements()->length - 1);
 }
+
+char **get_buffer(void)
+{
+	if (get_sct()->buffer == NULL)
+		return (NULL);
+	return (&get_sct()->buffer);
+}

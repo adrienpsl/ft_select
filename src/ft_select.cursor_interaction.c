@@ -75,7 +75,7 @@ int del(t_sct *s)
 **	dispatch at the good function according to the user input
 */
 
-int dispatch_user_key(int *buffer, t_sct *s)
+int dispatch_user_key(long *buffer, t_sct *s)
 {
 	K_UP == *buffer && move_selector(get_win()->line_wide * -1, s);
 	K_DOWN == *buffer && move_selector(get_win()->line_wide, s);

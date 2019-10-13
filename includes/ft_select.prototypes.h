@@ -37,6 +37,7 @@ t_array *get_elements(void);
 int get_elements_length(void);
 int *get_current(void);
 int g_current(void);
+char **get_buffer(void);
 
 /*
 **	Setter
@@ -97,7 +98,7 @@ void print_color_file(char *file_name);
 int move_selector(int step_size, t_sct *s);
 int space(t_sct *s);
 int del(t_sct *s);
-int dispatch_user_key(int *buffer, t_sct *s);
+int dispatch_user_key(long *buffer, t_sct *s);
 int putchar_0(int c);
 
 /*

@@ -15,6 +15,7 @@
 
 # include <ft_array.structure.h>
 # include <termios.h>
+#include <ft_s.h>
 
 typedef struct	s_el
 {
@@ -56,8 +57,8 @@ typedef struct	s_sct
 	t_term			term;
 	t_window		window;
 	int				current;
-	int				termios_set;
 	struct termios	termios;
+	char *buffer;
 	
 	int	max_y;
 	int	max_x;

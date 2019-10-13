@@ -67,10 +67,10 @@ void print_list(t_array *els)
 	pos.x = 0;
 	pos.y = 0;
 	clear_screen();
-	//	if (get_sct(NULL)->window.is_enough == false)
-	//	{
-	//		ft_dprintf(0, "The window is too little dude !");
-	//		return ;
-	//	}
+//		if (get_sct(NULL)->window.is_enough == false)
+//		{
+//			ft_dprintf(0, "The window is too little dude !");
+//			return ;
+//		}
 	loop_on_elements(els, &pos);
 }
