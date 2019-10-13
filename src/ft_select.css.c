@@ -26,6 +26,7 @@ int print_in_underline(char *text)
 int print_in_reverse(char *text)
 {
 	tputs(" ", 1, putchar_0);
+	print_color_file(text);
 	tputs(get_term()->reverse, 1, putchar_0);
 	tputs(text, 1, putchar_0);
 	tputs(get_term()->reset, 1, putchar_0);

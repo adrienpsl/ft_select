@@ -89,6 +89,7 @@ void move_display(int step);
 **	Print
 */
 void print_list(t_array *els);
+void print_color_file(char *file_name);
 
 /*
 **	cursor interaction

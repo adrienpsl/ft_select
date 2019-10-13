@@ -10,20 +10,56 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_H
-#define FT_SELECT_H
+#include <ft_select.h>
 
-# include "ft_select.structures.h"
-# include "ft_select.prototypes.h"
-# include "ft_select.defines.h"
+static char get_type(char *file_name)
+{
+	int i;
+	struct stat fs;
+	static char *char_type = "bcpdls-";
+	static int filters[7] =
+		{ S_IFBLK, S_IFCHR, S_IFIFO, S_IFDIR, S_IFLNK, S_IFSOCK, S_IFREG };
 
-#include <libft.h>
+	if (OK != lstat(file_name, &fs))
+		return (false);
+	i = 0;
+	while (i < 7)
+	{
+		if ((S_IFMT & fs.st_mode) == filters[i])
+			return (char_type[i]);
+		i++;
+	}
+	return (false);
+}
 
-#include <termcap.h>
-#include <sys/ioctl.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <curses.h>
-#include <sys/stat.h>
+void print_color_file(char *file_name)
+{
+	static char type;
 
-#endif
+	type = get_type(file_name);
+	if (type == false)
+		return;
+	if (type == 'd')
+		tputs(BLUE, 1, putchar_0);
+	if (type == 'l')
+		tputs(MAGENTA, 1, putchar_0);
+	if (type == '-')
+		return;
+	if (type == 'c')
+		tputs(GREEN, 1, putchar_0);
+	if (type == 'b')
+		tputs(YELLOW, 1, putchar_0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
