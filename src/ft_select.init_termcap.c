@@ -44,6 +44,10 @@ static int get_all_termcaps(t_term *t)
 		|| NULL == (t->underline = tgetstr("us", NULL))
 		|| NULL == (t->reverse = tgetstr("mr", NULL))
 		|| NULL == (t->reset = tgetstr("me", NULL))
+		|| NULL == (t->hide_cursor = tgetstr("vi", NULL))
+		|| NULL == (t->show_cursor = tgetstr("ve", NULL))
+		|| NULL == (t->delete_line = tgetstr("dl", NULL))
+		|| NULL == (t->clear_screen = tgetstr("cl", NULL))
 		|| NULL == (t->clear_screen = tgetstr("cl", NULL)))
 		return (-1);
 	return (OK);

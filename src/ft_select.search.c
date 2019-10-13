@@ -12,28 +12,32 @@
 
 #include <ft_select.h>
 
-static void go_last_line()
+static void go_start_last_line()
 {
 	tputs(tgoto(get_term()->move, 0, get_win()->window_y), 1, putchar_0);
 }
 
 static void free_buffer()
 {
-	tputs(get_buffer(), 1, putchar_0);
 	ftstr__free(set_buffer());
-	tputs(tgetstr("dl", NULL), 1, putchar_0);
-	go_last_line();
-}
-
-static void init_buffer()
-{
-	*set_buffer() = ft_strdup("");
+	tputs(get_term()->delete_line, 1, putchar_0);
+	tputs(get_term()->hide_cursor, 1, putchar_0);
 }
 
 static void add_to_buffer_and_print(char *buffer)
 {
+	go_start_last_line();
+	tputs(get_term()->delete_line, 1, putchar_0);
 	ft_pstrjoin(get_buffer(), buffer, 1, set_buffer());
 	tputs(get_buffer(), 1, putchar_0);
+}
+
+static void init_buffer()
+{
+	// I want make appear the cursor ! 
+	go_start_last_line();
+	tputs(get_term()->show_cursor, 1, putchar_0);
+	*set_buffer() = ft_strdup("");
 }
 
 void handle_buffer(long *buffer)

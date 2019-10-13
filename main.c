@@ -55,7 +55,7 @@ int loop_user_input(t_sct *s)
 			return (-1);
 		if (buffer == '$' || NULL != get_sct()->buffer)
 		{
-			
+			handle_buffer(&buffer);
 		}
 		else if (OK != (ret = dispatch_user_key(&buffer, s)))
 			return (ret);

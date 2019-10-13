@@ -31,6 +31,9 @@ typedef struct	s_term
 	char		*reverse;
 	char		*reset;
 	char		*clear_screen;
+	char		*delete_line;
+	char		*hide_cursor;
+	char 		*show_cursor;
 }				t_term;
 
 typedef struct s_pos
