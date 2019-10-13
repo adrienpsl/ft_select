@@ -43,13 +43,6 @@ static int get_argv(int ac, char **av, t_sct *select)
 	return (OK);
 }
 
-// je fais une current line,
-// if user tap /, 
-// I add the char to the current line, 
-// and select all the matched,
-// I need to validate with enter
-
-// add to buffer :
 int loop_user_input(t_sct *s)
 {
 	static long buffer = { 0 };
@@ -60,17 +53,25 @@ int loop_user_input(t_sct *s)
 		buffer = 0;
 		if (read(0, &buffer, 4) < 0)
 			return (-1);
-		if (buffer == '$' || NULL != *get_buffer())
+		if (buffer == '$' || NULL != get_sct()->buffer)
 		{
-			if (buffer == '$' && *get_buffer())
-				ft_dprintf(1, *get_buffer());
-			if (*get_buffer() == NULL)
+			// delete the line !
+			tputs(tgoto(get_term()->move, 0, get_win()->window_y), 1, putchar_0);
+			if (buffer == '$' && NULL != get_buffer())
 			{
-				if (NULL == (*get_buffer() = ft_strdup((char *)buffer)))
-					return (0);
+				tputs(get_buffer(), 1, putchar_0);
+				ftstr__free(set_buffer());
+				tputs(tgetstr("dl", NULL), 1, putchar_0);
+				tputs(tgoto(get_term()->move, 0, get_win()->window_y), 1, putchar_0);
 			}
+			else if (get_buffer() == NULL)
+				*set_buffer() = ft_strdup("");
 			else
-				ft_pstrjoin(*get_buffer(), (char*)buffer, 1, get_buffer());
+			{
+				ft_pstrjoin(get_buffer(), (char *)&buffer, 1,
+									set_buffer());
+				tputs(get_buffer(), 1, putchar_0);
+			}
 		}
 		else if (OK != (ret = dispatch_user_key(&buffer, s)))
 			return (ret);

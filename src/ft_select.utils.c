@@ -37,12 +37,15 @@ bool is_good_index(int index, int nb_elements)
 }
 
 // I have to stock the data, to keep element in place
+// need the size window !
 bool get_window_size(t_window *w, int nb_elements, int size_el)
 {
 	static struct winsize size;
 
 	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &size))
 		return (false);
+	w->window_y = size.ws_row;
+	size.ws_row -= 2;
 	w->line_wide = size.ws_col / size_el;
 	if (w->line_wide == 0)
 		w->line_wide = nb_elements;

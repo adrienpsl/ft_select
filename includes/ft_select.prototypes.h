@@ -35,14 +35,12 @@ t_term *get_term(void);
 t_window *get_win(void);
 t_array *get_elements(void);
 int get_elements_length(void);
-int *get_current(void);
-int g_current(void);
-char **get_buffer(void);
 
-/*
-**	Setter
-*/
+int g_current(void);
 int *set_current(void);
+
+char *get_buffer(void);
+char **set_buffer(void);
 
 /*
 **	handling the list element
