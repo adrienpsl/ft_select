@@ -55,23 +55,7 @@ int loop_user_input(t_sct *s)
 			return (-1);
 		if (buffer == '$' || NULL != get_sct()->buffer)
 		{
-			// delete the line !
-			tputs(tgoto(get_term()->move, 0, get_win()->window_y), 1, putchar_0);
-			if (buffer == '$' && NULL != get_buffer())
-			{
-				tputs(get_buffer(), 1, putchar_0);
-				ftstr__free(set_buffer());
-				tputs(tgetstr("dl", NULL), 1, putchar_0);
-				tputs(tgoto(get_term()->move, 0, get_win()->window_y), 1, putchar_0);
-			}
-			else if (get_buffer() == NULL)
-				*set_buffer() = ft_strdup("");
-			else
-			{
-				ft_pstrjoin(get_buffer(), (char *)&buffer, 1,
-									set_buffer());
-				tputs(get_buffer(), 1, putchar_0);
-			}
+			
 		}
 		else if (OK != (ret = dispatch_user_key(&buffer, s)))
 			return (ret);
@@ -79,6 +63,7 @@ int loop_user_input(t_sct *s)
 	return (OK);
 }
 
+// free the buffer if need
 int main(int ac, char **av)
 {
 	static t_sct s = { 0 };

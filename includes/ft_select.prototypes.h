@@ -105,4 +105,11 @@ int putchar_0(int c);
 int loop_user_input(t_sct *s);
 void quit_binary(t_array *elements, struct termios *backup);
 
+/*
+**	search
+*/
+void handle_buffer(long *buffer);
+
+
+
 #endif
