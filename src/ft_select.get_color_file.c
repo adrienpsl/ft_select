@@ -12,12 +12,12 @@
 
 #include <ft_select.h>
 
-static char get_type(char *file_name)
+static char		get_type(char *file_name)
 {
-	int i;
-	struct stat fs;
-	static char *char_type = "bcpdls-";
-	static int filters[7] =
+	int				i;
+	struct stat		fs;
+	static char		*char_type = "bcpdls-";
+	static int		filters[7] =
 		{ S_IFBLK, S_IFCHR, S_IFIFO, S_IFDIR, S_IFLNK, S_IFSOCK, S_IFREG };
 
 	if (OK != lstat(file_name, &fs))
@@ -32,34 +32,21 @@ static char get_type(char *file_name)
 	return (false);
 }
 
-void print_color_file(char *file_name)
+void			print_color_file(char *file_name)
 {
 	static char type;
 
 	type = get_type(file_name);
 	if (type == false)
-		return;
+		return ;
 	if (type == 'd')
 		tputs(BLUE, 1, putchar_0);
 	if (type == 'l')
 		tputs(MAGENTA, 1, putchar_0);
 	if (type == '-')
-		return;
+		return ;
 	if (type == 'c')
 		tputs(GREEN, 1, putchar_0);
 	if (type == 'b')
 		tputs(YELLOW, 1, putchar_0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
