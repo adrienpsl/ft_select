@@ -98,9 +98,6 @@ void print_color_file(char *file_name);
 /*
 **	cursor interaction
 */
-int move_selector(int step_size, t_sct *s);
-int space(t_sct *s);
-int del(t_sct *s);
 int dispatch_user_key(long *buffer, t_sct *s);
 int putchar_0(int c);
 

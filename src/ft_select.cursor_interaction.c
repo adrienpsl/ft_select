@@ -12,17 +12,7 @@
 
 #include "ft_select.h"
 
-int go_last(void)
-{
-	return (get_elements_length());
-}
-
-int go_first(void)
-{
-	return (-go_last());
-}
-
-static void move_next(int step_size)
+static void		move_next(int step_size)
 {
 	t_el *current;
 	t_el *new;
@@ -35,7 +25,7 @@ static void move_next(int step_size)
 	*set_current() += step_size;
 }
 
-int move_selector(int step_size, t_sct *s)
+static int		move_selector(int step_size, t_sct *s)
 {
 	if (step_size == -1 && s->current == 0)
 		move_next(go_last());
@@ -51,7 +41,7 @@ int move_selector(int step_size, t_sct *s)
 	return (1);
 }
 
-int space(t_sct *s)
+static int		space(t_sct *s)
 {
 	t_el *el;
 
@@ -62,7 +52,7 @@ int space(t_sct *s)
 	return (1);
 }
 
-int del(t_sct *s)
+static int		del(t_sct *s)
 {
 	int step = s->current == s->elements->length - 1 ? -1 : 0;
 	ftarray__remove(s->elements, s->current);
@@ -75,7 +65,7 @@ int del(t_sct *s)
 **	dispatch at the good function according to the user input
 */
 
-int dispatch_user_key(long *buffer, t_sct *s)
+int				dispatch_user_key(long *buffer, t_sct *s)
 {
 	K_UP == *buffer && move_selector(get_win()->line_wide * -1, s);
 	K_DOWN == *buffer && move_selector(get_win()->line_wide, s);
