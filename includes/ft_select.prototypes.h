@@ -26,6 +26,9 @@ void test(t_sct *s);
 int go_last(void);
 int go_first(void);
 
+// find where put that !
+int select_all_match(void *p_el, void *param);
+
 /*
 **	getter
 */

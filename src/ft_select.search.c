@@ -14,27 +14,39 @@
 
 static void go_start_last_line()
 {
-	tputs(tgoto(get_term()->move, 0, get_win()->window_y), 1, putchar_0);
+	tputs(tgoto(get_term()->move, 0, get_win()->winsize.ws_row), 1, putchar_0);
+	tputs(get_term()->delete_line, 1, putchar_0);
 }
 
 static void free_buffer()
 {
-	ftstr__free(set_buffer());
 	tputs(get_term()->delete_line, 1, putchar_0);
 	tputs(get_term()->hide_cursor, 1, putchar_0);
+	ftarray__func(get_sct()->elements, select_all_match, NULL);
+	print_list(get_sct()->elements);
+	ftstr__free(set_buffer());
 }
 
 static void add_to_buffer_and_print(char *buffer)
 {
+	int length;
+
 	go_start_last_line();
+	length = ft_strlen(get_buffer()) - 1;
+	if (buffer[0] == K_BACKSPACE)
+	{
+		if (length < 0)
+			length = 0;
+		get_buffer()[length] = 0;
+	}
+	else if (length + 2 < get_win()->winsize.ws_col - 2)
+		ft_pstrjoin(get_buffer(), buffer, 1, set_buffer());
 	tputs(get_term()->delete_line, 1, putchar_0);
-	ft_pstrjoin(get_buffer(), buffer, 1, set_buffer());
 	tputs(get_buffer(), 1, putchar_0);
 }
 
 static void init_buffer()
 {
-	// I want make appear the cursor ! 
 	go_start_last_line();
 	tputs(get_term()->show_cursor, 1, putchar_0);
 	*set_buffer() = ft_strdup("");

@@ -36,25 +36,24 @@ bool is_good_index(int index, int nb_elements)
 	return (false);
 }
 
-// I have to stock the data, to keep element in place
-// need the size window !
+static int is_screen_enough(t_window *w, int size_el)
+{
+	w->line_wide = w->winsize.ws_col / size_el;
+	return (w->winsize.ws_row > 2 && w->line_wide);
+}
+
 bool get_window_size(t_window *w, int nb_elements, int size_el)
 {
-	static struct winsize size;
+	int row_minus_text_search_space;
 
-	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &size))
+	if (-1 == ioctl(STDIN_FILENO, TIOCGWINSZ, &w->winsize))
 		return (false);
-	w->window_y = size.ws_row;
-	size.ws_row -= 2;
-	w->line_wide = size.ws_col / size_el;
-	if (w->line_wide == 0)
-		w->line_wide = nb_elements;
-	w->nb_line = (nb_elements / w->line_wide);
-	if (w->nb_line == 0)
-		w->nb_line = 1;
-	w->capacity = w->line_wide * size.ws_row;
+	if (false == (w->is_enough = is_screen_enough(w, size_el)))
+		return (-1);
+	row_minus_text_search_space = w->winsize.ws_row - 2;
+	w->nb_line = (nb_elements / row_minus_text_search_space);
+	w->capacity = w->line_wide * row_minus_text_search_space;
 	w->current_step = 0;
-	w->is_enough = size.ws_row - w->nb_line > 0 ? true : false;
 	w->last_step = (nb_elements / w->capacity) * w->capacity;
 	return (true);
 }
@@ -63,7 +62,7 @@ void quit_binary(t_array *elements, struct termios *backup)
 {
 	ftarray__free(&elements);
 	clear_screen();
-	tputs(tgoto(get_term()->move, 0, -4), 1, putchar_0);
+//	tputs(tgoto(get_term()->move, 0, -4), 1, putchar_0);
 	if (backup->c_cc[VMIN])
 		unset_canonical_mode(backup);
 	exit(EXIT_SUCCESS);

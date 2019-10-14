@@ -76,6 +76,7 @@ int main(int ac, char **av)
 		|| OK != set_sct(&s))
 		quit_binary(s.elements, &s.termios);
 	test(&s);
+	clear_screen();
 	get_window_and_print(&s);
 	if (1 == loop_user_input(&s))
 	{
