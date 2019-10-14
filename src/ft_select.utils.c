@@ -54,7 +54,7 @@ bool get_window_size(t_window *w, int nb_elements, int size_el)
 	w->nb_line = (nb_elements / row_minus_text_search_space);
 	w->capacity = w->line_wide * row_minus_text_search_space;
 	w->current_step = 0;
-	w->last_step = (nb_elements / w->capacity) * w->capacity;
+	w->last_step = ((nb_elements / w->capacity) - 1) * w->capacity;
 	return (true);
 }
 
@@ -62,7 +62,6 @@ void quit_binary(t_array *elements, struct termios *backup)
 {
 	ftarray__free(&elements);
 	clear_screen();
-//	tputs(tgoto(get_term()->move, 0, -4), 1, putchar_0);
 	if (backup->c_cc[VMIN])
 		unset_canonical_mode(backup);
 	exit(EXIT_SUCCESS);

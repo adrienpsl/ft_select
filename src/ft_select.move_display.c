@@ -22,7 +22,7 @@ static int need_display_down(int step)
 static int need_display_up(int step)
 {
 	return (step <= 0 &&
-			step + get_sct()->current <= get_win()->current_step
+			step + get_sct()->current < get_win()->current_step
 			&& step + get_sct()->current > 0);
 }
 

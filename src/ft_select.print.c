@@ -33,12 +33,11 @@ static void loop_on_elements(t_array *els, t_pos *pos)
 {
 	static t_el *el;
 	t_sct *s = get_sct();
-	int i =  get_win()->current_step;
+	int i = get_win()->current_step;
 
 	els->i = 0;
-	s->max_y = 4;
 	while (i < s->window.capacity + get_win()->current_step
-		&& i < els->length)
+		   && i < els->length)
 	{
 		el = ftarray__at(els, i);
 		placing_cursor(pos);
@@ -66,10 +65,10 @@ void print_list(t_array *els)
 	pos.x = 0;
 	pos.y = 0;
 	clear_screen();
-		if (get_win()->is_enough == false)
-		{
-			ft_dprintf(0, "The window is too little dude !");
-			return ;
-		}
+	if (get_win()->is_enough == false)
+	{
+		ft_dprintf(0, "The window is too little dude !");
+		return;
+	}
 	loop_on_elements(els, &pos);
 }

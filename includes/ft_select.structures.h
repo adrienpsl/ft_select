@@ -62,11 +62,8 @@ typedef struct	s_sct
 	t_window		window;
 	int				current;
 	struct termios	termios;
+	int is_foreground;
 	char *buffer;
-	
-	int	max_y;
-	int	max_x;
-	
 }					t_sct;
 
 

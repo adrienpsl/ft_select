@@ -72,8 +72,8 @@ int main(int ac, char **av)
 		|| OK != get_argv(ac, av, &s)
 		|| OK != load_termcaps(&s.term)
 		|| OK != set_canonical(&s.termios)
-		|| OK != handle_all_signal()
-		|| OK != set_sct(&s))
+		|| OK != set_sct(&s)
+		|| OK != handle_all_signal())
 		quit_binary(s.elements, &s.termios);
 	test(&s);
 	clear_screen();
