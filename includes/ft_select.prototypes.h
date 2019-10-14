@@ -70,9 +70,11 @@ bool put_termcaps(char *name);
 /*
 **	CSS
 */
-int print_in_underline_reverse(char *text);
-int print_in_reverse(char *text);
-int print_in_underline(char *text);
+int print_underline_reverse(char *text);
+int print_reverse(char *text);
+int print_underline(char *text);
+int print_normal(char *text);
+
 int clear_screen(void);
 
 /*

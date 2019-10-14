@@ -16,7 +16,7 @@
 **	Set terminal in canonical mode, and save the origin config in backup
 */
 
-int set_canonical(struct termios *termios_backup)
+int	set_canonical(struct termios *termios_backup)
 {
 	struct termios new_termios;
 
@@ -24,7 +24,8 @@ int set_canonical(struct termios *termios_backup)
 	if (-1 == tcgetattr(STDIN_FILENO, &new_termios)
 		|| -1 == tcgetattr(STDIN_FILENO, termios_backup))
 	{
-		ft_dprintf(2, FT_SELECT_NAME"can't set the canonical terminal mode !");
+		ft_dprintf(2, FT_SELECT_NAME
+		"can't set the canonical terminal mode !");
 		return (-1);
 	}
 	new_termios.c_lflag &= ~(ICANON | ECHO);
@@ -39,7 +40,7 @@ int set_canonical(struct termios *termios_backup)
 **	Reset the backup terminal config
 */
 
-int unset_canonical_mode(struct termios *backup_termios)
+int	unset_canonical_mode(struct termios *backup_termios)
 {
 	if (-1 == tcsetattr(STDIN_FILENO, TCSANOW, backup_termios))
 	{
