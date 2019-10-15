@@ -30,7 +30,7 @@ bool			get_window_size(t_window *w, int nb_elements, int size_el)
 	w->nb_line = (nb_elements / row_minus_text_search_space);
 	w->capacity = w->line_wide * row_minus_text_search_space;
 	w->current_step = 0;
-	w->last_step = ((nb_elements / w->capacity) - 1) * w->capacity;
+	w->last_step = ((nb_elements / w->capacity)) * w->capacity;
 	return (true);
 }
 

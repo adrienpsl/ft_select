@@ -93,7 +93,7 @@ int main(int ac, char **av)
 {
 	static t_sct s = { 0 };
 
-	if (OK != set_sct(&s)
+	if (NULL ==  set_sct(&s)
 		|| OK != check(ac)
 		|| OK != get_argv(ac, av, &s)
 		|| OK != load_termcaps(&s.term)

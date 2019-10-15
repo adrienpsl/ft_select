@@ -38,6 +38,8 @@ static int	need_display_downer(int step)
 
 void		move_display(int step)
 {
+	if (get_win()->capacity >= get_elements_length())
+		return ;
 	if (true == need_display_upper(step))
 		get_win()->current_step = 0;
 	else if (true == need_display_downer(step))

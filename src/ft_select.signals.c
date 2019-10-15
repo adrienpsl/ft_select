@@ -53,7 +53,9 @@ static void		put_in_foreground(int nb)
 static void		changing_window(int nb)
 {
 	(void)nb;
+	inverse_current(g_current());
 	get_sct()->current = 0;
+	inverse_current(g_current());
 	get_sct()->window.current_step = 0;
 	get_window_and_print(get_sct());
 }

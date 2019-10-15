@@ -14,7 +14,7 @@
 
 static void		move_next(int step_size)
 {
-//	move_display(step_size);
+	move_display(step_size);
 	if (step_size == 0)
 		return ;
 	inverse_current(g_current());

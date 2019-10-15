@@ -20,21 +20,22 @@ add_library(${PROJECT_NAME}_lib ${sources_files})
 target_include_directories(${PROJECT_NAME}_lib PUBLIC includes)
 target_link_libraries(${PROJECT_NAME}_lib libft)
 
-find_package(Curses REQUIRED)
-include_directories(${CURSES_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME}_lib ${CURSES_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}_lib "-ltermcap")
+#find_package(Curses REQUIRED)
+#include_directories(${CURSES_INCLUDE_DIR})
+#target_link_libraries(${PROJECT_NAME}_lib ${CURSES_LIBRARIES})
 # ------------------------------------------------------------------------------
 #    Project Binary
 # ------------------------------------------------------------------------------
 add_executable(${PROJECT_NAME} src/main.c)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
 
-## ------------------------------------------------------------------------------
-##    Unit test Binary
-## ------------------------------------------------------------------------------
-file(GLOB_RECURSE unit_files unit.test/*.c)
-add_executable(${PROJECT_NAME}_unit_test ${unit_files})
-target_link_libraries(${PROJECT_NAME}_unit_test ${PROJECT_NAME}_lib)
+### ------------------------------------------------------------------------------
+###    Unit test Binary
+### ------------------------------------------------------------------------------
+#file(GLOB_RECURSE unit_files unit.test/*.c)
+#add_executable(${PROJECT_NAME}_unit_test ${unit_files})
+#target_link_libraries(${PROJECT_NAME}_unit_test ${PROJECT_NAME}_lib)
 #
 #
 ## ------------------------------------------------------------------------------
