@@ -27,7 +27,7 @@ static void	free_buffer()
 	ftstr__free(set_buffer());
 }
 
-static void	add_to_buffer_and_print(char *buffer)
+static void	buffering_and_display(char *buffer)
 {
 	int length;
 
@@ -52,12 +52,12 @@ static void	init_buffer()
 	*set_buffer() = ft_strdup("");
 }
 
-void		handle_buffer(long *buffer)
+void		search_mode(long *buffer)
 {
 	if (*buffer == '$' && NULL != get_buffer())
 		free_buffer();
 	else if (get_buffer() == NULL)
 		init_buffer();
 	else
-		add_to_buffer_and_print((char *)buffer);
+		buffering_and_display((char *)buffer);
 }

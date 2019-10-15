@@ -98,7 +98,7 @@ void print_color_file(char *file_name);
 /*
 **	cursor interaction
 */
-int dispatch_user_key(long *buffer, t_sct *s);
+int select_mode(long *buffer, t_sct *s);
 int putchar_0(int c);
 void inverse_current(int index);
 
@@ -111,7 +111,7 @@ void quit_binary(t_array *elements, struct termios *backup);
 /*
 **	search
 */
-void handle_buffer(long *buffer);
+void search_mode(long *buffer);
 
 
 
