@@ -14,15 +14,11 @@
 
 t_sct		*set_sct(t_sct *s)
 {
-	static t_sct *ptr;
+	static t_sct *ptr = NULL;
 
-	if (s == NULL)
-		return (ptr);
-	else
-	{
+	if (NULL != s)
 		ptr = s;
-		return (OK);
-	}
+	return (ptr);
 }
 
 t_sct		*get_sct(void)

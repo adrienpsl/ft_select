@@ -62,8 +62,8 @@ typedef struct	s_sct
 	t_window		window;
 	int				current;
 	struct termios	termios;
-	int is_foreground;
-	char *buffer;
+	int				is_foreground;
+	char			*buffer;
 }					t_sct;
 
 

@@ -1,4 +1,4 @@
-sh ./libft/render.sh;
+#sh ./libft/render.sh;
 
 rm -rf render/*
 mkdir -p render/includes;
@@ -6,10 +6,8 @@ mkdir -p render/src;
 
 cp Makefile render
 cp includes/* render/includes
-find ./src -type f -name "*.h" -exec cp {} ./render/includes \; ;
+find ./includes -type f -name "*.h" -exec cp {} ./render/includes \; ;
 find ./src -type f -name "*.c" -not -name "*test*" -exec cp {} ./render/src \; ;
-
-cp ./main/ft_ms.main.c ./render/src
 
 cp -R ./libft/render render/libft
 

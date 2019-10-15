@@ -93,11 +93,11 @@ int main(int ac, char **av)
 {
 	static t_sct s = { 0 };
 
-	if (OK != check(ac)
+	if (OK != set_sct(&s)
+		|| OK != check(ac)
 		|| OK != get_argv(ac, av, &s)
 		|| OK != load_termcaps(&s.term)
 		|| OK != set_canonical(&s.termios)
-		|| OK != set_sct(&s)
 		|| OK != handle_all_signal())
 		quit_binary(s.elements, &s.termios);
 	tputs(get_term()->hide_cursor, 1, putchar_0);
