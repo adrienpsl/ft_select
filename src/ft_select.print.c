@@ -12,7 +12,7 @@
 
 #include <ft_select.h>
 
-static int placing_cursor(t_pos *pos)
+static int		placing_cursor(t_pos *pos)
 {
 	char *goto_term;
 
@@ -29,7 +29,7 @@ static int placing_cursor(t_pos *pos)
 	return (1);
 }
 
-static void loop_on_elements(
+static void		loop_on_elements(
 	t_array *els,
 	t_pos *pos,
 	int current_step,
@@ -40,7 +40,7 @@ static void loop_on_elements(
 
 	i = current_step;
 	while (i < els->length
-		   && i < window_capacity + current_step)
+		&& i < window_capacity + current_step)
 	{
 		placing_cursor(pos);
 		el = ftarray__at(els, i);
@@ -56,7 +56,7 @@ static void loop_on_elements(
 	}
 }
 
-void print_list(t_array *els)
+void			print_list(t_array *els)
 {
 	static t_pos pos;
 

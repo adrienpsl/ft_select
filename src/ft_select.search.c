@@ -12,13 +12,13 @@
 
 #include <ft_select.h>
 
-static void go_start_last_line()
+static void	go_start_last_line()
 {
 	tputs(tgoto(get_term()->move, 0, get_win()->winsize.ws_row), 1, putchar_0);
 	tputs(get_term()->delete_line, 1, putchar_0);
 }
 
-static void free_buffer()
+static void	free_buffer()
 {
 	tputs(get_term()->delete_line, 1, putchar_0);
 	tputs(get_term()->hide_cursor, 1, putchar_0);
@@ -27,7 +27,7 @@ static void free_buffer()
 	ftstr__free(set_buffer());
 }
 
-static void add_to_buffer_and_print(char *buffer)
+static void	add_to_buffer_and_print(char *buffer)
 {
 	int length;
 
@@ -45,14 +45,14 @@ static void add_to_buffer_and_print(char *buffer)
 	tputs(get_buffer(), 1, putchar_0);
 }
 
-static void init_buffer()
+static void	init_buffer()
 {
 	go_start_last_line();
 	tputs(get_term()->show_cursor, 1, putchar_0);
 	*set_buffer() = ft_strdup("");
 }
 
-void handle_buffer(long *buffer)
+void		handle_buffer(long *buffer)
 {
 	if (*buffer == '$' && NULL != get_buffer())
 		free_buffer();

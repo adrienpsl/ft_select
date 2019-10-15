@@ -13,10 +13,10 @@
 # include <ft_select.h>
 #include <termcap.h>
 
-static int check_and_init()
+static int	check_and_init()
 {
-	char *term_name;
-	int ret;
+	char	*term_name;
+	int		ret;
 
 	if (NULL == (term_name = getenv("TERM")))
 	{
@@ -38,7 +38,7 @@ static int check_and_init()
 	return (OK);
 }
 
-static int get_all_termcaps(t_term *t)
+static int	get_all_termcaps(t_term *t)
 {
 	if (NULL == (t->move = tgetstr("cm", NULL))
 		|| NULL == (t->underline = tgetstr("us", NULL))
@@ -53,7 +53,7 @@ static int get_all_termcaps(t_term *t)
 	return (OK);
 }
 
-int load_termcaps(t_term *t)
+int			load_termcaps(t_term *t)
 {
 	if (OK != check_and_init()
 		|| OK != get_all_termcaps(t))

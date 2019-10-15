@@ -12,15 +12,15 @@
 
 #include <ft_select.h>
 
-int select_all_match(void *p_el, void *param)
+int	select_all_match(void *p_el, void *param)
 {
 	t_el *el;
 
 	el = p_el;
-	(void)param;
 	if (-1 != ftstr__search_start(get_buffer(), el->text))
 	{
 		el->is_selected = true;
 	}
 	return (OK);
+	(void)param;
 }

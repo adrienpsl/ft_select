@@ -100,6 +100,7 @@ void print_color_file(char *file_name);
 */
 int dispatch_user_key(long *buffer, t_sct *s);
 int putchar_0(int c);
+void inverse_current(int index);
 
 /*
 **	Buffer

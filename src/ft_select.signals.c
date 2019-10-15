@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <ft_select.h>
+#include <ft_select.h>
 #include <sys/ioctl.h>
 
-static void quit(int nb)
+static void		quit(int nb)
 {
 	t_sct *s;
 
@@ -22,7 +22,7 @@ static void quit(int nb)
 	(void)nb;
 }
 
-static void put_in_background(int nb)
+static void		put_in_background(int nb)
 {
 	unset_canonical_mode(&get_sct()->termios);
 	signal(SIGTSTP, SIG_DFL);
@@ -31,7 +31,7 @@ static void put_in_background(int nb)
 	(void)nb;
 }
 
-static void put_in_foreground(int nb)
+static void		put_in_foreground(int nb)
 {
 	t_sct *s;
 
@@ -49,8 +49,8 @@ static void put_in_foreground(int nb)
 	}
 }
 
-// restard current ! 
-static void changing_window(int nb)
+
+static void		changing_window(int nb)
 {
 	(void)nb;
 	get_sct()->current = 0;
@@ -58,7 +58,7 @@ static void changing_window(int nb)
 	get_window_and_print(get_sct());
 }
 
-int handle_all_signal(void)
+int				handle_all_signal(void)
 {
 	get_sct()->is_foreground = false;
 	signal(SIGINT, quit);

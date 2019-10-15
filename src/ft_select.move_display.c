@@ -12,31 +12,31 @@
 
 #include <ft_select.h>
 
-static int need_display_down(int step)
+static int	need_display_down(int step)
 {
 	return (step > 0 &&
 			step + get_sct()->current >=
 			get_win()->current_step + get_win()->capacity);
 }
 
-static int need_display_up(int step)
+static int	need_display_up(int step)
 {
 	return (step <= 0 &&
 			step + get_sct()->current < get_win()->current_step
 			&& step + get_sct()->current > 0);
 }
 
-static int need_display_upper(int step)
+static int	need_display_upper(int step)
 {
 	return (step == go_first());
 }
 
-static int need_display_downer(int step)
+static int	need_display_downer(int step)
 {
 	return (step == go_last());
 }
 
-void move_display(int step)
+void		move_display(int step)
 {
 	if (true == need_display_upper(step))
 		get_win()->current_step = 0;

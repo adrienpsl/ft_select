@@ -14,14 +14,10 @@
 
 static void		move_next(int step_size)
 {
-	t_el *current;
-	t_el *new;
 
 	move_display(step_size);
-	current = ftarray__at(get_elements(), g_current());
-	current->is_current = 0;
-	new = ftarray__at(get_elements(), g_current() + step_size);
-	new->is_current = 1;
+	inverse_current(g_current());
+	inverse_current(g_current() + step_size);
 	*set_current() += step_size;
 }
 
