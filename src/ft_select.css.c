@@ -51,7 +51,7 @@ int print_normal(char *text)
 	tputs(" ", 1, putchar_0);
 	print_color_file(text);
 	tputs(text, 1, putchar_0);
-	tputs(" ", 1, putchar_0);
+	tputs(RESET, 1, putchar_0);
 	return (1);
 }
 

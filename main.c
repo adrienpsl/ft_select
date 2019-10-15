@@ -55,6 +55,7 @@ static int get_argv(int ac, char **av, t_sct *select)
 		i += 1;
 	}
 	select->size_el = get_min_size(select->elements);
+	((t_el*)ftarray__at(select->elements, 0))->is_current = 1;
 	return (OK);
 }
 

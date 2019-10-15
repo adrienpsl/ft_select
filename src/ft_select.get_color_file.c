@@ -40,7 +40,7 @@ void			print_color_file(char *file_name)
 	if (type == false)
 		return ;
 	if (type == 'd')
-		tputs(BLUE, 1, putchar_0);
+		tputs(CYAN, 1, putchar_0);
 	if (type == 'l')
 		tputs(MAGENTA, 1, putchar_0);
 	if (type == '-')
