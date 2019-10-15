@@ -100,6 +100,7 @@ int main(int ac, char **av)
 		|| OK != set_sct(&s)
 		|| OK != handle_all_signal())
 		quit_binary(s.elements, &s.termios);
+	tputs(get_term()->hide_cursor, 1, putchar_0);
 	get_window_and_print(&s);
 	if (1 == loop_user_input(&s))
 		print_value();

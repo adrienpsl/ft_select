@@ -39,6 +39,7 @@ void			quit_binary(t_array *elements, struct termios *backup)
 	ftarray__free(&elements);
 	ftstr__free(&get_sct()->buffer);
 	clear_screen();
+	tputs(get_term()->show_cursor, 1, putchar_0);
 	if (backup->c_cc[VMIN])
 		unset_canonical_mode(backup);
 	exit(EXIT_SUCCESS);

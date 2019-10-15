@@ -24,6 +24,7 @@ static void		quit(int nb)
 
 static void		put_in_background(int nb)
 {
+	tputs(get_term()->show_cursor, 1, putchar_0);
 	unset_canonical_mode(&get_sct()->termios);
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(1, TIOCSTI, "\x1A");
@@ -44,6 +45,7 @@ static void		put_in_foreground(int nb)
 		get_window_and_print(s);
 		(void)nb;
 		get_sct()->is_foreground = true;
+		tputs(get_term()->hide_cursor, 1, putchar_0);
 	}
 }
 
