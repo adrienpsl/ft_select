@@ -37,6 +37,7 @@ bool			get_window_size(t_window *w, int nb_elements, int size_el)
 void			quit_binary(t_array *elements, struct termios *backup)
 {
 	ftarray__free(&elements);
+	ftstr__free(&get_sct()->buffer);
 	clear_screen();
 	if (backup->c_cc[VMIN])
 		unset_canonical_mode(backup);

@@ -14,8 +14,9 @@
 
 static void		move_next(int step_size)
 {
-
-	move_display(step_size);
+//	move_display(step_size);
+	if (step_size == 0)
+		return ;
 	inverse_current(g_current());
 	inverse_current(g_current() + step_size);
 	*set_current() += step_size;
@@ -73,7 +74,7 @@ int				select_mode(long *buffer, t_sct *s)
 		return (1);
 	else if (K_ESCAPE == *buffer)
 		return (-1);
-	else if (get_elements_length() == 0)
+	if (get_elements()->length == 0)
 		return (-1);
 	else
 		return (OK);

@@ -57,7 +57,6 @@ int print_normal(char *text)
 
 int clear_screen(void)
 {
-
 	tputs(tgetstr("cl", NULL), 1, putchar_0);
 	return (1);
 }

@@ -20,20 +20,20 @@ void set_el(t_el *el, char *data, int selected, int current, t_array *array)
 	el->is_current = current;
 	ftarray__push(array, el);
 }
+
 t_array *testing_array(void)
 {
 	t_el el;
 	t_array *array = ftarray__init(10, sizeof(t_el));
 	char buff[30];
-
-	for (int i = 0; i < 100; ++i)
+	
+	for (int i = 0; i < 4; ++i)
 	{
 		ft_bzero(buff, 30);
 		sprintf(buff, "el_________%d", i);
 		set_el(&el, buff, 0, 0, array);
 	}
-	if (array->length)
-		((t_el *)ftarray__at(array, 0))->is_current = 1;
+	((t_el *)ftarray__at(array, 0))->is_current = 1;
 	return (array);
 }
 

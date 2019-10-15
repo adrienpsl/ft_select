@@ -5,17 +5,17 @@ static void print_value(void)
 	t_array *els;
 	t_el *el;
 
+	clear_screen();
 	els = get_elements();
 	els->i = 0;
 	while (els->i < els->length)
 	{
 		el = ftarray__at(els, els->i);
 		if (el->is_selected)
-			ft_printf("%s", el->text);
+			ft_printf("%s ", el->text);
 		els->i += 1;
-		if (els->i < els->length)
-			ft_printf(" ");
 	}
+	ft_printf("\b \b");
 }
 
 /*
@@ -79,7 +79,8 @@ int loop_user_input(t_sct *s)
 		buffer = 0;
 		if (read(0, &buffer, 4) < 0)
 			return (-1);
-		if (buffer == '$' || NULL != get_sct()->buffer)
+		if ((buffer == '$' || NULL != get_sct()->buffer)
+			/*&& ((char *)buffer)[1] == '\0'*/)
 			search_mode(&buffer);
 		else if (OK != (ret = select_mode(&buffer, s)))
 			return (ret);
@@ -100,10 +101,7 @@ int main(int ac, char **av)
 		quit_binary(s.elements, &s.termios);
 	get_window_and_print(&s);
 	if (1 == loop_user_input(&s))
-	{
-		clear_screen();
-		ftarray__func(s.elements, print_value, NULL);
-	}
+		print_value();
 	clear_screen();
 	quit_binary(s.elements, &s.termios);
 	return (EXIT_SUCCESS);

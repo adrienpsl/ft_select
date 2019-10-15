@@ -40,9 +40,7 @@ static void		put_in_foreground(int nb)
 		s = get_sct();
 		signal(SIGTSTP, put_in_background);
 		if (OK != set_canonical(&s->termios))
-		{
 			quit_binary(s->elements, &s->termios);
-		}
 		get_window_and_print(s);
 		(void)nb;
 		get_sct()->is_foreground = true;
