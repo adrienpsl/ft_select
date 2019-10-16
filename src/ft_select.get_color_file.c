@@ -17,8 +17,8 @@ static char		get_type(char *file_name)
 	int				i;
 	struct stat		fs;
 	static char		*char_type = "bcpdls-";
-	static int		filters[7] =
-		{ S_IFBLK, S_IFCHR, S_IFIFO, S_IFDIR, S_IFLNK, S_IFSOCK, S_IFREG };
+	static int		filters[7] = { S_IFBLK,
+						S_IFCHR, S_IFIFO, S_IFDIR, S_IFLNK, S_IFSOCK, S_IFREG };
 
 	if (OK != lstat(file_name, &fs))
 		return (false);

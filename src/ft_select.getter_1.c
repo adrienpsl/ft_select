@@ -40,4 +40,3 @@ t_array		*get_elements(void)
 {
 	return (get_sct()->elements);
 }
-

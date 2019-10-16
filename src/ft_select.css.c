@@ -12,7 +12,7 @@
 
 #include "ft_select.h"
 
-int print_underline(char *text)
+int	print_underline(char *text)
 {
 	tputs(" ", 1, putchar_0);
 	tputs(RED, 1, putchar_0);
@@ -23,7 +23,7 @@ int print_underline(char *text)
 	return (1);
 }
 
-int print_reverse(char *text)
+int	print_reverse(char *text)
 {
 	tputs(" ", 1, putchar_0);
 	print_color_file(text);
@@ -34,7 +34,7 @@ int print_reverse(char *text)
 	return (1);
 }
 
-int print_underline_reverse(char *text)
+int	print_underline_reverse(char *text)
 {
 	tputs(" ", 1, putchar_0);
 	tputs(RED, 1, putchar_0);
@@ -46,7 +46,7 @@ int print_underline_reverse(char *text)
 	return (1);
 }
 
-int print_normal(char *text)
+int	print_normal(char *text)
 {
 	tputs(" ", 1, putchar_0);
 	print_color_file(text);
@@ -55,7 +55,7 @@ int print_normal(char *text)
 	return (1);
 }
 
-int clear_screen(void)
+int	clear_screen(void)
 {
 	tputs(tgetstr("cl", NULL), 1, putchar_0);
 	return (1);
