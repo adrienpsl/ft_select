@@ -16,7 +16,7 @@ static int		placing_cursor(t_pos *pos)
 {
 	char *goto_term;
 
-	if (NULL == (goto_term = 
+	if (NULL == (goto_term =
 		tgoto(get_term()->move, pos->x * get_sct()->size_el, pos->y)))
 		return (-1);
 	tputs(goto_term, 1, putchar_0);
@@ -35,8 +35,8 @@ static void		loop_on_elements(
 	int current_step,
 	int window_capacity)
 {
-	static t_el *el;
-	static int i;
+	static t_el	*el;
+	static int	i;
 
 	i = current_step;
 	while (i < els->length
@@ -67,7 +67,7 @@ void			print_list(t_array *els)
 	if (get_win()->is_enough == false)
 	{
 		ft_dprintf(0, "The window is too little dude !");
-		return;
+		return ;
 	}
 	loop_on_elements(els,
 		&pos,

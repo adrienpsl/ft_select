@@ -29,10 +29,10 @@ static int		move_selector(int step_size, t_sct *s)
 	else if (s->current + step_size < 0)
 		return (1);
 	else if (step_size == 1
-			 && s->current + step_size == s->elements->length)
+		&& s->current + step_size == s->elements->length)
 		move_next(go_first());
 	else if (true ==
-			 is_good_index(s->current + step_size, s->elements->length))
+		is_good_index(s->current + step_size, s->elements->length))
 		move_next(step_size);
 	print_list(s->elements);
 	return (1);
@@ -51,8 +51,11 @@ static int		space(t_sct *s)
 
 static int		del(t_sct *s)
 {
-	int step = s->current == s->elements->length - 1 ? -1 : 0;
+	int step;
+
+	step = s->current == s->elements->length - 1 ? -1 : 0;
 	ftarray__remove(s->elements, s->current);
+	((t_el*)ftarray__at(get_elements(), g_current()))->is_current = 1;
 	print_list(s->elements);
 	move_selector(step, s);
 	return (1);

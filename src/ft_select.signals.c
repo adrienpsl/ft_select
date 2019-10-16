@@ -50,7 +50,6 @@ static void		put_in_foreground(int nb)
 	(void)nb;
 }
 
-
 static void		changing_window(int nb)
 {
 	(void)nb;

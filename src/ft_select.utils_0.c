@@ -15,15 +15,16 @@
 void		inverse_current(int index)
 {
 	t_el *el;
+
 	el = ftarray__at(get_elements(), index);
 	el->is_current = !el->is_current;
 }
 
 int			get_min_size(t_array *array)
 {
-	int size;
-	int length;
-	t_el *el;
+	int		size;
+	int		length;
+	t_el	*el;
 
 	size = 0;
 	ftarray__set_start(array);
@@ -42,4 +43,3 @@ bool		is_good_index(int index, int nb_elements)
 		return (true);
 	return (false);
 }
-

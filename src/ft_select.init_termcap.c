@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <ft_select.h>
+#include <ft_select.h>
 #include <termcap.h>
 
-static int	check_and_init()
+static int	check_and_init(void)
 {
 	char	*term_name;
 	int		ret;
@@ -21,7 +21,7 @@ static int	check_and_init()
 	if (NULL == (term_name = getenv("TERM")))
 	{
 		ft_dprintf(0, "Specify a terminal type with 'TERM=<type>'.\n");
-		return -1;
+		return (-1);
 	}
 	ret = tgetent(NULL, term_name);
 	if (ret == -1)
@@ -32,7 +32,7 @@ static int	check_and_init()
 	if (ret == 0)
 	{
 		ft_dprintf(0, "Terminal type '%s' is not defined in termcap database "
-					  "(or too little information).\n", term_name);
+				"(or too little information).\n", term_name);
 		return (-1);
 	}
 	return (OK);

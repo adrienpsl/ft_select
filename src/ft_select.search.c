@@ -12,13 +12,13 @@
 
 #include <ft_select.h>
 
-static void	go_start_last_line()
+static void	go_start_last_line(void)
 {
 	tputs(tgoto(get_term()->move, 0, get_win()->winsize.ws_row), 1, putchar_0);
 	tputs(get_term()->delete_line, 1, putchar_0);
 }
 
-static void	free_buffer()
+static void	free_buffer(void)
 {
 	tputs(get_term()->delete_line, 1, putchar_0);
 	tputs(get_term()->hide_cursor, 1, putchar_0);
@@ -45,7 +45,7 @@ static void	buffering_and_display(char *buffer)
 	tputs(get_buffer(), 1, putchar_0);
 }
 
-static void	init_buffer()
+static void	init_buffer(void)
 {
 	go_start_last_line();
 	tputs(get_term()->show_cursor, 1, putchar_0);
@@ -55,7 +55,7 @@ static void	init_buffer()
 void		search_mode(long *buffer)
 {
 	if (false == ft_isascii((int)*buffer))
-	    return ;
+		return ;
 	if (*buffer == '$' && NULL != get_buffer())
 		free_buffer();
 	else if (get_buffer() == NULL)

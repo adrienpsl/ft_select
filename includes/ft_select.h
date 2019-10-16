@@ -17,13 +17,13 @@
 # include "ft_select.prototypes.h"
 # include "ft_select.defines.h"
 
-#include <libft.h>
+# include <libft.h>
 
-#include <termcap.h>
-#include <sys/ioctl.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <curses.h>
-#include <sys/stat.h>
+# include <termcap.h>
+# include <sys/ioctl.h>
+# include <stdbool.h>
+# include <unistd.h>
+# include <curses.h>
+# include <sys/stat.h>
 
 #endif
