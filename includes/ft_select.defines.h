@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef FT_SELECT_DEFINES_H
-#define FT_SELECT_DEFINES_H
+# define FT_SELECT_DEFINES_H
 # define FT_SELECT_NAME "ft_select: "
 
 # define K_DEL 2117294875
@@ -24,7 +24,6 @@
 # define K_ESCAPE 27
 # define K_SPACE 32
 
-
 # define MAGENTA "\033[35m"
 # define YELLOW "\033[33m"
 # define GREEN "\033[32m"
@@ -34,8 +33,6 @@
 # define BLUE "\033[34m"
 # define CYAN "\033[36m"
 # define RED "\033[31m"
-
-
 # define FT_FD_OUT 0
 
 #endif

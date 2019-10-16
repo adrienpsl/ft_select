@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef FT_SELECT_H
-#define FT_SELECT_H
+# define FT_SELECT_H
 
 # include "ft_select.structures.h"
 # include "ft_select.prototypes.h"

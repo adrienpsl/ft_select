@@ -12,13 +12,13 @@
 
 #include <ft_select.h>
 
-static int		is_screen_enough(t_window *w, int size_el)
+static int		is_screen_enough(t_wind *w, int size_el)
 {
 	w->line_wide = w->winsize.ws_col / size_el;
 	return (w->winsize.ws_row > 2 && w->line_wide);
 }
 
-bool			get_window_size(t_window *w, int nb_elements, int size_el)
+bool			get_window_size(t_wind *w, int nb_elements, int size_el)
 {
 	int row_minus_text_search_space;
 

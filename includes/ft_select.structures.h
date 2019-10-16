@@ -11,40 +11,39 @@
 /* ************************************************************************** */
 
 #ifndef FT_SELECT_STRUCTURES_H
-#define FT_SELECT_STRUCTURES_H
+# define FT_SELECT_STRUCTURES_H
 
 # include <ft_array.structure.h>
 # include <termios.h>
-#include <ft_s.h>
+# include <ft_s.h>
 
-typedef struct	s_el
+typedef struct		s_el
 {
-	char		*text;
-	int			is_selected;
-	int			is_current;
-}				t_el;
+	char			*text;
+	int				is_selected;
+	int				is_current;
+}					t_el;
 
-typedef struct	s_term
+typedef struct		s_term
 {
-	char		*move;
-	char		*underline;
-	char		*reverse;
-	char		*reset;
-	char		*clear_screen;
-	char		*delete_line;
-	char		*hide_cursor;
-	char 		*show_cursor;
-}				t_term;
+	char			*move;
+	char			*underline;
+	char			*reverse;
+	char			*reset;
+	char			*clear_screen;
+	char			*delete_line;
+	char			*hide_cursor;
+	char			*show_cursor;
+}					t_term;
 
-typedef struct s_pos
+typedef struct		s_pos
 {
-	int x;
-	int y;
-	// also, where I am ?
-	// I mean : 
-} t_pos;
+	int				x;
+	int				y;
+}					t_pos;
 
-typedef struct s_window{
+typedef struct		s_wind
+{
 	int				line_wide;
 	int				nb_line;
 	int				current_step;
@@ -52,20 +51,18 @@ typedef struct s_window{
 	int				is_enough;
 	int				last_step;
 	struct winsize	winsize;
-} t_window;
+}					t_wind;
 
-typedef struct	s_sct
+typedef struct		s_sct
 {
 	t_array			*elements;
 	int				size_el;
 	t_term			term;
-	t_window		window;
+	t_wind			window;
 	int				current;
 	struct termios	termios;
 	int				is_foreground;
 	char			*buffer;
 }					t_sct;
-
-
 
 #endif
