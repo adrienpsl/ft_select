@@ -31,7 +31,7 @@ t_term		*get_term(void)
 	return (&get_sct()->term);
 }
 
-t_wind	*get_win(void)
+t_wind		*get_win(void)
 {
 	return (&get_sct()->window);
 }
