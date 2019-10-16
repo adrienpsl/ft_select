@@ -4,7 +4,9 @@ static void print_value(void)
 {
 	t_array *els;
 	t_el *el;
+	int first;
 
+	first = 1;
 	clear_screen();
 	els = get_elements();
 	els->i = 0;
@@ -12,10 +14,14 @@ static void print_value(void)
 	{
 		el = ftarray__at(els, els->i);
 		if (el->is_selected)
-			ft_printf("%s ", el->text);
+		{
+			if (0 == first)
+				ft_printf(" ");
+			ft_printf("%s", el->text);
+		}
+		first = 0;
 		els->i += 1;
 	}
-	ft_printf("\b \b");
 }
 
 /*
