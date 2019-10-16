@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adpusel <adpusel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/19 10:48:07 by adpusel           #+#    #+#             */
+/*   Updated: 2017/11/16 12:45:50 by adpusel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <ft_select.h>
 
-static void print_value(void)
+static void		print_value(void)
 {
-	t_array *els;
-	t_el *el;
-	int first;
+	t_array	*els;
+	t_el	*el;
+	int		first;
 
 	first = 1;
 	clear_screen();
@@ -28,7 +40,7 @@ static void print_value(void)
 **	will check if the binary got argument and if the shell is a good one
 */
 
-static int check(int ac)
+static int		check(int ac)
 {
 	if (ac == 1)
 		return (1);
@@ -45,10 +57,10 @@ static int check(int ac)
 **	Can fail if no memory.
 */
 
-static int get_argv(int ac, char **av, t_sct *select)
+static int		get_argv(int ac, char **av, t_sct *select)
 {
-	t_el el;
-	int i;
+	t_el	el;
+	int		i;
 
 	if (NULL == (select->elements = ftarray__init(ac, sizeof(t_sct))))
 		return (-1);
@@ -66,7 +78,7 @@ static int get_argv(int ac, char **av, t_sct *select)
 }
 
 /*
-**	that's the main function of the program 
+**	that's the main function of the program
 **	read, and buffering users input, three way are possible :
 **		- we are in search mode, start with $ end with the same,
 **		all the key write by the user are catch and at the end, all matchs
@@ -76,18 +88,17 @@ static int get_argv(int ac, char **av, t_sct *select)
 **		- no match, no response.
 */
 
-int loop_user_input(t_sct *s)
+int				loop_user_input(t_sct *s)
 {
-	static long buffer = { 0 };
-	int ret;
+	static long	buffer = { 0 };
+	int			ret;
 
 	while (buffer != K_ENTER)
 	{
 		buffer = 0;
 		if (read(0, &buffer, 4) < 0)
 			return (-1);
-		if ((buffer == '$' || NULL != get_sct()->buffer)
-			/*&& ((char *)buffer)[1] == '\0'*/)
+		if (buffer == '$' || NULL != get_sct()->buffer)
 			search_mode(&buffer);
 		else if (OK != (ret = select_mode(&buffer, s)))
 			return (ret);
@@ -95,11 +106,11 @@ int loop_user_input(t_sct *s)
 	return (OK);
 }
 
-int main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	static t_sct s = { 0 };
 
-	if (NULL ==  set_sct(&s)
+	if (NULL == set_sct(&s)
 		|| OK != check(ac)
 		|| OK != get_argv(ac, av, &s)
 		|| OK != load_termcaps(&s.term)

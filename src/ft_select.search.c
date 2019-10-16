@@ -54,6 +54,8 @@ static void	init_buffer()
 
 void		search_mode(long *buffer)
 {
+	if (false == ft_isascii((int)*buffer))
+	    return ;
 	if (*buffer == '$' && NULL != get_buffer())
 		free_buffer();
 	else if (get_buffer() == NULL)
