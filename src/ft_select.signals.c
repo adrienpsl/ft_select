@@ -64,11 +64,15 @@ static void		changing_window(int nb)
 int				handle_all_signal(void)
 {
 	get_sct()->is_foreground = false;
-	signal(SIGINT, quit);
-	signal(SIGTERM, quit);
 	signal(SIGHUP, quit);
+	signal(SIGINT, quit);
 	signal(SIGQUIT, quit);
+	signal(SIGILL, quit);
 	signal(SIGABRT, quit);
+	signal(SIGFPE, quit);
+	signal(SIGPIPE, quit);
+	signal(SIGALRM, quit);
+	signal(SIGTERM, quit);
 	signal(SIGBUS, quit);
 	signal(SIGSEGV, quit);
 	signal(SIGWINCH, changing_window);
