@@ -26,6 +26,7 @@ static void		put_in_background(int nb)
 {
 	tputs(get_term()->show_cursor, 1, putchar_0);
 	unset_canonical_mode(&get_sct()->termios);
+	clear_screen();
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(1, TIOCSTI, "\x1A");
 	get_sct()->is_foreground = true;
@@ -43,10 +44,10 @@ static void		put_in_foreground(int nb)
 		if (OK != set_canonical(&s->termios))
 			quit_binary(s->elements, &s->termios);
 		get_window_and_print(s);
-		(void)nb;
 		get_sct()->is_foreground = true;
 		tputs(get_term()->hide_cursor, 1, putchar_0);
 	}
+	(void)nb;
 }
 
 
@@ -64,6 +65,7 @@ int				handle_all_signal(void)
 {
 	get_sct()->is_foreground = false;
 	signal(SIGINT, quit);
+	signal(SIGTERM, quit);
 	signal(SIGHUP, quit);
 	signal(SIGQUIT, quit);
 	signal(SIGABRT, quit);

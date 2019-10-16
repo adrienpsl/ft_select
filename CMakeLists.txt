@@ -9,7 +9,7 @@ project(ft_select C)
 # ------------------------------------------------------------------------------
 #    compilation flag
 # ------------------------------------------------------------------------------
-#set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -Wmissing-prototypes")
+set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -Wmissing-prototypes")
 add_subdirectory(libft)
 
 # ------------------------------------------------------------------------------
